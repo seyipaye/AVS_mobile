@@ -1,5 +1,8 @@
 import 'package:avs/components/reusable_card.dart';
 import 'package:avs/screens/dashboard_screen.dart';
+import 'package:avs/screens/new_verification.dart';
+import 'package:avs/screens/profile_screen.dart';
+import 'package:avs/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:avs/constants.dart';
@@ -8,6 +11,9 @@ const black = Colors.black;
 const white = Colors.white;
 
 class HomePage extends StatefulWidget {
+  final Widget screen;
+
+  HomePage({this.screen});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -21,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   var rejected = [inactiveCard, black];
   var profile = [inactiveCard, black];
   var settings = [inactiveCard, black];
-  var presentFragment = null;
+  Widget presentScreen;
 
   void makeInactive() {
     dashboard = [inactiveCard, black];
@@ -32,6 +38,12 @@ class _HomePageState extends State<HomePage> {
     rejected = [inactiveCard, black];
     profile = [inactiveCard, black];
     settings = [inactiveCard, black];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    presentScreen = widget.screen;
   }
 
   @override
@@ -63,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Text(
                         "AVS",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20, color: activeCard),
                       ),
                     ],
                   ),
@@ -93,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       makeInactive();
                       dashboard = [activeCard, white];
                       Navigator.pop(context);
-                      presentFragment = DashboardScreen();
+                      presentScreen = DashboardScreen();
                     });
                   },
                   cardChild: Container(
@@ -127,6 +139,8 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       makeInactive();
                       addNew = [activeCard, white];
+                      Navigator.pop(context);
+                      presentScreen = NewVerificationScreen();
                     });
                   },
                   cardChild: Container(
@@ -276,6 +290,8 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       makeInactive();
                       profile = [activeCard, white];
+                      Navigator.pop(context);
+                      presentScreen = ProfileScreen();
                     });
                   },
                   cardChild: Container(
@@ -305,6 +321,8 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       makeInactive();
                       settings = [activeCard, white];
+                      Navigator.pop(context);
+                      presentScreen = SettingsScreen();
                     });
                   },
                   cardChild: Container(
@@ -330,7 +348,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: presentFragment,
+      body: presentScreen,
     );
   }
 }

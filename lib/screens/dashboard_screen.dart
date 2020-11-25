@@ -1,9 +1,15 @@
 import 'package:avs/components/reusable_card.dart';
+import 'package:avs/pages/home_page.dart';
+import 'package:avs/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:avs/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardScreen extends StatefulWidget {
+  final Function click;
+
+  DashboardScreen({this.click});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -12,6 +18,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF2F2F2),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -78,11 +85,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         SizedBox(
                           height: 30,
                         ),
-                        Text('0'),
+                        Text(
+                          '0',
+                          style: boldSubHeader,
+                        ),
                         SizedBox(
                           height: 20,
                         ),
-                        Text('Total Requests Inprogress'),
+                        Text(
+                          'Total Requests Inprogress',
+                          style: text,
+                        ),
                         SizedBox(
                           height: 20,
                         ),
@@ -91,14 +104,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("Processing Requests: 50 %"),
+                              Text(
+                                "Processing Requests: 50 %",
+                                style: text,
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
                               LinearProgressIndicator(
                                 backgroundColor: Color(0xFFFFF5EC),
                                 value: 0.5,
-                                valueColor: AlwaysStoppedAnimation(activeCard),
                               )
                             ],
                           ),
@@ -108,14 +123,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("Unpaid Requests: 50 %"),
+                              Text(
+                                "Unpaid Requests: 50 %",
+                                style: text,
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
                               LinearProgressIndicator(
                                 backgroundColor: Color(0xFFFFF5EC),
                                 value: 0.5,
-                                valueColor: AlwaysStoppedAnimation(activeCard),
                               )
                             ],
                           ),
@@ -136,11 +153,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         SizedBox(
                           height: 30,
                         ),
-                        Text('0'),
+                        Text(
+                          '0',
+                          style: boldSubHeader,
+                        ),
                         SizedBox(
                           height: 20,
                         ),
-                        Text('Total Requests Inprogress'),
+                        Text(
+                          'Total Requests Inprogress',
+                          style: text,
+                        ),
                         SizedBox(
                           height: 20,
                         ),
@@ -149,14 +172,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("Processing Requests: 0 %"),
+                              Text(
+                                "Approved Requests: 0 %",
+                                style: text,
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
                               LinearProgressIndicator(
                                 backgroundColor: Color(0xFFFFF5EC),
                                 value: 0.0,
-                                valueColor: AlwaysStoppedAnimation(activeCard),
                               )
                             ],
                           ),
@@ -166,14 +191,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("Unpaid Requests: 5 %"),
+                              Text(
+                                "Rejected Requests: 5 %",
+                                style: text,
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
                               LinearProgressIndicator(
                                 backgroundColor: Color(0xFFFFF5EC),
                                 value: 0.05,
-                                valueColor: AlwaysStoppedAnimation(activeCard),
                               )
                             ],
                           ),
@@ -184,11 +211,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("You haven't created any verification request"),
+                    Text(
+                      "You haven't created any verification request",
+                      style: text,
+                    ),
                     Container(
                       width: double.infinity,
                     ),
@@ -200,7 +230,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return HomePage(
+                              screen: SettingsScreen(),
+                            );
+                          }),
+                        );
+                      },
                       child: Text(
                         "Create",
                         style: TextStyle(

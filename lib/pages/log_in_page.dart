@@ -1,4 +1,5 @@
 import 'package:avs/pages/forgot_password_page.dart';
+import 'package:avs/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -97,7 +98,14 @@ class _LogInPageState extends State<LogInPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return HomePage();
+                              }),
+                            );
+                          },
                           child: Text(
                             "Login",
                             style: TextStyle(
