@@ -1,7 +1,7 @@
 import 'package:avs/components/empty_verificatio_screen.dart';
 import 'package:avs/components/verification_card.dart';
 import 'package:flutter/material.dart';
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 
 class AllScreen extends StatefulWidget {
   @override

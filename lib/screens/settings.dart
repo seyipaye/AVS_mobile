@@ -5,7 +5,7 @@ import 'package:avs/screens/setting_screens/general_screen.dart';
 import 'package:avs/screens/setting_screens/info_screen.dart';
 import 'package:avs/screens/setting_screens/notification_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -23,11 +23,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void makeInactive() {
     setState(() {
-      general = [Colors.black, Colors.transparent];
-      changePassword = [Colors.black, Colors.transparent];
-      info = [Colors.black, Colors.transparent];
-      companyInfo = [Colors.black, Colors.transparent];
-      notifications = [Colors.black, Colors.transparent];
+      general = [Colors.white, Colors.transparent];
+      changePassword = [Colors.white, Colors.transparent];
+      info = [Colors.white, Colors.transparent];
+      companyInfo = [Colors.white, Colors.transparent];
+      notifications = [Colors.white, Colors.transparent];
     });
   }
 
@@ -49,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: Theme.of(context).accentColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -60,10 +60,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 Text(
                   "Edit Profile",
-                  style: header,
+                  style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -151,9 +151,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         )),
                     Expanded(
-                        flex: 5,
-                        child: Container(
-                          child: currentFragment,
+                        flex: 7,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Container(
+                            child: currentFragment,
+                          ),
                         )),
                   ],
                 ),

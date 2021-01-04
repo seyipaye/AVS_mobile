@@ -1,4 +1,4 @@
-#Fri Nov 20 13:04:16 WAT 2020
+#Mon Nov 30 17:29:33 WAT 2020
 base.0=/Users/macbook/Desktop/c2g/AVS_mobile/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

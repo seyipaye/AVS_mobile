@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 
 class InfoScreen extends StatefulWidget {
   @override

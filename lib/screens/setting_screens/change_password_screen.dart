@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
+import '../../utils/constants.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   @override
@@ -64,7 +64,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       "Save Changes",
                       style: text,
                     ),
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                   SizedBox(
                     height: 30,

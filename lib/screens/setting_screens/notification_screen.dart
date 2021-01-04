@@ -1,6 +1,6 @@
 import 'package:avs/screens/setting_screens/general_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 
 class NotificationScreen extends StatefulWidget {
   @override
@@ -105,7 +105,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       "Save Changes",
                       style: text,
                     ),
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                   SizedBox(
                     height: 10,

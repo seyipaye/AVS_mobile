@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VerificationCard extends StatefulWidget {
@@ -9,27 +9,11 @@ class VerificationCard extends StatefulWidget {
 
 class _VerificationCardState extends State<VerificationCard> {
   var button;
-  var activeButton = RaisedButton(
-    onPressed: () {},
-    child: Text(
-      "Active",
-      style: TextStyle(fontSize: 20, color: Colors.white),
-    ),
-    color: activeCard,
-  );
-  var acceptedButton = RaisedButton(
-    onPressed: () {},
-    child: Text(
-      "Approved",
-      style: TextStyle(fontSize: 20, color: Colors.white),
-    ),
-    color: Colors.green,
-  );
+  Widget declineButton = SizedBox();
 
   @override
   void initState() {
     super.initState();
-    button = acceptedButton;
   }
 
   @override
@@ -51,6 +35,7 @@ class _VerificationCardState extends State<VerificationCard> {
                   children: <Widget>[
                     Icon(
                       FontAwesomeIcons.clock,
+                      size: 18,
                     ),
                     SizedBox(
                       width: 20,
@@ -72,6 +57,7 @@ class _VerificationCardState extends State<VerificationCard> {
                   children: <Widget>[
                     Icon(
                       FontAwesomeIcons.home,
+                      size: 18,
                     ),
                     SizedBox(
                       width: 20,
@@ -93,6 +79,7 @@ class _VerificationCardState extends State<VerificationCard> {
                   children: <Widget>[
                     Icon(
                       FontAwesomeIcons.user,
+                      size: 18,
                     ),
                     SizedBox(
                       width: 20,
@@ -114,6 +101,7 @@ class _VerificationCardState extends State<VerificationCard> {
                   children: <Widget>[
                     Icon(
                       FontAwesomeIcons.mapMarker,
+                      size: 18,
                     ),
                     SizedBox(
                       width: 20,
@@ -129,7 +117,40 @@ class _VerificationCardState extends State<VerificationCard> {
                 SizedBox(
                   height: 10,
                 ),
-                button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          declineButton = RaisedButton(
+                            onPressed: () {
+                              setState(() {
+                                declineButton = SizedBox();
+                              });
+                            },
+                            child: Text(
+                              "Approved",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            color: Colors.green,
+                          );
+                        });
+                      },
+                      child: Text(
+                        "Active",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      color: activeCard,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    declineButton
+                  ],
+                )
               ],
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:avs/components/reusable_card.dart';
 import 'package:avs/pages/home_page.dart';
 import 'package:avs/screens/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 
 class CompanyInfoScreen extends StatefulWidget {
   @override
@@ -86,7 +86,7 @@ class _CompanyInfoScreenState extends State<CompanyInfoScreen> {
                         "Save Changes",
                         style: text,
                       ),
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                     SizedBox(
                       height: 30,

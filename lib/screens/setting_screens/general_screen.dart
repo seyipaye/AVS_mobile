@@ -1,4 +1,4 @@
-import 'package:avs/constants.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -42,7 +42,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
                     "Upload photo",
                     style: text,
                   ),
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).primaryColor,
                 ),
                 SizedBox(
                   height: 30,
@@ -70,7 +70,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
                   height: 30,
                 ),
                 TextField(
-                  cursorColor: Theme.of(context).accentColor,
+                  cursorColor: Theme.of(context).primaryColor,
                   style: text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -81,7 +81,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
                   height: 30,
                 ),
                 TextField(
-                  cursorColor: Theme.of(context).accentColor,
+                  cursorColor: Theme.of(context).primaryColor,
                   style: text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -92,7 +92,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
                   height: 30,
                 ),
                 TextField(
-                  cursorColor: Theme.of(context).accentColor,
+                  cursorColor: Theme.of(context).primaryColor,
                   style: text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -104,7 +104,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
                 ),
                 TextField(
                   enabled: false,
-                  cursorColor: Theme.of(context).accentColor,
+                  cursorColor: Theme.of(context).primaryColor,
                   style: text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -125,7 +125,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
                           "Save Changes",
                           style: text,
                         ),
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).primaryColor,
                       ),
                       SizedBox(
                         height: 30,
