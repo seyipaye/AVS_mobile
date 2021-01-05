@@ -23,12 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^8.10.0
+  font_awesome_flutter: ^8.11.0
   cupertino_icons: ^1.0.0
   http: ^0.12.2
   shared_preferences: ^0.5.12+4
-  image_picker: ^0.6.7+14
-  file_picker: ^2.1.0
+  image_picker: ^0.6.7+17
+  # File picker is causing a bug during build over here
+  #file_picker: ^2.1.5
   dotted_border: ^1.0.7
   loading_overlay: ^0.2.1
 
@@ -42,4 +43,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/
+    - assets/
