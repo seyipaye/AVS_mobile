@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home_screen.dart';
+
 void main() {
   runApp(AVSApp());
 }
@@ -14,7 +16,7 @@ class AVSApp extends StatelessWidget {
           buttonTheme: ThemeData.light().buttonTheme,
           cursorColor: Color(0xFF2A3142),
         ),
-        home: Container());
+        home: HomeScreen());
   }
 }
 
