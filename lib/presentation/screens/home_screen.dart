@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(),
       drawer: Drawer(
         child: Container(
-          color: Color(0xFF2E3548),
+          color: Theme.of(context).primaryColor,
           child: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

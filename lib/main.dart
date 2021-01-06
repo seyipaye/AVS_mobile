@@ -1,3 +1,4 @@
+import 'package:avs/presentation/screens/home_screen.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class AVSApp extends StatelessWidget {
         // buttonTheme: ThemeData.light().buttonTheme,
         // cursorColor: Color(0xFF2A3142),
       ),
-      home: Register(),
+      home: HomeScreen(),
     );
   }
 }

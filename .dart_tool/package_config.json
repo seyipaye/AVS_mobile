@@ -74,12 +74,6 @@
       "languageVersion": "2.10"
     },
     {
-      "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11",
-      "packageUri": "lib/",
-      "languageVersion": "2.1"
-    },
-    {
       "name": "flutter_test",
       "rootUri": "file:///Users/macbook/Developer/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -108,18 +102,6 @@
       "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.3"
-    },
-    {
-      "name": "image_picker",
-      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.6.7+17",
-      "packageUri": "lib/",
-      "languageVersion": "2.1"
-    },
-    {
-      "name": "image_picker_platform_interface",
-      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-1.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.5"
     },
     {
       "name": "intl",
@@ -314,7 +296,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-05T19:48:04.966383Z",
+  "generated": "2021-01-05T20:21:53.596244Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }
