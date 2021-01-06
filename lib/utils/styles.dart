@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const stroke = Color(0x99E4E4E4);
+
   static const primaryColor = MaterialColor(
     _primaryValue,
     <int, Color>{
