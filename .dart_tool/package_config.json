@@ -8,6 +8,12 @@
       "languageVersion": "2.10"
     },
     {
+      "name": "bloc",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/bloc-6.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0-nullsafety.1",
       "packageUri": "lib/",
@@ -56,6 +62,12 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "equatable",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/equatable-1.2.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0-nullsafety.1",
       "packageUri": "lib/",
@@ -78,6 +90,12 @@
       "rootUri": "file:///Users/mac/Developer/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "2.10"
+    },
+    {
+      "name": "flutter_bloc",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/flutter_bloc-6.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -158,6 +176,12 @@
       "languageVersion": "2.10"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/nested-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/path-1.8.0-nullsafety.1",
       "packageUri": "lib/",
@@ -222,6 +246,12 @@
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/process-3.0.13",
       "packageUri": "lib/",
       "languageVersion": "2.0"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/provider-4.3.2+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
     },
     {
       "name": "shared_preferences",
@@ -338,7 +368,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-05T17:35:09.071026Z",
+  "generated": "2021-01-07T14:46:10.791373Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }
