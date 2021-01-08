@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+
+double kLineHeight({double fontSize, double height}) => height / fontSize;
+
+TextStyle kInputTextStyle(context) => Theme.of(context)
+    .textTheme
+    .bodyText2
+    .copyWith(fontWeight: FontWeight.w300, fontSize: 16);
+
+final kRoundedRectangleBorder = RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(5),
+);
+
+final kRoundedTopRectangleBorder = RoundedRectangleBorder(
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(34),
+    topRight: Radius.circular(34),
+  ),
+);

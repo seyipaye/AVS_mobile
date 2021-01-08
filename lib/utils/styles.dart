@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const stroke = Color(0x99E4E4E4);
+
   static const primaryColor = MaterialColor(
     _primaryValue,
     <int, Color>{
@@ -17,4 +19,37 @@ class AppColors {
     },
   );
   static const int _primaryValue = 0xFF5770DE;
+}
+
+class AppTheme {
+  get light => ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: AppColors.primaryColor,
+        // accentColor: Color(0xFF2A3142),
+        // buttonTheme: ThemeData.light().buttonTheme,
+        // cursorColor: Color(0xFF2A3142),
+        inputDecorationTheme: InputDecorationTheme(
+          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: AppColors.stroke, width: 1),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade900, width: 0.5),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade900, width: 0.5),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey, width: 10),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: AppColors.primaryColor, width: 1),
+          ),
+        ),
+      );
 }
