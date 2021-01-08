@@ -18,3 +18,4 @@ class AppColors {
   );
   static const int _primaryValue = 0xFF5770DE;
 }
+

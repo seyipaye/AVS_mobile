@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -54,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Color(0xFFD4DBF9),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: [],
+                            children: [
+                              Image.asset("profile-img.png"),
+                            ],
                           ),
                         ),
                         Container(
@@ -199,11 +202,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               CupertinoIcons.arrow_down,
                               color: Colors.red,
                             ),
-                            Text('From previous period')
+                            Text('From previous period'),
                           ],
-                        )
+                        ),
                       ],
                     ),
+                    SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(
+                        value: 0.9,
+                        strokeWidth: 10,
+                      ),
+                    )
                   ],
                 ),
               )
