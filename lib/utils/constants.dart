@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+final kAnimationDuration = Duration(milliseconds: 300);
+
 double kLineHeight({double fontSize, double height}) => height / fontSize;
 
 TextStyle kInputTextStyle(context) => Theme.of(context)

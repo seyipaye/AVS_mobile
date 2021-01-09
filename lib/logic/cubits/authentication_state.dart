@@ -20,6 +20,16 @@ class AuthError extends AuthenticationState {
 
 class Authenticated extends AuthenticationState {}
 
-class Unauthenticated extends AuthenticationState {}
+class Unauthenticated extends AuthenticationState {
+  final User user;
+
+  /* This is an empty user, or a user that haven't completed registration fully
+   *
+   */
+  const Unauthenticated({this.user});
+
+  @override
+  List<Object> get props => [user];
+}
 
 class Loading extends AuthenticationState {}

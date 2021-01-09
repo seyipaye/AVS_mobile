@@ -6,6 +6,9 @@ import 'package:meta/meta.dart';
 ///
 /// [User.empty] represents an unauthenticated user.
 /// {@endtemplate}
+///
+enum Gender { Female, Male }
+
 class User extends Equatable {
   /// {@macro user}
   const User({
@@ -33,4 +36,6 @@ class User extends Equatable {
 
   @override
   List<Object> get props => [email, id, name, photo];
+
+  bool get isFullyRegistered => true;
 }
