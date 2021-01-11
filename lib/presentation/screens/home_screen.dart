@@ -1,5 +1,6 @@
 import 'package:avs/presentation/widgets/bar_chart.dart';
 import 'package:avs/presentation/widgets/request_count_card.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final space = SizedBox(
+    height: 30,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     // Image(),
                     Text(
                       'AVS',
-                      style: TextStyle(color: Colors.white),
+                      style: kHeaderTextStyle(context),
                     ),
                   ],
                 )
@@ -38,8 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
