@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField(
-      {this.autofocus = false,
+      {this.maxLength,
+      this.autofocus = false,
       this.readOnly = false,
       this.onChanged,
       this.initialValue,
@@ -33,6 +34,7 @@ class AppTextFormField extends StatelessWidget {
       Key key})
       : super(key: key);
 
+  final int maxLength;
   final int maxLines;
   final String hintText;
   final String errorText;
@@ -65,6 +67,7 @@ class AppTextFormField extends StatelessWidget {
       readOnly: readOnly,
       autovalidate: autovalidate,
       onChanged: onChanged,
+      maxLength: maxLength,
       initialValue: initialValue,
       obscureText: obscureText,
       textAlignVertical: TextAlignVertical.center,

@@ -1,10 +1,21 @@
 import 'dart:async';
 
+import 'package:avs/data/models/status_response.dart';
 import 'package:avs/data/models/user.dart';
+import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:flutter/foundation.dart';
 
 class UserRepository {
   //final userDao = UserDao();
+  final apiClient = AVSApiClient();
+
+  Future<StatusResponse> sendOtp(String mobile) {
+    return apiClient.sendOtp(mobile);
+  }
+
+  Future<StatusResponse> verifyOtp({String mobile, String code}) {
+    return apiClient.verifyOtp(mobile: mobile, code: code);
+  }
 
   Future<User> getUser() {
     return Future<User>.delayed(const Duration(seconds: 2), () => User.empty);

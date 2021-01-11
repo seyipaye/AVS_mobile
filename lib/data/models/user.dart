@@ -12,18 +12,17 @@ enum Gender { Female, Male }
 class User extends Equatable {
   /// {@macro user}
   const User({
-    @required this.email,
-    @required this.id,
-    @required this.name,
-    @required this.photo,
-  })  : assert(email != null),
-        assert(id != null);
+    this.email,
+    this.mobile,
+    this.name,
+    this.photo,
+  });
 
   /// The current user's email address.
   final String email;
 
-  /// The current user's id.
-  final String id;
+  /// The current user's phone number.
+  final String mobile;
 
   /// The current user's name (display name).
   final String name;
@@ -32,10 +31,10 @@ class User extends Equatable {
   final String photo;
 
   /// Empty user which represents an unauthenticated user.
-  static const empty = User(email: '', id: '', name: null, photo: null);
+  static const empty = User(email: '', mobile: '', name: null, photo: null);
 
   @override
-  List<Object> get props => [email, id, name, photo];
+  List<Object> get props => [email, mobile, name, photo];
 
   bool get isFullyRegistered => true;
 }

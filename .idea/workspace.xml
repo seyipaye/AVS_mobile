@@ -22,20 +22,52 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="AuthStructure refactored">
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page1.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page2.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page3.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page4.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/widgets/input/app_dropdown_button.dart" afterDir="false" />
+    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Registration UI">
+      <change afterPath="$PROJECT_DIR$/lib/data/models/status_response.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/providers/avs_api_client.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/otp_cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/otp_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/phone_number_cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/phone_number_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/otp_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/phone_number_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/validators.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/image_picker/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/image_picker/image_picker.framework/image_picker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/shared_preferences/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/shared_preferences/shared_preferences.framework/shared_preferences" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/models/user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/user.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/repositories/authentication_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repositories/authentication_repository.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logic/cubits/authentication_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/authentication_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page1.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page2.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/password_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/user_info_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/register_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/styles.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/widgets/input/app_text_form_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/widgets/input/app_text_form_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +78,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Concept" />
-        <option value="Dart File" />
         <option value="stateless_widget" />
+        <option value="Dart File" />
       </list>
     </option>
   </component>
@@ -73,17 +105,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/presentation/pages/authentication" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/utils" />
+    <property name="settings.editor.selected.configurable" value="memory.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/utils" />
       <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
       <recent name="$PROJECT_DIR$/lib/presentation/widgets/input" />
       <recent name="$PROJECT_DIR$/lib/presentation/widgets" />
       <recent name="$PROJECT_DIR$/lib/data/models" />
-      <recent name="$PROJECT_DIR$/images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
@@ -134,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610115879394</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: Registration UI">
+      <created>1610212902076</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1610212902079</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,43 +192,52 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Project structure set" />
     <MESSAGE value="AuthStructure refactored" />
-    <option name="LAST_COMMIT_MESSAGE" value="AuthStructure refactored" />
+    <MESSAGE value="feat: Registration UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Registration UI" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610024915194">
+    <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610354102104">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
-    <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.840@0.23.1440.840" timestamp="1610024915194" />
+    <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.840@0.23.1440.840" timestamp="1610354102104" />
+    <state x="411" y="166" key="#com.intellij.ide.util.MemberChooser" timestamp="1610321140029">
+      <screen x="0" y="23" width="1440" height="840" />
+    </state>
+    <state x="411" y="166" key="#com.intellij.ide.util.MemberChooser/0.23.1440.840@0.23.1440.840" timestamp="1610321140029" />
     <state x="100" y="100" width="1080" height="600" key="AVDManager" timestamp="1606753523843">
       <screen x="0" y="25" width="1280" height="775" />
     </state>
     <state x="100" y="100" width="1080" height="600" key="AVDManager/0.0.1280.800@0.0.1280.800" timestamp="1606334689871" />
     <state x="100" y="100" width="1080" height="600" key="AVDManager/0.25.1280.775@0.25.1280.775" timestamp="1606753523843" />
-    <state width="1154" height="98" key="GridCell.Tab.0.bottom" timestamp="1610130472868">
+    <state width="1154" height="98" key="GridCell.Tab.0.bottom" timestamp="1610355297005">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="228" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1609682662166" />
-    <state width="1154" height="98" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1610130472868" />
+    <state width="1154" height="98" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1610355297005" />
     <state width="1238" height="228" key="GridCell.Tab.0.bottom/0.25.1280.775@0.25.1280.775" timestamp="1607596698116" />
-    <state width="1154" height="98" key="GridCell.Tab.0.center" timestamp="1610130472867">
+    <state width="1154" height="98" key="GridCell.Tab.0.center" timestamp="1610355297004">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="228" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1609682662164" />
-    <state width="1154" height="98" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1610130472867" />
+    <state width="1154" height="98" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1610355297004" />
     <state width="1238" height="228" key="GridCell.Tab.0.center/0.25.1280.775@0.25.1280.775" timestamp="1607596698108" />
-    <state width="1154" height="98" key="GridCell.Tab.0.left" timestamp="1610130472867">
+    <state width="1154" height="98" key="GridCell.Tab.0.left" timestamp="1610355297000">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="228" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1609682662163" />
     <state width="1238" height="229" key="GridCell.Tab.0.left/0.0.1280.800@0.25.1280.775" timestamp="1606765734310" />
-    <state width="1154" height="98" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1610130472867" />
+    <state width="1154" height="98" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1610355297000" />
     <state width="1238" height="228" key="GridCell.Tab.0.left/0.25.1280.775@0.25.1280.775" timestamp="1607596698107" />
-    <state width="1154" height="98" key="GridCell.Tab.0.right" timestamp="1610130472867">
+    <state width="1154" height="98" key="GridCell.Tab.0.right" timestamp="1610355297005">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="228" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1609682662165" />
-    <state width="1154" height="98" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610130472867" />
+    <state width="1154" height="98" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610355297005" />
     <state width="1238" height="228" key="GridCell.Tab.0.right/0.25.1280.775@0.25.1280.775" timestamp="1607596698115" />
+    <state x="99" y="82" key="SettingsEditor" timestamp="1610216414327">
+      <screen x="0" y="23" width="1440" height="840" />
+    </state>
+    <state x="99" y="82" key="SettingsEditor/0.23.1440.840@0.23.1440.840" timestamp="1610216414327" />
     <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1610115889165">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
@@ -210,10 +258,11 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="354" y="238" key="git4idea.merge.GitPullDialog/0.23.1440.840@0.23.1440.840" timestamp="1609832822462" />
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1606767654862">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state x="343" y="153" width="754" height="710" key="search.everywhere.popup" timestamp="1610214352578">
+      <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1606767654862" />
+    <state x="343" y="153" width="754" height="710" key="search.everywhere.popup/0.23.1440.840@0.23.1440.840" timestamp="1610214352578" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

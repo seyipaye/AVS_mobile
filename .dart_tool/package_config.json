@@ -128,6 +128,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "get",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/get-3.24.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.10"
+    },
+    {
       "name": "http",
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/http-0.12.2",
       "packageUri": "lib/",
@@ -368,7 +374,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-07T14:46:10.791373Z",
+  "generated": "2021-01-09T18:22:47.875516Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }

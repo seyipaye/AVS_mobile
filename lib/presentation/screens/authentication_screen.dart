@@ -1,10 +1,10 @@
 import 'package:avs/data/models/user.dart';
+import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
-import 'package:avs/presentation/pages/authentication/register_page1.dart';
-import 'package:avs/presentation/pages/authentication/register_page2.dart';
-import 'package:avs/presentation/pages/authentication/register_page3.dart';
-import 'package:avs/presentation/pages/authentication/register_page4.dart';
-import 'package:avs/presentation/widgets/auth_header.dart';
+import 'package:avs/presentation/pages/authentication/phone_number_page.dart';
+import 'package:avs/presentation/pages/authentication/otp_page.dart';
+import 'package:avs/presentation/pages/authentication/password_page.dart';
+import 'package:avs/presentation/pages/authentication/user_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,14 +27,14 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   void initState() {
     super.initState();
     controller = PageController();
+    final userRepository = context.read<UserRepository>();
+    final authenticationCubit = context.read<AuthenticationCubit>();
+
     pages = [
-      RegisterPage1(controller),
-      RegisterPage2(controller),
-      RegisterPage3(controller),
-      RegisterPage4(controller),
-      // RegisterPage2(
-      //   carouselController: _carouselController,
-      // ),
+      PhoneNumberPage(controller, authenticationCubit, userRepository),
+      OtpPage(controller, authenticationCubit, userRepository),
+      PasswordPage(controller),
+      UserInfoPage(controller),
       // LogInPage(
       //   controller: _carouselController,
       // ),
