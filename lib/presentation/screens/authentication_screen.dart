@@ -3,7 +3,7 @@ import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/presentation/pages/authentication/phone_number_page.dart';
 import 'package:avs/presentation/pages/authentication/otp_page.dart';
-import 'package:avs/presentation/pages/authentication/password_page.dart';
+import 'package:avs/presentation/pages/authentication/set_password_page.dart';
 import 'package:avs/presentation/pages/authentication/user_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,14 +26,14 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   @override
   void initState() {
     super.initState();
-    controller = PageController();
+    controller = PageController(initialPage: 2);
     final userRepository = context.read<UserRepository>();
     final authenticationCubit = context.read<AuthenticationCubit>();
 
     pages = [
       PhoneNumberPage(controller, authenticationCubit, userRepository),
       OtpPage(controller, authenticationCubit, userRepository),
-      PasswordPage(controller),
+      SetPasswordPage(controller, authenticationCubit, userRepository),
       UserInfoPage(controller),
       // LogInPage(
       //   controller: _carouselController,
@@ -42,6 +42,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       //   controller: _carouselController,
       // ),
     ];
+  }
+
+  Future<bool> onWillPop() {
+    bool result = true;
+    if (controller.page != 0) {
+      controller.animateToPage(0,
+          duration: Duration(milliseconds: 200), curve: Curves.linear);
+      result = false;
+    }
+    return Future.value(result);
   }
 
   @override
@@ -57,11 +67,14 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           }
         },
         builder: (context, state) {
-          return PageView.builder(
-            controller: controller,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: pages.length,
-            itemBuilder: (_, index) => pages[index],
+          return WillPopScope(
+            onWillPop: onWillPop,
+            child: PageView.builder(
+              controller: controller,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: pages.length,
+              itemBuilder: (_, index) => pages[index],
+            ),
           );
         },
       ),

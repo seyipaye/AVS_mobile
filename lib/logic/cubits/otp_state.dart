@@ -2,8 +2,7 @@ part of 'otp_cubit.dart';
 
 class OtpState extends Equatable {
   OtpState(
-      {this.phoneNumber,
-      this.autovalidateMode = AutovalidateMode.disabled,
+      {this.autovalidateMode = AutovalidateMode.disabled,
       this.isLoading = false,
       this.errorMessage});
 
@@ -12,7 +11,6 @@ class OtpState extends Equatable {
         errorMessage: message,
       );
 
-  final String phoneNumber;
   final AutovalidateMode autovalidateMode;
   final bool isLoading;
   final String errorMessage;
@@ -25,7 +23,6 @@ class OtpState extends Equatable {
     final bool isLoading,
   }) {
     return OtpState(
-      phoneNumber: phoneNumber ?? this.phoneNumber,
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
       isLoading: isLoading ?? this.isLoading,
     );
@@ -33,6 +30,5 @@ class OtpState extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object> get props =>
-      [phoneNumber, autovalidateMode, isLoading, errorMessage];
+  List<Object> get props => [autovalidateMode, isLoading, errorMessage];
 }

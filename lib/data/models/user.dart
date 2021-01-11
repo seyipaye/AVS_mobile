@@ -12,29 +12,88 @@ enum Gender { Female, Male }
 class User extends Equatable {
   /// {@macro user}
   const User({
-    this.email,
     this.mobile,
-    this.name,
+    this.id,
     this.photo,
+    this.firstName,
+    this.lastName,
+    this.gender,
+    this.otherName,
+    this.email,
   });
-
-  /// The current user's email address.
-  final String email;
 
   /// The current user's phone number.
   final String mobile;
 
-  /// The current user's name (display name).
-  final String name;
+  final String id;
+
+  //JsonName:firstName
+  final String firstName;
+
+//JsonName:lastName
+  final String lastName;
+
+//JsonName:gender
+  final String gender;
+
+//JsonName:otherName
+  final String otherName;
+
+//JsonName:email
+  final UserEmail email;
 
   /// Url for the current user's photo.
   final String photo;
 
   /// Empty user which represents an unauthenticated user.
-  static const empty = User(email: '', mobile: '', name: null, photo: null);
+  static const empty = User(
+    email: UserEmail(address: ''),
+    mobile: '',
+  );
+
+  static const test = User(
+    email: UserEmail(address: ''),
+    mobile: '08156655621',
+  );
 
   @override
-  List<Object> get props => [email, mobile, name, photo];
+  List<Object> get props =>
+      [email, mobile, photo, firstName, lastName, gender, otherName, id];
 
   bool get isFullyRegistered => true;
+
+  User copyWith({
+    final String mobile,
+    final String id,
+    final String firstName,
+    final String lastName,
+    final String gender,
+    final String otherName,
+    final UserEmail email,
+    final String photo,
+  }) {
+    return User(
+      mobile: mobile ?? this.mobile,
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      gender: gender ?? this.gender,
+      otherName: otherName ?? this.otherName,
+      email: email ?? this.email,
+      photo: photo ?? this.photo,
+    );
+  }
+}
+
+class UserEmail extends Equatable {
+//JsonName:address
+  final String address;
+
+  const UserEmail({
+    this.address,
+  });
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [address];
 }

@@ -24,10 +24,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           emit(Unauthenticated(user: user));
         }
       } else {
-        emit(Unauthenticated(user: User.empty));
+        // Todo: Modify
+        this.user = User.test;
+        emit(Unauthenticated(user: user));
       }
     }).catchError((error) {
-      emit(AuthError(error.toString()));
+      emit(AuthError(Error.safeToString(error)));
     });
 
     /*final bool hasToken = await

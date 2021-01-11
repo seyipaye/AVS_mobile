@@ -2,19 +2,26 @@ import 'package:avs/data/models/user.dart';
 import 'package:get/utils.dart';
 
 class Validator {
-  static String isPhoneNumber(String value) {
-    if (value.isEmpty || value.length < 11) {
-      return 'Phone number must be eleven digits long';
+  static String isPassword(String value) {
+    if (value.isEmpty) {
+      return 'This field is required';
+    } else if (!GetUtils.isLengthGreaterOrEqual(value, 8)) {
+      return 'Password must be at least 8 characters long';
     }
-
     return null;
   }
 
   static String isOtp(String value) {
     if (value.isEmpty || value.length < 4) {
-      return 'Otp must be four digits long';
+      return 'Otp must be 4 digits long';
     }
+    return null;
+  }
 
+  static String isPhoneNumber(String value) {
+    if (value.isEmpty || value.length < 11) {
+      return 'Phone number must be 11 digits long';
+    }
     return null;
   }
 
@@ -32,15 +39,6 @@ class Validator {
       return 'This field is required';
     } else if (!GetUtils.isEmail(value.trim())) {
       return 'Please enter a valid email';
-    }
-    return null;
-  }
-
-  static String isPassword(String value) {
-    if (value.isEmpty) {
-      return 'This field is required';
-    } else if (!GetUtils.isLengthGreaterOrEqual(value, 6)) {
-      return 'Password must be 6 characters long';
     }
     return null;
   }

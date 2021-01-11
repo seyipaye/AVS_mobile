@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-import 'package:avs/data/models/status_response.dart';
+import 'package:avs/data/api_responses/status_response.dart';
 import 'package:http/http.dart' as http;
+
+final printAllResponses = true;
 
 /// Exception thrown when locationSearch fails.
 class SendOtpFailure implements Exception {
@@ -13,7 +15,7 @@ class SendOtpFailure implements Exception {
 class ClientError implements Exception {
   ClientError(this.message);
 
-  final message;
+  final String message;
 }
 
 /// Exception thrown when getWeather fails.
@@ -26,6 +28,28 @@ class AVSApiClient {
   static const _baseUrl = 'https://avs-staging-api.herokuapp.com/v1';
   final http.Client _httpClient;
 
+  Future<String> setPassword({String mobile, String password}) async {
+    print(mobile + password);
+    final response = await _httpClient.post(
+      _baseUrl + '/agents/addPassword',
+      body: {
+        'mobile': mobile,
+        'password': password,
+      },
+    );
+
+    if (printAllResponses) {
+      print(response.body);
+    }
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
+    return jsonDecode(response.body)['id']?.toString();
+  }
+
   Future<StatusResponse> verifyOtp({String mobile, String code}) async {
     //print('sd$phoneNumber');
     final response = await _httpClient.post(
@@ -36,11 +60,12 @@ class AVSApiClient {
       },
     );
 
-    print(response.body);
+    if (printAllResponses) {
+      print(response.body);
+    }
     if (response.statusCode != 200) {
-      if (response.statusCode == 400) {}
       throw ClientError(
-        StatusResponse.fromMap(jsonDecode(response.body)).message ??
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
     }
@@ -57,11 +82,16 @@ class AVSApiClient {
       },
     );
 
-    //print(response.body);
-    if (response.statusCode != 200) {
-      throw SendOtpFailure(response.reasonPhrase);
+    print(response);
+    if (printAllResponses) {
+      print(response.body);
     }
-
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
     return StatusResponse.fromMap(jsonDecode(response.body));
 
     /*final responseJson = jsonDecode(
