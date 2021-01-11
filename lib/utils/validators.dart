@@ -12,7 +12,7 @@ class Validator {
 
   static String isOtp(String value) {
     if (value.isEmpty || value.length < 4) {
-      return 'Phone number must be eleven digits long';
+      return 'Otp must be four digits long';
     }
 
     return null;

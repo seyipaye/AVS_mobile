@@ -10,6 +10,12 @@ class SendOtpFailure implements Exception {
   final message;
 }
 
+class ClientError implements Exception {
+  ClientError(this.message);
+
+  final message;
+}
+
 /// Exception thrown when getWeather fails.
 class WeatherRequestFailure implements Exception {}
 
@@ -23,16 +29,20 @@ class AVSApiClient {
   Future<StatusResponse> verifyOtp({String mobile, String code}) async {
     //print('sd$phoneNumber');
     final response = await _httpClient.post(
-      _baseUrl + '/auth/send/otp/agent',
+      _baseUrl + '/auth/verify/otp/agent',
       body: {
         'mobile': mobile,
         'code': code,
       },
     );
 
-    //print(response.body);
+    print(response.body);
     if (response.statusCode != 200) {
-      throw SendOtpFailure(response.reasonPhrase);
+      if (response.statusCode == 400) {}
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body)).message ??
+            response.reasonPhrase,
+      );
     }
 
     return StatusResponse.fromMap(jsonDecode(response.body));

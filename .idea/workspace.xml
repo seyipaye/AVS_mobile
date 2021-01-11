@@ -22,52 +22,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Registration UI">
-      <change afterPath="$PROJECT_DIR$/lib/data/models/status_response.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/providers/avs_api_client.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/otp_cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/otp_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/phone_number_cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/phone_number_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/otp_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/phone_number_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/utils/validators.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Link Send OTP to backend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/image_picker/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/image_picker/image_picker.framework/image_picker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/shared_preferences/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/shared_preferences/shared_preferences.framework/shared_preferences" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/models/user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/repositories/authentication_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repositories/authentication_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page1.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page2.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/password_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/register_page4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/user_info_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/widgets/input/app_text_form_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/widgets/input/app_text_form_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/models/status_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/status_response.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/providers/avs_api_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/providers/avs_api_client.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/logic/cubits/otp_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/otp_cubit.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/otp_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/otp_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/validators.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/validators.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +65,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/utils" />
     <property name="settings.editor.selected.configurable" value="memory.settings" />
@@ -173,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610212902079</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: Link Send OTP to backend">
+      <created>1610357775815</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1610357775825</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -193,17 +162,18 @@
     <MESSAGE value="Project structure set" />
     <MESSAGE value="AuthStructure refactored" />
     <MESSAGE value="feat: Registration UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Registration UI" />
+    <MESSAGE value="feat: Link Send OTP to backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Link Send OTP to backend" />
   </component>
   <component name="WindowStateProjectService">
     <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610354102104">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.840@0.23.1440.840" timestamp="1610354102104" />
-    <state x="411" y="166" key="#com.intellij.ide.util.MemberChooser" timestamp="1610321140029">
+    <state x="411" y="166" key="#com.intellij.ide.util.MemberChooser" timestamp="1610362177304">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
-    <state x="411" y="166" key="#com.intellij.ide.util.MemberChooser/0.23.1440.840@0.23.1440.840" timestamp="1610321140029" />
+    <state x="411" y="166" key="#com.intellij.ide.util.MemberChooser/0.23.1440.840@0.23.1440.840" timestamp="1610362177304" />
     <state x="100" y="100" width="1080" height="600" key="AVDManager" timestamp="1606753523843">
       <screen x="0" y="25" width="1280" height="775" />
     </state>
@@ -238,10 +208,10 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="99" y="82" key="SettingsEditor/0.23.1440.840@0.23.1440.840" timestamp="1610216414327" />
-    <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1610115889165">
+    <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1610357831654">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
-    <state x="192" y="183" key="Vcs.Push.Dialog.v2/0.23.1440.840@0.23.1440.840" timestamp="1610115889165" />
+    <state x="192" y="183" key="Vcs.Push.Dialog.v2/0.23.1440.840@0.23.1440.840" timestamp="1610357831654" />
     <state x="100" y="100" width="1080" height="600" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606839209926">
       <screen x="0" y="0" width="1280" height="800" />
     </state>

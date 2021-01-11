@@ -1,4 +1,5 @@
 import 'package:avs/data/models/user.dart';
+import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:bloc/bloc.dart';
@@ -27,25 +28,21 @@ class OtpCubit extends Cubit<OtpState> {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       emit(state.copyWith(isLoading: true));
-      // Submit phone number
 
       userRepository
           .verifyOtp(mobile: authenticationCubit.user.mobile, code: otpCode)
           .then((response) {
         if (response.success) {
           // Move to next page
-          //authenticationCubit.user = User(mobile: mobile);
           controller.nextPage(
               duration: kAnimationDuration, curve: Curves.linear);
         } else {
-          emit(
-            OtpState.error('Something went wrong, please try again later'),
-          );
+          emit(OtpState.error('Something went wrong, please try again later'));
         }
       }).catchError((error) {
         print(error);
-        if (error is Exception) {
-          emit(OtpState.error(error.toString()));
+        if (error is ClientError) {
+          emit(OtpState.error(error.message));
         } else if (error is Error) {
           emit(OtpState.error(error.toString()));
         } else {
