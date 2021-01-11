@@ -10,15 +10,21 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit({@required UserRepository userRepository})
       : _userRepository = userRepository,
         super(Uninitialized()) {
-    // Initialize App
     //userRepository.hasToken()
 
     userRepository.getUser().then((user) {
-      if (user != null) {
-        this._user = user;
-        emit(Authenticated());
+      // TODO: Revert if statement for normal functionality
+      if (user == null) {
+        this.user = user;
+
+        // TODO: Check if the user gotten has completed registration
+        if (user.isFullyRegistered) {
+          emit(Authenticated());
+        } else {
+          emit(Unauthenticated(user: user));
+        }
       } else {
-        emit(Unauthenticated());
+        emit(Unauthenticated(user: User.empty));
       }
     }).catchError((error) {
       emit(AuthError(error.toString()));
@@ -34,5 +40,5 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   final UserRepository _userRepository;
-  User _user;
+  User user;
 }

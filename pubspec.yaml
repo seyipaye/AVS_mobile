@@ -30,6 +30,9 @@ dependencies:
   dotted_border: ^1.0.7
   loading_overlay: ^0.2.1
 
+  # Utils
+  get: ^3.24.0
+
   # State management
   bloc: ^6.1.1
   flutter_bloc: ^6.1.1

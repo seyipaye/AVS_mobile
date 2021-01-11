@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const stroke = Color(0x99E4E4E4);
+  static const stroke = Color(0xFFced4da);
 
   static const primaryColor = MaterialColor(
     _primaryValue,
@@ -43,7 +43,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(5),
           ),
           disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 10),
+            borderSide: BorderSide(color: Colors.grey, width: 1),
             borderRadius: BorderRadius.circular(5),
           ),
           focusedBorder: OutlineInputBorder(
