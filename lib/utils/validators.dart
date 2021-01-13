@@ -2,27 +2,43 @@ import 'package:avs/data/models/user.dart';
 import 'package:get/utils.dart';
 
 class Validator {
-  static String isPhoneNumber(String value) {
-    if (value.isEmpty || value.length < 11) {
-      return 'Phone number must be eleven digits long';
+  static String isPassword(String value) {
+    if (value.isEmpty) {
+      return 'This field is required';
+    } else if (!GetUtils.isLengthGreaterOrEqual(value, 8)) {
+      return 'Password must be at least 8 characters long';
     }
-
     return null;
   }
 
   static String isOtp(String value) {
     if (value.isEmpty || value.length < 4) {
-      return 'Phone number must be eleven digits long';
+      return 'Otp must be 4 digits long';
     }
+    return null;
+  }
 
+  static String isPhoneNumber(String value) {
+    if (value.isEmpty || value.length < 11) {
+      return 'Phone number must be 11 digits long';
+    }
     return null;
   }
 
   static String isName(String value) {
     if (value.isEmpty) {
       return 'This field is required';
-    } else if (!GetUtils.isAlphabetOnly(value)) {
+    } else if (!GetUtils.isAlphabetOnly(value) || value.length < 2) {
       return 'Please enter a valid name';
+    }
+    return null;
+  }
+
+  static String isOtherName(String value) {
+    if (value.isNotEmpty) {
+      if (!GetUtils.isAlphabetOnly(value) || value.length < 2) {
+        return 'Please enter a valid name';
+      }
     }
     return null;
   }
@@ -36,11 +52,11 @@ class Validator {
     return null;
   }
 
-  static String isPassword(String value) {
-    if (value.isEmpty) {
-      return 'This field is required';
-    } else if (!GetUtils.isLengthGreaterOrEqual(value, 6)) {
-      return 'Password must be 6 characters long';
+  static String isOptionalEmail(String value) {
+    if (value.isNotEmpty) {
+      if (!GetUtils.isEmail(value.trim())) {
+        return 'Please enter a valid email';
+      }
     }
     return null;
   }
@@ -77,7 +93,7 @@ class Validator {
     return null;
   }
 
-  static String isGender(Gender value) {
+  static String isGender(String value) {
     if (value == null) {
       return 'Please select a valid Gender';
     }

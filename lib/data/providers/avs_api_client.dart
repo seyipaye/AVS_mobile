@@ -1,13 +1,24 @@
 import 'dart:convert';
+import 'dart:developer';
 
-import 'package:avs/data/models/status_response.dart';
+import 'package:avs/data/api_responses/status_response.dart';
+import 'package:avs/data/api_responses/user_response.dart';
+import 'package:avs/data/models/user.dart';
 import 'package:http/http.dart' as http;
+
+final printAllResponses = true;
 
 /// Exception thrown when locationSearch fails.
 class SendOtpFailure implements Exception {
   SendOtpFailure(this.message);
 
   final message;
+}
+
+class ClientError implements Exception {
+  ClientError(this.message);
+
+  final String message;
 }
 
 /// Exception thrown when getWeather fails.
@@ -20,19 +31,66 @@ class AVSApiClient {
   static const _baseUrl = 'https://avs-staging-api.herokuapp.com/v1';
   final http.Client _httpClient;
 
+  Future<User> setUser({User user}) async {
+    print(jsonEncode(user.toRequestBody) + user.id);
+    final response = await _httpClient.post(
+      _baseUrl + '/auth/local/register/agent/${user.id}',
+      headers: {"Content-Type": "application/json"},
+      body: (jsonEncode(user.toRequestBody)),
+    );
+
+    if (printAllResponses) {
+      log(response.body);
+    }
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
+    return UserResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
+  }
+
+  Future<String> setPassword({String mobile, String password}) async {
+    print(mobile + password);
+    final response = await _httpClient.post(
+      _baseUrl + '/agents/addPassword',
+      body: {
+        'mobile': mobile,
+        'password': password,
+      },
+    );
+
+    if (printAllResponses) {
+      print(response.body);
+    }
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
+    return jsonDecode(response.body)['id']?.toString();
+  }
+
   Future<StatusResponse> verifyOtp({String mobile, String code}) async {
     //print('sd$phoneNumber');
     final response = await _httpClient.post(
-      _baseUrl + '/auth/send/otp/agent',
+      _baseUrl + '/auth/verify/otp/agent',
       body: {
         'mobile': mobile,
         'code': code,
       },
     );
 
-    //print(response.body);
+    if (printAllResponses) {
+      print(response.body);
+    }
     if (response.statusCode != 200) {
-      throw SendOtpFailure(response.reasonPhrase);
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
     }
 
     return StatusResponse.fromMap(jsonDecode(response.body));
@@ -47,11 +105,16 @@ class AVSApiClient {
       },
     );
 
-    //print(response.body);
-    if (response.statusCode != 200) {
-      throw SendOtpFailure(response.reasonPhrase);
+    print(response);
+    if (printAllResponses) {
+      print(response.body);
     }
-
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
     return StatusResponse.fromMap(jsonDecode(response.body));
 
     /*final responseJson = jsonDecode(

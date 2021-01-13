@@ -5,10 +5,7 @@ import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/presentation/widgets/auth_header.dart';
 import 'package:avs/presentation/widgets/input/app_text_form_field.dart';
-import 'package:avs/utils/constants.dart';
-import 'package:avs/utils/styles.dart';
 import 'package:avs/utils/validators.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -28,18 +25,26 @@ class OtpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AuthAppBar(
-          title: 'Great!',
-          subTitle: 'Kindly check your sms. We sent you an OTP',
-        ),
-        SizedBox(height: 20.0),
-        // Body
-        Expanded(
-          child: _buildForm(),
-        )
-      ],
+    return BlocProvider(
+      create: (_) => OtpCubit(
+        userRepository,
+        authenticationCubit,
+        formKey: formKey,
+        controller: controller,
+      ),
+      child: Column(
+        children: [
+          AuthAppBar(
+            title: 'Great!',
+            subTitle: 'Kindly check your sms. We sent you an OTP',
+          ),
+          SizedBox(height: 20.0),
+          // Body
+          Expanded(
+            child: _buildForm(),
+          )
+        ],
+      ),
     );
   }
 
@@ -57,7 +62,7 @@ class OtpPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          print(state);
+          //print(state);
           return Form(
             key: formKey,
             autovalidateMode: state.autovalidateMode,
@@ -65,7 +70,7 @@ class OtpPage extends StatelessWidget {
               children: [
                 AppTextFormField(
                   label:
-                      'Please enter the OTP sent to ${context.read<AuthenticationCubit>().user.mobile}',
+                      'Please enter the OTP sent to ${context.watch<AuthenticationCubit>().user.mobile}',
                   maxLength: 4,
                   onSaved: (String val) =>
                       context.read<OtpCubit>().otpCode = val.trim(),

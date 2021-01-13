@@ -13,21 +13,25 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     //userRepository.hasToken()
 
     userRepository.getUser().then((user) {
-      // TODO: Revert if statement for normal functionality
-      if (user == null) {
+      emit(Authenticated(user: User.test));
+      return; // TODO: Remove for normal functionality
+
+      if (user != null) {
         this.user = user;
 
         // TODO: Check if the user gotten has completed registration
         if (user.isFullyRegistered) {
-          emit(Authenticated());
+          emit(Authenticated(user: user));
         } else {
           emit(Unauthenticated(user: user));
         }
       } else {
-        emit(Unauthenticated(user: User.empty));
+        // Todo: Uncomment emit(Unauthenticated());
+        this.user = User.test;
+        emit(Unauthenticated(user: this.user));
       }
     }).catchError((error) {
-      emit(AuthError(error.toString()));
+      emit(AuthError(Error.safeToString(error)));
     });
 
     /*final bool hasToken = await
