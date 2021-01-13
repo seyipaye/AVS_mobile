@@ -10,6 +10,7 @@ class UserRepository {
   final apiClient = AVSApiClient();
 
   Future<User> setUser({User user}) {
+    return Future.delayed(Duration(seconds: 2)).then((value) => user);
     return apiClient.setUser(user: user);
   }
 
@@ -26,7 +27,7 @@ class UserRepository {
   }
 
   Future<User> getUser() {
-    return Future<User>.delayed(const Duration(seconds: 2), () => User.empty);
+    return Future<User>.delayed(const Duration(seconds: 2), () => null);
   }
 
   /*Future<User> authenticate ({

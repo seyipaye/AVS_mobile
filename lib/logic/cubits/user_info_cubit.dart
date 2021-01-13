@@ -45,18 +45,13 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       //print(authenticationCubit.user);
       emit(state.copyWith(isLoading: true));
 
-      Future.delayed(Duration(seconds: 2)).then((value) {
-        authenticationCubit.emit(Authenticated(user: authenticationCubit.user));
-      });
-      /*userRepository.setUser(user: authenticationCubit.user).then((user) {
+      userRepository.setUser(user: authenticationCubit.user).then((user) {
         if (user != null) {
           // Move to next page
           // authenticationCubit.user = authenticationCubit.user.copyWith(
           //   id: id,
           // );
           authenticationCubit.emit(Authenticated(user: user));
-          controller.nextPage(
-              duration: kAnimationDuration, curve: Curves.linear);
         } else {
           emit(UserInfoState.error(
               'Something went wrong, please try again later'));
@@ -70,7 +65,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         } else {
           emit(UserInfoState.error(error));
         }
-      });*/
+      });
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }

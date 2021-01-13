@@ -50,7 +50,7 @@ class SetPasswordCubit extends Cubit<SetPasswordState> {
           }
         }).catchError((error) {
           print(error);
-          if (error is ClientError) {
+          if (error is ClientError || error is Exception) {
             emit(SetPasswordState.error(error.message));
           } else if (error is Error) {
             emit(SetPasswordState.error(Error.safeToString(error)));
