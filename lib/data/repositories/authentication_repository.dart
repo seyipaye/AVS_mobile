@@ -9,6 +9,10 @@ class UserRepository {
   //final userDao = UserDao();
   final apiClient = AVSApiClient();
 
+  Future<User> setUser({User user}) {
+    return apiClient.setUser(user: user);
+  }
+
   Future<String> setPassword({String mobile, String password}) {
     return apiClient.setPassword(mobile: mobile, password: password);
   }

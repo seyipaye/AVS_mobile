@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:avs/data/api_responses/status_response.dart';
+import 'package:avs/data/api_responses/user_response.dart';
+import 'package:avs/data/models/user.dart';
 import 'package:http/http.dart' as http;
 
 final printAllResponses = true;
@@ -27,6 +30,26 @@ class AVSApiClient {
 
   static const _baseUrl = 'https://avs-staging-api.herokuapp.com/v1';
   final http.Client _httpClient;
+
+  Future<User> setUser({User user}) async {
+    print(jsonEncode(user.toRequestBody) + user.id);
+    final response = await _httpClient.post(
+      _baseUrl + '/auth/local/register/agent/${user.id}',
+      headers: {"Content-Type": "application/json"},
+      body: (jsonEncode(user.toRequestBody)),
+    );
+
+    if (printAllResponses) {
+      log(response.body);
+    }
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
+    return UserResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
+  }
 
   Future<String> setPassword({String mobile, String password}) async {
     print(mobile + password);

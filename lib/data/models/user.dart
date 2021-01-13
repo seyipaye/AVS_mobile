@@ -53,7 +53,7 @@ class User extends Equatable {
 
   static const test = User(
     email: UserEmail(address: ''),
-    mobile: '08156655621',
+    mobile: '08156655655',
   );
 
   @override
@@ -83,6 +83,20 @@ class User extends Equatable {
       photo: photo ?? this.photo,
     );
   }
+
+  get toRequestBody {
+    return {
+      'profile': {
+        'firstName': firstName,
+        'lastName': lastName,
+        'otherName': otherName,
+        'email': {
+          'address': this.email.address,
+        },
+        'gender': this.gender
+      }
+    };
+  }
 }
 
 class UserEmail extends Equatable {
@@ -96,4 +110,6 @@ class UserEmail extends Equatable {
   @override
   // TODO: implement props
   List<Object> get props => [address];
+
+  get toRequestBody => {"address": this.address};
 }

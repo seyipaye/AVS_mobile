@@ -26,7 +26,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       } else {
         // Todo: Modify
         this.user = User.test;
-        emit(Unauthenticated(user: user));
+        emit(Unauthenticated(user: this.user));
       }
     }).catchError((error) {
       emit(AuthError(Error.safeToString(error)));

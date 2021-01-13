@@ -28,8 +28,17 @@ class Validator {
   static String isName(String value) {
     if (value.isEmpty) {
       return 'This field is required';
-    } else if (!GetUtils.isAlphabetOnly(value)) {
+    } else if (!GetUtils.isAlphabetOnly(value) || value.length < 2) {
       return 'Please enter a valid name';
+    }
+    return null;
+  }
+
+  static String isOtherName(String value) {
+    if (value.isNotEmpty) {
+      if (!GetUtils.isAlphabetOnly(value) || value.length < 2) {
+        return 'Please enter a valid name';
+      }
     }
     return null;
   }
@@ -39,6 +48,15 @@ class Validator {
       return 'This field is required';
     } else if (!GetUtils.isEmail(value.trim())) {
       return 'Please enter a valid email';
+    }
+    return null;
+  }
+
+  static String isOptionalEmail(String value) {
+    if (value.isNotEmpty) {
+      if (!GetUtils.isEmail(value.trim())) {
+        return 'Please enter a valid email';
+      }
     }
     return null;
   }
@@ -75,7 +93,7 @@ class Validator {
     return null;
   }
 
-  static String isGender(Gender value) {
+  static String isGender(String value) {
     if (value == null) {
       return 'Please select a valid Gender';
     }

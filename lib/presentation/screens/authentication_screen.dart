@@ -34,7 +34,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       PhoneNumberPage(controller, authenticationCubit, userRepository),
       OtpPage(controller, authenticationCubit, userRepository),
       SetPasswordPage(controller, authenticationCubit, userRepository),
-      UserInfoPage(controller),
+      UserInfoPage(controller, authenticationCubit, userRepository),
       // LogInPage(
       //   controller: _carouselController,
       // ),
