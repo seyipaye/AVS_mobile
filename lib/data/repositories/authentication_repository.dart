@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:avs/data/api_responses/status_response.dart';
+import 'package:avs/data/models/shared_pref.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:flutter/foundation.dart';
@@ -8,9 +9,12 @@ import 'package:flutter/foundation.dart';
 class UserRepository {
   //final userDao = UserDao();
   final apiClient = AVSApiClient();
+  final prefs = SharedPref();
 
-  Future<User> setUser({User user}) {
+  Future<User> setUser({User user}) async {
     return Future.delayed(Duration(seconds: 2)).then((value) => user);
+    await prefs.save('User', user);
+
     return apiClient.setUser(user: user);
   }
 
@@ -26,8 +30,9 @@ class UserRepository {
     return apiClient.sendOtp(mobile);
   }
 
-  Future<User> getUser() {
+  Future<User> getUser() async {
     return Future<User>.delayed(const Duration(seconds: 2), () => null);
+    User user = await prefs.read('User');
   }
 
   /*Future<User> authenticate ({

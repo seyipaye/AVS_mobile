@@ -1,7 +1,9 @@
 import 'package:avs/presentation/screens/dash_board_screen.dart';
 
 import 'package:avs/presentation/screens/authentication_screen.dart';
+import 'package:avs/presentation/screens/home_screen.dart';
 import 'package:avs/presentation/screens/splash_screen.dart';
+import 'package:avs/presentation/widgets/completion_chart.dart';
 
 import 'package:avs/utils/styles.dart';
 import 'package:equatable/equatable.dart';
