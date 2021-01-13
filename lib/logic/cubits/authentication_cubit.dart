@@ -13,9 +13,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     //userRepository.hasToken()
 
     userRepository.getUser().then((user) {
-/*
-      emit(Authenticated(user: User.test)); return; // TODO: Remove for normal functionality
-*/
+      emit(Authenticated(user: User.test));
+      return; // TODO: Remove for normal functionality
 
       if (user != null) {
         this.user = user;
