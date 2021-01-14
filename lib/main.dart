@@ -1,6 +1,7 @@
 import 'package:avs/presentation/screens/dash_board_screen.dart';
 
 import 'package:avs/presentation/screens/authentication_screen.dart';
+import 'package:avs/presentation/screens/home_screen.dart';
 import 'package:avs/presentation/screens/splash_screen.dart';
 
 import 'package:avs/utils/styles.dart';
@@ -44,7 +45,7 @@ class AVSApp extends StatelessWidget {
             return AuthenticationScreen();
           }
           if (state is Authenticated) {
-            return DashBoardScreen();
+            return HomeScreen();
           }
           if (state is AuthError) {
             return SplashScreen();

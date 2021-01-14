@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const stroke = Color(0xFFced4da);
 
+  static const background = Color(0xFFf8f8fb);
+
   static const primaryColor = MaterialColor(
     _primaryValue,
     <int, Color>{
@@ -28,6 +30,7 @@ class AppTheme {
         // accentColor: Color(0xFF2A3142),
         // buttonTheme: ThemeData.light().buttonTheme,
         // cursorColor: Color(0xFF2A3142),
+        scaffoldBackgroundColor: AppColors.background,
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           enabledBorder: OutlineInputBorder(
