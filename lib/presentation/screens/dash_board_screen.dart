@@ -1,7 +1,12 @@
 import 'package:avs/presentation/widgets/agent_rating.dart';
+import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/bar_chart.dart';
+import 'package:avs/presentation/widgets/completion_chart.dart';
+import 'package:avs/presentation/widgets/page_title.dart';
+import 'package:avs/presentation/widgets/profile_image.dart';
 import 'package:avs/presentation/widgets/request_count_card.dart';
 import 'package:avs/presentation/widgets/request_item_card.dart';
+import 'package:avs/presentation/widgets/wallet_data.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -25,28 +30,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      drawer: Drawer(
-        child: Container(
-          color: Theme.of(context).primaryColor,
-          child: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // Image(),
-                    Text(
-                      'AVS',
-                      style: kHeaderTextStyle(context),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(10),
@@ -56,10 +39,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  'DASHBOARD',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
+                PageHeader(title: "DASHBOARD"),
                 Card(
                   child: Stack(
                     children: [
@@ -88,31 +68,34 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              'Welcome back!',
+                              'Welcome Back !',
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            space,
-                            Text('Username'),
-                            space,
-                            CircleAvatar(
-                              radius: 40,
-                              backgroundColor: AppColors.primaryColor[50],
-                              backgroundImage: AssetImage('assets/avatar.png'),
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
                             ),
                             space,
                             Text(
                               'Username',
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: 20,
+                                  color: Theme.of(context).primaryColor),
                             ),
                             space,
+                            ProfileImage(
+                              radius: 45,
+                            ),
+                            space,
+                            Text(
+                              'Username',
+                              style: kBoldTextStyle(context),
+                            ),
                             Text('Usertype'),
                             space,
                             Row(
                               children: <Widget>[
                                 AgentRating(
-                                  rating: '3.2',
+                                  rating: '5.0',
                                 ),
                                 SizedBox(
                                   width: 100,
@@ -123,14 +106,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               ],
                             ),
                             space,
-                            RaisedButton(
-                              onPressed: () {},
-                              color: AppColors.primaryColor[300],
-                              child: Text(
-                                'ViewProfile',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            )
+                            AppRaisedButton(
+                              onPressed: (context) {},
+                              text: 'View Profile',
+                            ),
                           ],
                         ),
                       )
@@ -140,16 +119,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 cardSpace,
                 Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Earning',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                              style: kBoldTextStyle(context),
                             ),
                             SizedBox(
                               height: 10,
@@ -194,36 +173,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ),
                           ],
                         ),
+                        CompletionChart(
+                          size: 100,
+                          percentage: 89,
+                        ),
                         SizedBox(
                           height: 10,
                         ),
-                        Center(
-                          child: Container(
-                            height: 100,
-                            child: PieChart(
-                              PieChartData(
-                                borderData: FlBorderData(
-                                  show: false,
-                                ),
-                                sectionsSpace: 0,
-                                centerSpaceRadius: 30,
-                                sections: [
-                                  PieChartSectionData(
-                                      color: AppColors.primaryColor[300],
-                                      value: 80,
-                                      title: '80%',
-                                      radius: 20,
-                                      titleStyle: TextStyle(fontSize: 8)),
-                                  PieChartSectionData(
-                                      color: Colors.white,
-                                      value: 20,
-                                      title: '',
-                                      radius: 20)
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ),
@@ -250,7 +206,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     width: double.infinity,
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 30, top: 20),
+                        padding: const EdgeInsets.only(
+                            right: 30, top: 20, bottom: 20),
                         child: MyBarChart(),
                       ),
                     ),
@@ -268,26 +225,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class WalletInfo extends StatelessWidget {
-  final String walletBalance;
-
-  const WalletInfo({@required this.walletBalance});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          walletBalance,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-        ),
-        Text('Wallet')
-      ],
     );
   }
 }

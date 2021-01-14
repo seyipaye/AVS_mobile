@@ -1,3 +1,4 @@
+import 'package:avs/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,15 +16,17 @@ class AgentRating extends StatelessWidget {
           children: [
             Text(
               rating,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              style: kBoldTextStyle(context),
             ),
             SizedBox(
               width: 5,
             ),
             for (int i = 0; i < 5; i++)
               Icon(
-                CupertinoIcons.star_fill,
-                size: 10,
+                !(double.parse(rating) > i && double.parse(rating) < i + 1)
+                    ? CupertinoIcons.star_fill
+                    : CupertinoIcons.star_lefthalf_fill,
+                size: 15,
                 color:
                     i < double.parse(rating) ? Color(0xFFFFA502) : Colors.grey,
               )

@@ -9,6 +9,11 @@ TextStyle kInputTextStyle(context) => Theme.of(context)
     .bodyText2
     .copyWith(fontWeight: FontWeight.w300, fontSize: 16);
 
+TextStyle kBoldTextStyle(context) => Theme.of(context)
+    .textTheme
+    .bodyText2
+    .copyWith(fontWeight: FontWeight.bold, fontSize: 20);
+
 TextStyle kHeaderTextStyle(context) => Theme.of(context)
     .textTheme
     .bodyText1
