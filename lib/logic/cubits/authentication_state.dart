@@ -30,7 +30,7 @@ class Authenticated extends AuthenticationState {
 class Unauthenticated extends AuthenticationState {
   final User user;
 
-  const Unauthenticated({this.user});
+  const Unauthenticated(User empty, {this.user});
 
   @override
   List<Object> get props => [user];

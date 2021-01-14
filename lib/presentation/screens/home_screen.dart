@@ -21,6 +21,27 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      drawer: Drawer(
+        child: Container(
+          color: Theme.of(context).primaryColor,
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    // Image(),
+                    Text(
+                      'AVS',
+                      style: kHeaderTextStyle(context),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
       body: DashBoardScreen(),
     );
   }

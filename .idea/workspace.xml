@@ -22,15 +22,39 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Post demo">
+    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Link a little bit of SetUserInfoScreen to backend">
+      <change afterPath="$PROJECT_DIR$/lib/presentation/widgets/bar_chart_group_data.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/widgets/bar_chart_key.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/debug_ios_bundle_flutter_assets.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/debug_ios_bundle_flutter_assets.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/flutter_assets.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/kernel_snapshot.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/outputs.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/outputs.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/models/user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/styles.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/image_picker/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/image_picker/image_picker.framework/image_picker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/shared_preferences/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/shared_preferences/shared_preferences.framework/shared_preferences" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/image_picker.framework/image_picker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/shared_preferences.framework/shared_preferences" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/dash_board_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/dash_board_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/widgets/bar_chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/widgets/bar_chart.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,24 +93,24 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/logic/cubits" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets" />
     <property name="settings.editor.selected.configurable" value="memory.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib/logic/cubits" />
-      <recent name="$PROJECT_DIR$/lib/utils" />
-      <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
-      <recent name="$PROJECT_DIR$/lib/presentation/widgets/input" />
-      <recent name="$PROJECT_DIR$/lib/presentation/widgets" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/data/api_responses" />
       <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
       <recent name="$PROJECT_DIR$/lib/presentation/pages" />
       <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/assets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
+      <recent name="$PROJECT_DIR$/lib/logic/cubits" />
+      <recent name="$PROJECT_DIR$/lib/utils" />
+      <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
+      <recent name="$PROJECT_DIR$/lib/presentation/widgets/input" />
     </key>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
@@ -165,21 +189,7 @@
       <option name="project" value="LOCAL" />
       <updated>1610554293305</updated>
     </task>
-    <task id="LOCAL-00008" summary="feat: Built 1st demo">
-      <created>1610556715430</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1610556715430</updated>
-    </task>
-    <task id="LOCAL-00009" summary="feat: Post demo">
-      <created>1610556855185</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1610556855185</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,9 +213,7 @@
     <MESSAGE value="feat: Link Verify OTP to backend" />
     <MESSAGE value="feat: Link Set Password to backend" />
     <MESSAGE value="feat: Link a little bit of SetUserInfoScreen to backend" />
-    <MESSAGE value="feat: Built 1st demo" />
-    <MESSAGE value="feat: Post demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Post demo" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Link a little bit of SetUserInfoScreen to backend" />
   </component>
   <component name="WindowStateProjectService">
     <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610354102104">
@@ -216,36 +224,35 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="411" y="166" key="#com.intellij.ide.util.MemberChooser/0.23.1440.840@0.23.1440.840" timestamp="1610452222883" />
-    <state x="113" y="104" width="1215" height="651" key="AVDManager" timestamp="1610594521269">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state x="100" y="100" width="1080" height="600" key="AVDManager" timestamp="1606753523843">
+      <screen x="0" y="25" width="1280" height="775" />
     </state>
     <state x="100" y="100" width="1080" height="600" key="AVDManager/0.0.1280.800@0.0.1280.800" timestamp="1606334689871" />
-    <state x="113" y="104" width="1215" height="651" key="AVDManager/0.23.1440.840@0.23.1440.840" timestamp="1610594521269" />
     <state x="100" y="100" width="1080" height="600" key="AVDManager/0.25.1280.775@0.25.1280.775" timestamp="1606753523843" />
-    <state width="1144" height="131" key="GridCell.Tab.0.bottom" timestamp="1610621697737">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1610609101017">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="228" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1609682662166" />
-    <state width="1144" height="131" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1610621697737" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1610609101017" />
+    <state width="1398" height="137" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1610556660485" />
     <state width="1238" height="228" key="GridCell.Tab.0.bottom/0.25.1280.775@0.25.1280.775" timestamp="1607596698116" />
-    <state width="1144" height="131" key="GridCell.Tab.0.center" timestamp="1610621697736">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1610609101015">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="228" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1609682662164" />
-    <state width="1144" height="131" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1610621697736" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1610609101015" />
+    <state width="1398" height="137" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1610556660485" />
     <state width="1238" height="228" key="GridCell.Tab.0.center/0.25.1280.775@0.25.1280.775" timestamp="1607596698108" />
-    <state width="1144" height="131" key="GridCell.Tab.0.left" timestamp="1610621697736">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1610609101014">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="228" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1609682662163" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1610609101014" />
     <state width="1238" height="229" key="GridCell.Tab.0.left/0.0.1280.800@0.25.1280.775" timestamp="1606765734310" />
-    <state width="1144" height="131" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1610621697736" />
+    <state width="1398" height="137" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1610556660484" />
     <state width="1238" height="228" key="GridCell.Tab.0.left/0.25.1280.775@0.25.1280.775" timestamp="1607596698107" />
-    <state width="1144" height="131" key="GridCell.Tab.0.right" timestamp="1610621697737">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1610609101016">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="228" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1609682662165" />
-    <state width="1144" height="131" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610621697737" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1610609101016" />
+    <state width="1398" height="137" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610556660485" />
     <state width="1238" height="228" key="GridCell.Tab.0.right/0.25.1280.775@0.25.1280.775" timestamp="1607596698115" />
     <state x="349" y="211" key="MultipleFileMergeDialog" timestamp="1610554543439">
       <screen x="0" y="23" width="1440" height="840" />
@@ -255,10 +262,10 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="99" y="82" key="SettingsEditor/0.23.1440.840@0.23.1440.840" timestamp="1610216414327" />
-    <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1610558532987">
+    <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1610555274378">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
-    <state x="192" y="183" key="Vcs.Push.Dialog.v2/0.23.1440.840@0.23.1440.840" timestamp="1610558532987" />
+    <state x="192" y="183" key="Vcs.Push.Dialog.v2/0.23.1440.840@0.23.1440.840" timestamp="1610555274378" />
     <state x="100" y="100" width="1080" height="600" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606839209926">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
@@ -267,10 +274,6 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="121" y="47" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.840@0.23.1440.840" timestamp="1610131280758" />
-    <state x="503" y="364" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610594457018">
-      <screen x="0" y="23" width="1440" height="840" />
-    </state>
-    <state x="503" y="364" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.840@0.23.1440.840" timestamp="1610594457018" />
     <state x="26" y="290" width="877" height="620" key="dock-window-1" timestamp="1610111355825">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
