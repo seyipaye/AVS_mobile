@@ -175,7 +175,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         ),
                         CompletionChart(
                           size: 100,
-                          percentage: 99,
+                          percentage: 89,
                         ),
                         SizedBox(
                           height: 10,
@@ -206,7 +206,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     width: double.infinity,
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 30, top: 20),
+                        padding: const EdgeInsets.only(
+                            right: 30, top: 20, bottom: 20),
                         child: MyBarChart(),
                       ),
                     ),
