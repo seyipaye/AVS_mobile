@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 
 part 'authentication_state.dart';
 
+// TODO: Check for normal functionality
+final skipAuthentication = false;
+
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit({@required UserRepository userRepository})
       : _userRepository = userRepository,
@@ -13,24 +16,21 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     //userRepository.hasToken()
 
     userRepository.getUser().then((user) {
-      emit(Authenticated(user: User.test));
-
-      return; // TODO: Remove for normal functionality
-
-      // if (user != null) {
-      //   this.user = user;
-      //
-      //   // TODO: Check if the user gotten has completed registration
-      //   if (user.isFullyRegistered) {
-      //     emit(Authenticated(user: user));
-      //   } else {
-      //     emit(Unauthenticated(user: user));
-      //   }
-      // } else {
-      //   // Todo: Uncomment emit(Unauthenticated());
-      //   this.user = User.test;
-      //   emit(Unauthenticated(user: this.user));
-      // }
+      if (skipAuthentication) {
+        emit(Authenticated(user: User.test));
+      } else {
+        if (user != null) {
+          this.user = user;
+          // TODO: Check if the user gotten has completed registration
+          if (user.isFullyRegistered) {
+            emit(Authenticated(user: user));
+          } else {
+            emit(Unauthenticated(user: user));
+          }
+        } else {
+          emit(Unauthenticated());
+        }
+      }
     }).catchError((error) {
       emit(AuthError(Error.safeToString(error)));
     });

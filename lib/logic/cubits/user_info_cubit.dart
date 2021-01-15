@@ -58,7 +58,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError) {
+        if (error is ClientError || error is Exception) {
           emit(UserInfoState.error(error.message));
         } else if (error is Error) {
           emit(UserInfoState.error(Error.safeToString(error)));

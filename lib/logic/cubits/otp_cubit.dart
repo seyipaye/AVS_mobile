@@ -41,7 +41,7 @@ class OtpCubit extends Cubit<OtpState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError) {
+        if (error is ClientError || error is Exception) {
           emit(OtpState.error(error.message));
         } else if (error is Error) {
           emit(OtpState.error(Error.safeToString(error)));
