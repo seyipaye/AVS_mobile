@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 part 'authentication_state.dart';
 
 // TODO: Check for normal functionality
-final skipAuthentication = false;
+final skipAuthentication = true;
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit({@required UserRepository userRepository})
