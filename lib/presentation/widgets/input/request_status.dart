@@ -11,7 +11,7 @@ class RequestStatus extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Text(status),
+        Text(status, style: TextStyle(fontSize: 13)),
         SizedBox(
           width: 10,
         ),

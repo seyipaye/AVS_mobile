@@ -9,6 +9,10 @@ class AppColors {
 
   static const icons = Color(0xFF555b6d);
 
+  static const offset = Color(0x14323247);
+
+  static const text2 = Color(0xFF999999);
+
   // #555b6d;
 
   // #2a3042;
@@ -42,13 +46,13 @@ class AppTheme {
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(color: AppColors.icons),
           color: Colors.white,
+          elevation: .5,
           textTheme: TextTheme(
             headline6: Typography.blackCupertino.headline6.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
-          elevation: 1,
         ),
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
