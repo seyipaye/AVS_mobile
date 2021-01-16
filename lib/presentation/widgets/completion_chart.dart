@@ -47,11 +47,23 @@ class CompletionChart extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.white, shape: BoxShape.circle),
                         child: Center(
-                            child: Text(
-                          "${percentage.toInt()}%",
-                          style: TextStyle(
-                              fontSize: size / 5,
-                              color: Theme.of(context).primaryColor),
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${percentage.toInt()}%",
+                              style: TextStyle(
+                                  fontSize: size / 7,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                            Text(
+                              'completed',
+                              style: TextStyle(
+                                  fontSize: size / 10,
+                                  color: Theme.of(context).primaryColor),
+                            )
+                          ],
                         )),
                       ),
                     )
