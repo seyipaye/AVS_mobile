@@ -44,7 +44,7 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError) {
+        if (error is ClientError || error is Exception) {
           emit(PhoneNumberState.error(error.message));
         } else if (error is Error) {
           emit(PhoneNumberState.error(Error.safeToString(error)));

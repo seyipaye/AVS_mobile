@@ -140,6 +140,12 @@
       "languageVersion": "2.10"
     },
     {
+      "name": "google_nav_bar",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/google_nav_bar-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "http",
       "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2",
       "packageUri": "lib/",
@@ -168,6 +174,12 @@
       "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.16.1",
       "packageUri": "lib/",
       "languageVersion": "2.5"
+    },
+    {
+      "name": "line_icons",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/line_icons-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
     },
     {
       "name": "loading_overlay",
@@ -380,7 +392,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-13T17:34:01.878797Z",
+  "generated": "2021-01-16T15:57:34.000087Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }

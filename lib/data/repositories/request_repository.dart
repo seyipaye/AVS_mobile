@@ -6,7 +6,7 @@ class RequestRepository {
   final provider = RequestProvider();
   static const int _perPage = 10;
 
-  Future<Request> getNewRequests(
+  Future<List<Request>> getNewRequests(
       {@required int page, int limit = _perPage}) async {
     return await provider.getNewRequests(page: page, limit: limit);
   }

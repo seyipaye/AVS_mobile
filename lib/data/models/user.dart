@@ -108,7 +108,6 @@ class UserEmail extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object> get props => [address];
 
   get toRequestBody => {"address": this.address};
