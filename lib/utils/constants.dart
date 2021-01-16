@@ -1,4 +1,13 @@
+import 'package:avs/utils/styles.dart';
 import 'package:flutter/material.dart';
+
+BoxShadow kDropShadow(double dx, double dy, double blurRadius,
+        {color = AppColors.offset}) =>
+    BoxShadow(
+      offset: Offset(dx, dy),
+      blurRadius: blurRadius,
+      color: color,
+    );
 
 final kAnimationDuration = Duration(milliseconds: 300);
 

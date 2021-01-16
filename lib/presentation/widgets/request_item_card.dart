@@ -2,6 +2,7 @@ import 'package:avs/presentation/widgets/input/request_status.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+// Todo: Compare with NewRequestItem
 class RequestItem extends StatelessWidget {
   final String verificationNumber;
   final String status;

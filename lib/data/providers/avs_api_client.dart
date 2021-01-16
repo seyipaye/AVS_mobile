@@ -28,7 +28,7 @@ class AVSApiClient {
   AVSApiClient({http.Client httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = 'https://avs-staging-api.herokuapp.com/v1';
+  static const _baseUrl = ' https://api-sandbox.quickavs.ng/v1';
   final http.Client _httpClient;
 
   Future<User> setUser({User user}) async {
