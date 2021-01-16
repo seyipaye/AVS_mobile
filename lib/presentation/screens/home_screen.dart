@@ -1,11 +1,10 @@
-import 'package:avs/presentation/screens/dash_board_screen.dart';
-import 'package:avs/presentation/widgets/bar_chart.dart';
-import 'package:avs/presentation/widgets/request_count_card.dart';
-import 'package:avs/utils/constants.dart';
+import 'package:avs/presentation/screens/reqests_screen.dart';
 import 'package:avs/utils/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
+
+import 'dash_board_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,36 +12,73 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final space = SizedBox(
-    height: 30,
-  );
-
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    DashBoardScreen(),
+    RequestsScreen(),
+    Text(
+      'Index 2: Profile',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: More',
+      style: optionStyle,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      drawer: Drawer(
-        child: Container(
-          color: Theme.of(context).primaryColor,
-          child: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // Image(),
-                    Text(
-                      'AVS',
-                      style: kHeaderTextStyle(context),
-                    ),
-                  ],
-                )
+      //drawer: AppDrawer(),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: buildBottomNavBar(),
+    );
+  }
+
+  Container buildBottomNavBar() {
+    return Container(
+      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+      ]),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+          child: GNav(
+              gap: 8,
+              activeColor: Colors.white,
+              iconSize: 24,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              duration: Duration(milliseconds: 800),
+              tabBackgroundColor: AppColors.primaryColor,
+              tabs: [
+                GButton(
+                  icon: LineIcons.home,
+                  text: 'Dashboard',
+                ),
+                GButton(
+                  icon: LineIcons.list_alt,
+                  text: 'Requests',
+                ),
+                GButton(
+                  icon: LineIcons.user,
+                  text: 'Profile',
+                ),
+                GButton(
+                  icon: LineIcons.ellipsis_v,
+                  text: 'More',
+                ),
               ],
-            ),
-          ),
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              }),
         ),
       ),
-      body: DashBoardScreen(),
     );
   }
 }

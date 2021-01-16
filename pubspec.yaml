@@ -33,8 +33,11 @@ dependencies:
   dotted_border: ^1.0.7
   loading_overlay: ^0.2.1
 
-  fl_chart: ^0.12.2
 
+  # Ui
+  fl_chart: ^0.12.2
+  line_icons: ^0.2.0
+  google_nav_bar: ^3.2.0
 
   # Utils
   get: ^3.24.0
