@@ -18,12 +18,12 @@ class RequestsLoadingState extends RequestsBlocState {
 }
 
 class RequestsSuccessState extends RequestsBlocState {
-  final List<Request> requests;
+  // final List<Request> requests;
 
-  RequestsSuccessState(this.requests);
+  // RequestsSuccessState(this.requests);
 
   @override
-  List<Object> get props => [requests];
+  List<Object> get props => [];
 }
 
 class RequestsErrorState extends RequestsBlocState {

@@ -33,7 +33,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(

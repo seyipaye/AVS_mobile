@@ -8,8 +8,9 @@ class Request {
   final String merchant;
   final List<dynamic> history;
   final String updatedAt;
-  final String requestId;
+  final int requestId;
   final String id;
+  final String createdAt;
 
   Request(
       this.contact,
@@ -22,7 +23,8 @@ class Request {
       this.history,
       this.updatedAt,
       this.requestId,
-      this.id);
+      this.id,
+      this.createdAt);
 
   Request.fromJson(Map<String, dynamic> json)
       : contact = Contact.fromJson(json['contact']),
@@ -35,6 +37,7 @@ class Request {
         history = json['history'],
         updatedAt = json['updatedAt'],
         requestId = json['requestId'],
+        createdAt = json['createdAt'],
         id = json['id'];
 }
 
