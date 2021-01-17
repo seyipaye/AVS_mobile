@@ -22,6 +22,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Link a little bit of SetUserInfoScreen to backend" />
+=======
+    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="pre merge commit">
+      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/app_drawer.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/reqests_screen.dart" afterDir="false" />
+=======
     <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Bottom nav bar to Home screen &amp; &#10;Built 2nd demo">
       <change afterPath="$PROJECT_DIR$/lib/presentation/pages/request/all_request_page.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/presentation/pages/request/assigned_request_page.dart" afterDir="false" />
@@ -35,6 +43,7 @@
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/kernel_snapshot.d" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/kernel_snapshot.stamp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/bac15c12a4c275c5f78db7a2f43333ef/outputs.json" beforeDir="false" />
+>>>>>>> 6df837faa573f56548b30eda3190cf32deddb72e
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
@@ -196,6 +205,7 @@
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
+>>>>>>> 39964d313b35414eafc1a6db7b7a741a7360cf30
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,7 +243,14 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/presentation/pages/request" />
+>>>>>>> 6df837faa573f56548b30eda3190cf32deddb72e
     <property name="settings.editor.selected.configurable" value="memory.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -388,11 +405,31 @@
     <state x="100" y="100" width="1080" height="600" key="AVDManager/0.0.1280.800@0.0.1280.800" timestamp="1606334689871" />
     <state x="113" y="104" width="1215" height="651" key="AVDManager/0.23.1440.840@0.23.1440.840" timestamp="1610752648211" />
     <state x="100" y="100" width="1080" height="600" key="AVDManager/0.25.1280.775@0.25.1280.775" timestamp="1606753523843" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1610703633983">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1610703633983" />
+    <state width="1398" height="137" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1610556660485" />
+    <state width="1238" height="228" key="GridCell.Tab.0.bottom/0.25.1280.775@0.25.1280.775" timestamp="1607596698116" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1610703633982">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1610703633982" />
+    <state width="1398" height="137" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1610556660485" />
+    <state width="1238" height="228" key="GridCell.Tab.0.center/0.25.1280.775@0.25.1280.775" timestamp="1607596698108" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1610703633979">
+      <screen x="0" y="0" width="1280" height="800" />
+=======
+    <state width="1398" height="131" key="GridCell.Tab.0.bottom" timestamp="1610723049896">
+=======
     <state x="100" y="123" width="1240" height="640" key="DiffContextDialog" timestamp="1610752648211">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="100" y="123" width="1240" height="640" key="DiffContextDialog/0.23.1440.840@0.23.1440.840" timestamp="1610752648211" />
     <state width="1398" height="130" key="GridCell.Tab.0.bottom" timestamp="1610817415248">
+>>>>>>> 6df837faa573f56548b30eda3190cf32deddb72e
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1610609101017" />
@@ -406,24 +443,42 @@
     <state width="1238" height="228" key="GridCell.Tab.0.center/0.25.1280.775@0.25.1280.775" timestamp="1607596698108" />
     <state width="1398" height="130" key="GridCell.Tab.0.left" timestamp="1610817415247">
       <screen x="0" y="23" width="1440" height="840" />
+>>>>>>> 39964d313b35414eafc1a6db7b7a741a7360cf30
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1610609101014" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1610703633979" />
     <state width="1238" height="229" key="GridCell.Tab.0.left/0.0.1280.800@0.25.1280.775" timestamp="1606765734310" />
     <state width="1398" height="130" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1610817415247" />
     <state width="1238" height="228" key="GridCell.Tab.0.left/0.25.1280.775@0.25.1280.775" timestamp="1607596698107" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1610703633982">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1610703633982" />
+    <state width="1398" height="137" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610556660485" />
+=======
+    <state width="1398" height="131" key="GridCell.Tab.0.right" timestamp="1610723049895">
+      <screen x="0" y="23" width="1440" height="840" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1610609101016" />
+    <state width="1398" height="131" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610723049895" />
+>>>>>>> 39964d313b35414eafc1a6db7b7a741a7360cf30
+=======
     <state width="1398" height="130" key="GridCell.Tab.0.right" timestamp="1610817415247">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1610609101016" />
     <state width="1398" height="130" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610817415247" />
+>>>>>>> 6df837faa573f56548b30eda3190cf32deddb72e
     <state width="1238" height="228" key="GridCell.Tab.0.right/0.25.1280.775@0.25.1280.775" timestamp="1607596698115" />
     <state x="349" y="211" key="MultipleFileMergeDialog" timestamp="1610554543439">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="349" y="211" key="MultipleFileMergeDialog/0.23.1440.840@0.23.1440.840" timestamp="1610554543439" />
-    <state x="99" y="82" key="SettingsEditor" timestamp="1610216414327">
-      <screen x="0" y="23" width="1440" height="840" />
+    <state x="88" y="0" key="SettingsEditor" timestamp="1610709045770">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
+    <state x="88" y="0" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1610709045770" />
     <state x="99" y="82" key="SettingsEditor/0.23.1440.840@0.23.1440.840" timestamp="1610216414327" />
     <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1610728465104">
       <screen x="0" y="23" width="1440" height="840" />
@@ -462,6 +517,10 @@
           <url>file://$PROJECT_DIR$/lib/pages/update_verification_page.dart</url>
           <line>294</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2/lib/src/base_response.dart</url>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -4,6 +4,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class MyBarChart extends StatelessWidget {
+  final List<BarChartGroupData> list;
+
+  const MyBarChart({@required this.list});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -82,80 +86,7 @@ class MyBarChart extends StatelessWidget {
               show: false,
             ),
             groupsSpace: 1,
-            barGroups: [
-              groupData(
-                  position: 0,
-                  width: 4,
-                  approved: 30,
-                  pending: 40,
-                  rejected: 20),
-              groupData(
-                  position: 1,
-                  width: 4,
-                  approved: 10,
-                  pending: 40,
-                  rejected: 20),
-              groupData(
-                  position: 2,
-                  width: 4,
-                  approved: 30,
-                  pending: 10,
-                  rejected: 20),
-              groupData(
-                  position: 3,
-                  width: 4,
-                  approved: 40,
-                  pending: 40,
-                  rejected: 10),
-              groupData(
-                  position: 4,
-                  width: 4,
-                  approved: 20,
-                  pending: 20,
-                  rejected: 40),
-              groupData(
-                  position: 5,
-                  width: 4,
-                  approved: 30,
-                  pending: 10,
-                  rejected: 10),
-              groupData(
-                  position: 6,
-                  width: 4,
-                  approved: 30,
-                  pending: 50,
-                  rejected: 5),
-              groupData(
-                  position: 7,
-                  width: 4,
-                  approved: 20,
-                  pending: 40,
-                  rejected: 30),
-              groupData(
-                  position: 8,
-                  width: 4,
-                  approved: 10,
-                  pending: 10,
-                  rejected: 20),
-              groupData(
-                  position: 9,
-                  width: 4,
-                  approved: 30,
-                  pending: 30,
-                  rejected: 20),
-              groupData(
-                  position: 10,
-                  width: 4,
-                  approved: 30,
-                  pending: 30,
-                  rejected: 30),
-              groupData(
-                  position: 11,
-                  width: 4,
-                  approved: 10,
-                  pending: 40,
-                  rejected: 20),
-            ],
+            barGroups: list,
           ),
         ),
         BarChartKey(
