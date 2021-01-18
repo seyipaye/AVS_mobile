@@ -1,6 +1,7 @@
 import 'package:avs/presentation/widgets/agent_rating.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/bar_chart.dart';
+import 'package:avs/presentation/widgets/bar_chart_group_data.dart';
 import 'package:avs/presentation/widgets/completion_chart.dart';
 import 'package:avs/presentation/widgets/page_title.dart';
 import 'package:avs/presentation/widgets/profile_image.dart';
@@ -9,7 +10,6 @@ import 'package:avs/presentation/widgets/request_item_card.dart';
 import 'package:avs/presentation/widgets/wallet_data.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +33,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
@@ -176,7 +176,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         ),
                         CompletionChart(
                           size: 100,
-                          percentage: 89,
+                          percentage: 36,
                         ),
                         SizedBox(
                           height: 10,
@@ -208,12 +208,88 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.only(
-                            right: 30, top: 20, bottom: 20),
-                        child: MyBarChart(),
+                            right: 20, top: 20, bottom: 20),
+                        child: MyBarChart(
+                          list: [
+                            groupData(
+                                position: 0,
+                                width: 4,
+                                approved: 30,
+                                pending: 40,
+                                rejected: 20),
+                            groupData(
+                                position: 1,
+                                width: 4,
+                                approved: 10,
+                                pending: 40,
+                                rejected: 20),
+                            groupData(
+                                position: 2,
+                                width: 4,
+                                approved: 30,
+                                pending: 10,
+                                rejected: 20),
+                            groupData(
+                                position: 3,
+                                width: 4,
+                                approved: 40,
+                                pending: 40,
+                                rejected: 10),
+                            groupData(
+                                position: 4,
+                                width: 4,
+                                approved: 20,
+                                pending: 20,
+                                rejected: 40),
+                            groupData(
+                                position: 5,
+                                width: 4,
+                                approved: 30,
+                                pending: 10,
+                                rejected: 10),
+                            groupData(
+                                position: 6,
+                                width: 4,
+                                approved: 30,
+                                pending: 50,
+                                rejected: 5),
+                            groupData(
+                                position: 7,
+                                width: 4,
+                                approved: 20,
+                                pending: 40,
+                                rejected: 30),
+                            groupData(
+                                position: 8,
+                                width: 4,
+                                approved: 10,
+                                pending: 10,
+                                rejected: 20),
+                            groupData(
+                                position: 9,
+                                width: 4,
+                                approved: 30,
+                                pending: 30,
+                                rejected: 20),
+                            groupData(
+                                position: 10,
+                                width: 4,
+                                approved: 30,
+                                pending: 30,
+                                rejected: 30),
+                            groupData(
+                                position: 11,
+                                width: 4,
+                                approved: 10,
+                                pending: 40,
+                                rejected: 20),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
+                space,
                 RequestItem(
                   verificationNumber: '0000000123',
                   status: 'COMPLETED',
