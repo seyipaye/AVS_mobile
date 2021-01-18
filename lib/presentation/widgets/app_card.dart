@@ -5,7 +5,8 @@ class AppCard extends StatelessWidget {
   final Color color;
   final EdgeInsets margin;
   final EdgeInsets padding;
-  final child;
+  final Widget child;
+  final GestureTapCallback onTap;
   final double radius;
   final double height;
   final blurRadius;
@@ -23,20 +24,28 @@ class AppCard extends StatelessWidget {
     this.margin,
     this.height,
     this.padding,
+    this.onTap,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      padding: padding,
-      height: height,
+    return Ink(
       decoration: BoxDecoration(
         border: border,
         color: color,
-        borderRadius: BorderRadius.all(Radius.circular(radius)),
+        borderRadius: BorderRadius.circular(radius),
         boxShadow: boxShadow ?? [kDropShadow(0, blurRadius, blurRadius)],
       ),
-      child: child,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(radius),
+        onTap: onTap,
+        child: Container(
+          margin: margin,
+          padding: padding,
+          height: height,
+          child: child,
+        ),
+      ),
     );
   }
 }

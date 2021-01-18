@@ -2,26 +2,20 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class LoadingIndicator extends StatelessWidget {
-  LoadingIndicator({
+  const LoadingIndicator({
     Key key,
     this.color,
-    double radius,
-  }) : super(key: key) {
-    if (radius != null) {
-      this.height = radius;
-      this.width = radius;
-    }
-  }
+    this.radius,
+  }) : super(key: key);
 
   final Color color;
-  double height;
-  double width;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
-      width: width,
+      height: radius,
+      width: radius,
       child: CircularProgressIndicator(
         // backgroundColor: Colors.black,
         valueColor: AlwaysStoppedAnimation(color),

@@ -14,6 +14,8 @@ class NewRequestItem extends StatelessWidget {
   final String streetAddress;
   final String lga;
   final String state;
+  final String imageUrl;
+  final GestureTapCallback onTap;
 
   final Map statusCode = {
     'PROCESSED': Colors.green[300],
@@ -30,7 +32,9 @@ class NewRequestItem extends StatelessWidget {
       this.lastName,
       this.streetAddress,
       this.lga,
-      this.state});
+      this.state,
+      this.onTap,
+      this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -41,85 +45,76 @@ class NewRequestItem extends StatelessWidget {
       color: Colors.white,
       border: Border.all(color: AppColors.stroke, width: .5),
       padding: const EdgeInsets.symmetric(horizontal: 14),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: () {},
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 14, bottom: 10),
-                child: Row(
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        child: CachedNetworkImage(
-                          imageUrl: 'https://i.pravatar.cc/100',
-                          placeholder: (context, url) =>
-                              Center(child: LoadingIndicator(radius: 20)),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
+      onTap: onTap,
+      child: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 14, bottom: 10),
+              child: Row(
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        placeholder: (context, url) => const Center(
+                            child: const LoadingIndicator(radius: 20)),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        width: double.infinity,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    SizedBox(width: 14),
-                    Expanded(
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: DefaultTextStyle(
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                      style:
+                          const TextStyle(color: AppColors.text2, fontSize: 13),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(firstName + ' ' + lastName,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600)),
-                          Text(
-                            streetAddress,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                            style:
-                                TextStyle(color: AppColors.text2, fontSize: 13),
-                          ),
-                          Text(
-                            lga + ', ' + state,
-                            softWrap: false,
-                            overflow: TextOverflow.fade,
-                            style:
-                                TextStyle(color: AppColors.text2, fontSize: 13),
-                          ),
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600)),
+                          Text(streetAddress),
+                          Text(lga + ', ' + state),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Divider(height: .5),
-            SizedBox(
-              height: 30,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '№ $verificationNumber',
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    style:
-                        TextStyle(color: AppColors.primaryColor, fontSize: 13),
                   ),
-                  RequestStatus(
-                    status: status,
-                    color: statusCode[status],
-                  )
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          const Divider(height: .5),
+          SizedBox(
+            height: 30,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '№ $verificationNumber',
+                  style: const TextStyle(
+                      color: AppColors.primaryColor, fontSize: 13),
+                ),
+                RequestStatus(
+                  status: status,
+                  color: statusCode[status],
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
