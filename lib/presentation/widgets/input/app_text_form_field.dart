@@ -31,9 +31,15 @@ class AppTextFormField extends StatelessWidget {
       this.maxLines = 1,
       this.inputFormatters,
       this.errorText,
-      Key key})
+      Key key,
+      this.spacerHeight,
+      this.topPadding,
+      this.enableInteractiveSelection = true})
       : super(key: key);
 
+  final bool enableInteractiveSelection;
+  final double topPadding;
+  final double spacerHeight;
   final int maxLength;
   final int maxLines;
   final String hintText;
@@ -64,6 +70,7 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget textFormField = TextFormField(
+      enableInteractiveSelection: enableInteractiveSelection,
       readOnly: readOnly,
       autovalidate: autovalidate,
       onChanged: onChanged,
@@ -100,6 +107,9 @@ class AppTextFormField extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(
+                height: topPadding ?? 0,
+              ),
               Text(
                 label,
                 style: TextStyle(
@@ -109,7 +119,7 @@ class AppTextFormField extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: spacerHeight ?? 10.0,
               ),
               textFormField
             ],
