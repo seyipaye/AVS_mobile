@@ -34,9 +34,11 @@ class AppTextFormField extends StatelessWidget {
       Key key,
       this.spacerHeight,
       this.topPadding,
-      this.enableInteractiveSelection = true})
+      this.enableInteractiveSelection = true,
+      this.labelTextStyle})
       : super(key: key);
 
+  final TextStyle labelTextStyle;
   final bool enableInteractiveSelection;
   final double topPadding;
   final double spacerHeight;
@@ -112,11 +114,12 @@ class AppTextFormField extends StatelessWidget {
               ),
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  //color: AppColors.label,
-                ),
+                style: labelTextStyle ??
+                    TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      //color: AppColors.label,
+                    ),
               ),
               SizedBox(
                 height: spacerHeight ?? 10.0,

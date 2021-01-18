@@ -48,10 +48,10 @@ dependencies:
   equatable: ^1.2.5
 
   # Assets loading
+  photo_view: ^0.10.3
   flutter_svg: 0.19.0
   image_picker: ^0.6.7+21
   cached_network_image: ^2.5.0
-  photo_view: ^0.10.3
   # File picker is causing a bug during build over here
   #file_picker: ^2.1.5
 
