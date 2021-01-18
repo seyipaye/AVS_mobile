@@ -38,7 +38,6 @@ class NewRequestItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //RequestDetails
     return AppCard(
       height: 120,
       radius: 16.0,
