@@ -10,4 +10,9 @@ class RequestRepository {
       {@required int page, int limit = _perPage}) async {
     return await provider.getNewRequests(page: page, limit: limit);
   }
+
+  Future<List<Request>> getAssignedRequests(
+      {@required int page, int limit = _perPage}) async {
+    return await provider.getAssignedRequests(page: page, limit: limit);
+  }
 }

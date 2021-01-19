@@ -22,6 +22,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="255008e7-6783-4fad-b82c-7e6e78bb566e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/providers/request_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/providers/request_provider.dart" afterDir="false" />
+=======
     <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Request details Screen 100% done">
       <change afterPath="$PROJECT_DIR$/lib/data/api_responses/login_response.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/logic/cubits/login_cubit.dart" afterDir="false" />
@@ -41,6 +52,7 @@
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/app_drawer.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/styles.dart" afterDir="false" />
+>>>>>>> 89b324ec66ae72ed937b7db2b65d0cfdb23ddfae
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +91,11 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/logic/cubits" />
+>>>>>>> 89b324ec66ae72ed937b7db2b65d0cfdb23ddfae
     <property name="settings.editor.selected.configurable" value="memory.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -120,7 +136,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="" />
+      <changelist id="255008e7-6783-4fad-b82c-7e6e78bb566e" name="Default Changelist" comment="" />
       <created>1605866229643</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -270,6 +286,22 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="100" y="123" width="1240" height="640" key="DiffContextDialog/0.23.1440.840@0.23.1440.840" timestamp="1610752648211" />
+<<<<<<< HEAD
+    <state width="1238" height="151" key="GridCell.Tab.0.bottom" timestamp="1611042119915">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="151" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1611042119915" />
+    <state width="1398" height="130" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1610960847804" />
+    <state width="1238" height="228" key="GridCell.Tab.0.bottom/0.25.1280.775@0.25.1280.775" timestamp="1607596698116" />
+    <state width="1238" height="151" key="GridCell.Tab.0.center" timestamp="1611042119912">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="151" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1611042119912" />
+    <state width="1398" height="130" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1610960847804" />
+    <state width="1238" height="228" key="GridCell.Tab.0.center/0.25.1280.775@0.25.1280.775" timestamp="1607596698108" />
+    <state width="1238" height="151" key="GridCell.Tab.0.left" timestamp="1611042119912">
+      <screen x="0" y="0" width="1280" height="800" />
+=======
     <state width="1173" height="122" key="GridCell.Tab.0.bottom" timestamp="1611054983312">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
@@ -284,16 +316,25 @@
     <state width="1238" height="228" key="GridCell.Tab.0.center/0.25.1280.775@0.25.1280.775" timestamp="1607596698108" />
     <state width="1173" height="122" key="GridCell.Tab.0.left" timestamp="1611054983310">
       <screen x="0" y="23" width="1440" height="840" />
+>>>>>>> 89b324ec66ae72ed937b7db2b65d0cfdb23ddfae
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1610609101014" />
+    <state width="1238" height="151" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1611042119912" />
     <state width="1238" height="229" key="GridCell.Tab.0.left/0.0.1280.800@0.25.1280.775" timestamp="1606765734310" />
     <state width="1173" height="122" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1611054983310" />
     <state width="1238" height="228" key="GridCell.Tab.0.left/0.25.1280.775@0.25.1280.775" timestamp="1607596698107" />
+<<<<<<< HEAD
+    <state width="1238" height="151" key="GridCell.Tab.0.right" timestamp="1611042119913">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="151" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1611042119913" />
+    <state width="1398" height="130" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1610960847804" />
+=======
     <state width="1173" height="122" key="GridCell.Tab.0.right" timestamp="1611054983311">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1610609101016" />
     <state width="1173" height="122" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1611054983311" />
+>>>>>>> 89b324ec66ae72ed937b7db2b65d0cfdb23ddfae
     <state width="1238" height="228" key="GridCell.Tab.0.right/0.25.1280.775@0.25.1280.775" timestamp="1607596698115" />
     <state x="349" y="211" key="MultipleFileMergeDialog" timestamp="1610960635736">
       <screen x="0" y="23" width="1440" height="840" />
