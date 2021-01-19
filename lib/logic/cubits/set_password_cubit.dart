@@ -1,4 +1,3 @@
-import 'package:avs/data/models/user.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
