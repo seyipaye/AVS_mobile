@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:avs/data/api_responses/login_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/api_responses/user_response.dart';
 import 'package:avs/data/models/user.dart';
@@ -24,12 +25,35 @@ class ClientError implements Exception {
 /// Exception thrown when getWeather fails.
 class WeatherRequestFailure implements Exception {}
 
+// primary-agent@quickavs.ng
+// System123!
+
 class AVSApiClient {
   AVSApiClient({http.Client httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = ' https://api-sandbox.quickavs.ng/v1';
+  static const _baseUrl = 'https://api-sandbox.quickavs.ng/v1';
   final http.Client _httpClient;
+
+  Future<User> login(String email, String password) async {
+    final response = await _httpClient.post(
+      _baseUrl + '/auth/local/agent/login',
+      body: {"credential": email, "password": password},
+    );
+
+    if (printAllResponses) {
+      log(response.body);
+    }
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
+
+    return LoginResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
+    //return UserResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
+  }
 
   Future<User> setUser({User user}) async {
     print(jsonEncode(user.toRequestBody) + user.id);
@@ -97,7 +121,7 @@ class AVSApiClient {
   }
 
   Future<StatusResponse> sendOtp(String mobile) async {
-    //print('sd$phoneNumber');
+    //print('sd$mobile');
     final response = await _httpClient.post(
       _baseUrl + '/auth/send/otp/agent',
       body: {

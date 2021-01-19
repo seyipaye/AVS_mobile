@@ -9,6 +9,10 @@ part 'authentication_state.dart';
 // TODO: Check for normal functionality
 final skipAuthentication = true;
 
+/*
+primary-agent@quickavs.ng
+System123!
+ */
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit({@required UserRepository userRepository})
       : _userRepository = userRepository,

@@ -83,10 +83,9 @@ class PhoneNumberPage extends StatelessWidget {
                 AppRaisedButton(
                   text: 'Continue',
                   isLoading: state.isLoading,
-                  onPressed: (context) {
-                    FocusScope.of(context).unfocus();
-                    context.read<PhoneNumberCubit>().handleContinue();
-                  }, //nextPage,
+                  onPressed: context
+                      .watch<PhoneNumberCubit>()
+                      .handleContinue, //nextPage,
                 ),
                 authSpacer,
               ],
