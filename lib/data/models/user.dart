@@ -7,25 +7,27 @@ import 'package:meta/meta.dart';
 /// [User.empty] represents an unauthenticated user.
 /// {@endtemplate}
 ///
-enum Gender { Female, Male }
 
 class User extends Equatable {
   /// {@macro user}
   const User({
     this.mobile,
     this.id,
-    this.photo,
+    this.imageUrl,
     this.firstName,
     this.lastName,
     this.gender,
     this.otherName,
     this.email,
+    this.uid,
   });
 
   /// The current user's phone number.
   final String mobile;
 
   final String id;
+
+  final String uid;
 
   //JsonName:firstName
   final String firstName;
@@ -43,7 +45,7 @@ class User extends Equatable {
   final UserEmail email;
 
   /// Url for the current user's photo.
-  final String photo;
+  final String imageUrl;
 
   /// Empty user which represents an unauthenticated user.
   static const empty = User(
@@ -58,29 +60,31 @@ class User extends Equatable {
 
   @override
   List<Object> get props =>
-      [email, mobile, photo, firstName, lastName, gender, otherName, id];
+      [email, mobile, imageUrl, firstName, lastName, gender, otherName, id];
 
   bool get isFullyRegistered => true;
 
   User copyWith({
     final String mobile,
     final String id,
+    final String uid,
     final String firstName,
     final String lastName,
     final String gender,
     final String otherName,
     final UserEmail email,
-    final String photo,
+    final String imageUrl,
   }) {
     return User(
       mobile: mobile ?? this.mobile,
       id: id ?? this.id,
+      uid: uid ?? this.uid,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       gender: gender ?? this.gender,
       otherName: otherName ?? this.otherName,
       email: email ?? this.email,
-      photo: photo ?? this.photo,
+      imageUrl: imageUrl ?? this.imageUrl,
     );
   }
 

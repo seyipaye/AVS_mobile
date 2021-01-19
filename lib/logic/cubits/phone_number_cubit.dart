@@ -24,7 +24,8 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
 
   String mobile;
 
-  Future<void> handleContinue() async {
+  Future<void> handleContinue(BuildContext context) async {
+    FocusScope.of(context).unfocus();
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       emit(state.copyWith(isLoading: true));

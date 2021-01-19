@@ -11,6 +11,10 @@ class UserRepository {
   final apiClient = AVSApiClient();
   final prefs = SharedPref();
 
+  Future<User> login({String email, String password}) async {
+    return apiClient.login(email, password);
+  }
+
   Future<User> setUser({User user}) async {
     return Future.delayed(Duration(seconds: 2)).then((value) => user);
     await prefs.save('User', user);

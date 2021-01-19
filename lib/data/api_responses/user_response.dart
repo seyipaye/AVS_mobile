@@ -15,7 +15,7 @@ class UserResponse {
   User get toSimpleUser => User(
         mobile: agent.profile.mobile.number,
         id: agent.user,
-        photo: null,
+        imageUrl: null,
         firstName: agent.profile.firstName,
         lastName: agent.profile.lastName,
         gender: agent.profile.gender,

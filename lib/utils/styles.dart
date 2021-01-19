@@ -13,6 +13,8 @@ class AppColors {
 
   static const text2 = Color(0xFF999999);
 
+  static const forgotPassword = Color(0xFF74788d);
+
   // #555b6d;
 
   // #2a3042;
