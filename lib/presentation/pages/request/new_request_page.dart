@@ -2,8 +2,8 @@ import 'package:avs/presentation/screens/request_details.dart';
 import 'package:avs/presentation/widgets/new_request_item.dart';
 import 'package:flutter/material.dart';
 
-class AllRequestPage extends StatelessWidget {
-  const AllRequestPage();
+class NewRequestPage extends StatelessWidget {
+  const NewRequestPage();
   @override
   Widget build(BuildContext context) {
     return ListView.separated(

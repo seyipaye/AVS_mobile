@@ -1,4 +1,4 @@
-import 'package:avs/presentation/pages/request/all_request_page.dart';
+import 'package:avs/presentation/pages/request/new_request_page.dart';
 import 'package:avs/presentation/pages/request/assigned_request_page.dart';
 import 'package:avs/presentation/widgets/page_title.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,17 +15,17 @@ class _RequestsScreenState extends State<RequestsScreen> {
   final Map<int, Widget> tabs = <int, Widget>{
     0: Container(
       width: double.maxFinite,
-      child: Center(child: Text('All')),
+      child: Center(child: Text('Assigned')),
     ),
     1: Container(
       width: double.maxFinite,
-      child: Center(child: Text('Assigned')),
+      child: Center(child: Text('New')),
     ),
   };
 
   final Map<int, Widget> children = <int, Widget>{
-    0: AllRequestPage(),
-    1: AssignedRequestPage(),
+    0: AssignedRequestPage(),
+    1: NewRequestPage(),
   };
 
   int selectedIndex = 0;
