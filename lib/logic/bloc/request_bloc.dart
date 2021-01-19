@@ -6,6 +6,10 @@ import 'package:bloc/bloc.dart';
 ///Events
 class RequestEvent {}
 
+class NewRequestEvent extends RequestEvent {}
+
+class AssignedRequestEvent extends RequestEvent {}
+
 class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
   final RequestRepository _repository;
   int page = 1;
@@ -16,11 +20,35 @@ class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
 
   @override
   Stream<RequestsBlocState> mapEventToState(RequestEvent event) async* {
-    if (event is RequestEvent && isLoading == false) {
+    ///Pagination For New Requests
+    if (event is NewRequestEvent && isLoading == false) {
       yield RequestsLoadingState(message: "Loading Requests");
       isLoading = true;
       final List<Request> requests =
           await _repository.getNewRequests(page: page);
+      print(requests);
+      if (requests != null) {
+        if (requests.isNotEmpty) {
+          requestList.addAll(requests);
+          yield RequestsSuccessState();
+          print(page);
+          page++;
+          isLoading = false;
+        }
+        isLoading = false;
+      } else if (requests.isEmpty) {
+        isLoading = false;
+        yield RequestsErrorState(error: 'Pages exceeded');
+      } else
+        yield RequestsErrorState(error: 'List is null');
+    }
+
+    /// Pagination For Assigned Requests
+    else if (event is AssignedRequestEvent && isLoading == false) {
+      yield RequestsLoadingState(message: "Loading Requests");
+      isLoading = true;
+      final List<Request> requests =
+          await _repository.getAssignedRequests(page: page);
       if (requests != null && requests.isNotEmpty) {
         requestList.addAll(requests);
         yield RequestsSuccessState();

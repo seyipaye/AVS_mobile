@@ -25,6 +25,8 @@ class User extends Equatable {
   /// The current user's phone number.
   final String mobile;
 
+  ///Tokens
+
   final String id;
 
   final String uid;

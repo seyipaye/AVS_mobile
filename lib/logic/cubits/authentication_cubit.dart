@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 part 'authentication_state.dart';
 
 // TODO: Check for normal functionality
-final skipAuthentication = true;
+final skipAuthentication = false;
 
 /*
 primary-agent@quickavs.ng
