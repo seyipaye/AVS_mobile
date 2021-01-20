@@ -1,21 +1,27 @@
+import 'package:avs/data/providers/request_provider.dart';
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/logic/bloc/request_bloc.dart';
 import 'package:avs/logic/bloc/request_bloc_states.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
+import 'package:avs/presentation/screens/request_details.dart';
 import 'package:avs/presentation/widgets/new_request_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewRequestPage extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
+
   NewRequestPage();
   @override
   Widget build(BuildContext context) {
-    // ScrollController _scrollController = ScrollController();
     return BlocProvider(
-      create: (context) =>
-          RequestBloc(RequestRepository(context.read<AuthenticationCubit>()))
-            ..add(NewRequestEvent()),
+      create: (context) => RequestBloc(
+        RequestRepository(
+          RequestProvider(
+            context.read<AuthenticationCubit>(),
+          ),
+        ),
+      )..add(NewRequestEvent()),
       child: BlocBuilder<RequestBloc, RequestsBlocState>(
           //   listener: (context, state) {
           // if (state is RequestsLoadingState) {
@@ -46,6 +52,12 @@ class NewRequestPage extends StatelessWidget {
               child: Container(
                   height: 100, width: 100, child: CircularProgressIndicator()));
         }
+        if (state is RequestsErrorState && list.isEmpty) {
+          /// Show error loading page with option to retry
+        }
+        if (state is RequestsSuccessState && list.isEmpty) {
+          /// Show that the list is empty
+        }
 
         ///Work on the list given on success
         return ListView.separated(
@@ -69,6 +81,15 @@ class NewRequestPage extends StatelessWidget {
                 verificationNumber: list[index].verificationNumber,
                 state: list[index].address.state,
                 status: list[index].status,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RequestDetailsScreen(),
+                      settings: RouteSettings(arguments: list[index]),
+                    ),
+                  );
+                },
               );
             },
             separatorBuilder: (BuildContext context, int index) =>

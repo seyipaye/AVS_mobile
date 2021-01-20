@@ -1,3 +1,4 @@
+import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -75,13 +76,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }).catchError((error) {
       emit(AuthError(Error.safeToString(error)));
     });
+  }
 
-    /*final bool hasToken = await
-
-    if (hasToken) {
-      yield AuthenticationAuthenticated();
-    } else {
-      yield AuthenticationUnauthenticated();
-    }*/
+  Future<void> refreshTokens() async {
+    final tokens = await _userRepository.refreshTokens(user.tokens);
+    tokens == null
+        ? emit(Unauthenticated())
+        : _user = user.copyWith(tokens: tokens);
   }
 }
