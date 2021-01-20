@@ -1,3 +1,4 @@
+import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 
 class LoginResponseUserExtraPostOffice {
@@ -32,7 +33,7 @@ class LoginResponse {
   LoginResponseRole role;
 
 //JsonName:tokens
-  LoginResponseTokens tokens;
+  Tokens tokens;
 
 //JsonName:message
   String message;
@@ -48,47 +49,25 @@ class LoginResponse {
   });
 
   User get toSimpleUser => User(
-        id: user.extra.id,
-        uid: user.extra.uid,
-        imageUrl: user.extra.profile.imageUrl,
-        firstName: user.extra.profile.firstName,
-        lastName: user.extra.profile.lastName,
-        otherName: user.extra.profile.otherName,
-        gender: user.extra.profile.gender,
-        mobile: user.extra.profile.mobile.number,
-        email: UserEmail(address: user.extra.profile.email.address),
-      );
+      id: user.extra.id,
+      uid: user.extra.uid,
+      imageUrl: user.extra.profile.imageUrl,
+      firstName: user.extra.profile.firstName,
+      lastName: user.extra.profile.lastName,
+      otherName: user.extra.profile.otherName,
+      gender: user.extra.profile.gender,
+      mobile: user.extra.profile.mobile.number,
+      email: UserEmail(address: user.extra.profile.email.address),
+      tokens: tokens);
 
   factory LoginResponse.fromMap(dynamic map) {
     if (null == map) return null;
     var temp;
     return LoginResponse(
       role: LoginResponseRole.fromMap(map['role']),
-      tokens: LoginResponseTokens.fromMap(map['tokens']),
+      tokens: Tokens.fromMap(map['tokens']),
       message: map['message']?.toString(),
       user: LoginResponseUser.fromMap(map['user']),
-    );
-  }
-}
-
-class LoginResponseTokensAccess {
-//JsonName:expires
-  String expires;
-
-//JsonName:token
-  String token;
-
-  LoginResponseTokensAccess({
-    this.expires,
-    this.token,
-  });
-
-  factory LoginResponseTokensAccess.fromMap(dynamic map) {
-    if (null == map) return null;
-    var temp;
-    return LoginResponseTokensAccess(
-      expires: map['expires']?.toString(),
-      token: map['token']?.toString(),
     );
   }
 }
@@ -119,28 +98,6 @@ class LoginResponseUserExtraAddressGeo {
                   .toList()
               : []),
       type: map['type']?.toString(),
-    );
-  }
-}
-
-class LoginResponseTokens {
-//JsonName:access
-  LoginResponseTokensAccess access;
-
-//JsonName:refresh
-  LoginResponseTokensRefresh refresh;
-
-  LoginResponseTokens({
-    this.access,
-    this.refresh,
-  });
-
-  factory LoginResponseTokens.fromMap(dynamic map) {
-    if (null == map) return null;
-    var temp;
-    return LoginResponseTokens(
-      access: LoginResponseTokensAccess.fromMap(map['access']),
-      refresh: LoginResponseTokensRefresh.fromMap(map['refresh']),
     );
   }
 }
@@ -354,28 +311,6 @@ class LoginResponseUserExtraProfileEmail {
               : (temp is num
                   ? 0 != temp.toInt()
                   : ('true' == temp.toString()))),
-    );
-  }
-}
-
-class LoginResponseTokensRefresh {
-//JsonName:expires
-  String expires;
-
-//JsonName:token
-  String token;
-
-  LoginResponseTokensRefresh({
-    this.expires,
-    this.token,
-  });
-
-  factory LoginResponseTokensRefresh.fromMap(dynamic map) {
-    if (null == map) return null;
-    var temp;
-    return LoginResponseTokensRefresh(
-      expires: map['expires']?.toString(),
-      token: map['token']?.toString(),
     );
   }
 }

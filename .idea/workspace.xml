@@ -22,25 +22,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Request details Screen 100% done">
-      <change afterPath="$PROJECT_DIR$/lib/data/api_responses/login_response.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/login_cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/cubits/login_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/login_page.dart" afterDir="false" />
+    <list default="true" id="bfa4bbfd-4239-4ed5-a735-3485a3506eb2" name="Default Changelist" comment="feat: Login Page Done">
+      <change afterPath="$PROJECT_DIR$/lib/data/models/tokens.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/api_responses/user_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/api_responses/user_response.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/api_responses/login_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/api_responses/login_response.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/models/user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/providers/avs_api_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/providers/avs_api_client.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/repositories/authentication_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repositories/authentication_repository.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/authentication_cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logic/cubits/phone_number_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/phone_number_cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logic/cubits/set_password_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/cubits/set_password_cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/phone_number_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/phone_number_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/app_drawer.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/styles.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/authentication/otp_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/authentication/otp_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,19 +74,19 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib/data/api_responses" />
-      <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
-      <recent name="$PROJECT_DIR$/lib/presentation/pages" />
-      <recent name="$PROJECT_DIR$/assets/images" />
-      <recent name="$PROJECT_DIR$/assets" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/logic/cubits" />
       <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
       <recent name="$PROJECT_DIR$/lib/presentation/pages/request" />
       <recent name="$PROJECT_DIR$/lib/presentation/widgets" />
       <recent name="$PROJECT_DIR$/assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/data/models" />
+      <recent name="$PROJECT_DIR$/lib/data/api_responses" />
+      <recent name="$PROJECT_DIR$/lib/presentation/pages/authentication" />
+      <recent name="$PROJECT_DIR$/lib/presentation/pages" />
+      <recent name="$PROJECT_DIR$/assets/images" />
     </key>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
@@ -210,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610963460043</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: Login Page Done">
+      <created>1611057543850</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1611057543853</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -249,7 +246,8 @@
     <MESSAGE value="feat: New Request Item modified&#10;feat: Request details Screen 50% done" />
     <MESSAGE value="feat: New Request Item modified&#10;feat: Request details Screen 60% done" />
     <MESSAGE value="feat: Request details Screen 100% done" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Request details Screen 100% done" />
+    <MESSAGE value="feat: Login Page Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Login Page Done" />
   </component>
   <component name="WindowStateProjectService">
     <state x="310" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610354102104">
@@ -270,30 +268,30 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="100" y="123" width="1240" height="640" key="DiffContextDialog/0.23.1440.840@0.23.1440.840" timestamp="1610752648211" />
-    <state width="1173" height="122" key="GridCell.Tab.0.bottom" timestamp="1611054983312">
+    <state width="1398" height="122" key="GridCell.Tab.0.bottom" timestamp="1611131418830">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1610609101017" />
-    <state width="1173" height="122" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1611054983312" />
+    <state width="1398" height="122" key="GridCell.Tab.0.bottom/0.23.1440.840@0.23.1440.840" timestamp="1611131418830" />
     <state width="1238" height="228" key="GridCell.Tab.0.bottom/0.25.1280.775@0.25.1280.775" timestamp="1607596698116" />
-    <state width="1173" height="122" key="GridCell.Tab.0.center" timestamp="1611054983310">
+    <state width="1398" height="122" key="GridCell.Tab.0.center" timestamp="1611131418830">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1610609101015" />
-    <state width="1173" height="122" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1611054983310" />
+    <state width="1398" height="122" key="GridCell.Tab.0.center/0.23.1440.840@0.23.1440.840" timestamp="1611131418830" />
     <state width="1238" height="228" key="GridCell.Tab.0.center/0.25.1280.775@0.25.1280.775" timestamp="1607596698108" />
-    <state width="1173" height="122" key="GridCell.Tab.0.left" timestamp="1611054983310">
+    <state width="1398" height="122" key="GridCell.Tab.0.left" timestamp="1611131418827">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1610609101014" />
     <state width="1238" height="229" key="GridCell.Tab.0.left/0.0.1280.800@0.25.1280.775" timestamp="1606765734310" />
-    <state width="1173" height="122" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1611054983310" />
+    <state width="1398" height="122" key="GridCell.Tab.0.left/0.23.1440.840@0.23.1440.840" timestamp="1611131418827" />
     <state width="1238" height="228" key="GridCell.Tab.0.left/0.25.1280.775@0.25.1280.775" timestamp="1607596698107" />
-    <state width="1173" height="122" key="GridCell.Tab.0.right" timestamp="1611054983311">
+    <state width="1398" height="122" key="GridCell.Tab.0.right" timestamp="1611131418830">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1610609101016" />
-    <state width="1173" height="122" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1611054983311" />
+    <state width="1398" height="122" key="GridCell.Tab.0.right/0.23.1440.840@0.23.1440.840" timestamp="1611131418830" />
     <state width="1238" height="228" key="GridCell.Tab.0.right/0.25.1280.775@0.25.1280.775" timestamp="1607596698115" />
     <state x="349" y="211" key="MultipleFileMergeDialog" timestamp="1610960635736">
       <screen x="0" y="23" width="1440" height="840" />
@@ -303,10 +301,10 @@
       <screen x="0" y="23" width="1440" height="840" />
     </state>
     <state x="99" y="82" key="SettingsEditor/0.23.1440.840@0.23.1440.840" timestamp="1610216414327" />
-    <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1610963468613">
+    <state x="192" y="183" key="Vcs.Push.Dialog.v2" timestamp="1611057651166">
       <screen x="0" y="23" width="1440" height="840" />
     </state>
-    <state x="192" y="183" key="Vcs.Push.Dialog.v2/0.23.1440.840@0.23.1440.840" timestamp="1610963468613" />
+    <state x="192" y="183" key="Vcs.Push.Dialog.v2/0.23.1440.840@0.23.1440.840" timestamp="1611057651166" />
     <state x="100" y="100" width="1080" height="600" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606839209926">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
