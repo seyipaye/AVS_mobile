@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/models/shared_pref.dart';
+import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:flutter/foundation.dart';
@@ -68,5 +69,10 @@ class UserRepository {
   Future<bool> hasToken() async {
     //bool result = await userDao.checkUser(0);
     return true; //result;
+  }
+
+  ///Function to refresh the request
+  Future<Tokens> refreshTokens(Tokens tokens) async {
+    return apiClient.refreshTokens(tokens);
   }
 }
