@@ -1,6 +1,7 @@
 import 'package:avs/data/models/request.dart';
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/logic/bloc/request_bloc_states.dart';
+import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:bloc/bloc.dart';
 
 ///Events
@@ -12,6 +13,7 @@ class AssignedRequestEvent extends RequestEvent {}
 
 class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
   final RequestRepository _repository;
+
   int page = 1;
   bool isLoading = false;
   List<Request> requestList = [];
@@ -36,7 +38,7 @@ class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
           isLoading = false;
         }
         isLoading = false;
-      } else if (requests.isEmpty) {
+      } else if (requests != null && requests.isEmpty) {
         isLoading = false;
         yield RequestsErrorState(error: 'Pages exceeded');
       } else
@@ -55,7 +57,7 @@ class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
         print(page);
         page++;
         isLoading = false;
-      } else if (requests.isEmpty) {
+      } else if (requests != null && requests.isEmpty) {
         isLoading = false;
         yield RequestsErrorState(error: 'Pages exceeded');
       } else

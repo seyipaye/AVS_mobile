@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:avs/data/models/user.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
@@ -34,11 +31,7 @@ class LoginCubit extends Cubit<LoginState> {
 
       userRepository.login(email: email, password: password).then((user) {
         if (user != null) {
-          // Move to next page
-          // authenticationCubit.user = authenticationCubit.user.copyWith(
-          //   id: id,
-          // );
-          authenticationCubit.emit(Authenticated(user: user));
+          authenticationCubit.authenticatedUser = user;
         } else {
           emit(
               LoginState.error('Something went wrong, please try again later'));

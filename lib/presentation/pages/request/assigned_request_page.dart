@@ -1,6 +1,7 @@
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/logic/bloc/request_bloc.dart';
 import 'package:avs/logic/bloc/request_bloc_states.dart';
+import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/presentation/screens/request_details.dart';
 import 'package:avs/presentation/widgets/new_request_item.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,8 @@ class AssignedRequestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          RequestBloc(RequestRepository())..add(AssignedRequestEvent()),
+          RequestBloc(RequestRepository(context.read<AuthenticationCubit>()))
+            ..add(AssignedRequestEvent()),
       child: BlocBuilder<RequestBloc, RequestsBlocState>(
           //   listener: (context, state) {
           // if (state is RequestsLoadingState) {

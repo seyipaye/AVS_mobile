@@ -34,7 +34,7 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
       userRepository.sendOtp(mobile).then((response) {
         if (response.success) {
           // Move to next page
-          authenticationCubit.user = User(mobile: mobile);
+          authenticationCubit.mobile = mobile;
           controller.nextPage(
               duration: kAnimationDuration, curve: Curves.linear);
         } else {
