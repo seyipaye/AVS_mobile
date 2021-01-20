@@ -35,11 +35,11 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     final form = Form.of(context);
     if (form.validate()) {
       form.save();
-      authenticationCubit.user = authenticationCubit.user.copyWith(
+      authenticationCubit.setUserInfo(
         firstName: this.firstName,
         lastName: this.lastName,
         otherName: this.otherNames,
-        email: UserEmail(address: this.email),
+        email: this.email,
         gender: this.gender,
       );
       //print(authenticationCubit.user);

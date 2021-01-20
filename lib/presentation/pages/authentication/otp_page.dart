@@ -70,7 +70,7 @@ class OtpPage extends StatelessWidget {
               children: [
                 AppTextFormField(
                   label:
-                      'Please enter the OTP sent to ${context.watch<AuthenticationCubit>().user.mobile}',
+                      'Please enter the OTP sent to ${context.watch<AuthenticationCubit>().user?.mobile}',
                   maxLength: 4,
                   onSaved: (String val) =>
                       context.read<OtpCubit>().otpCode = val.trim(),

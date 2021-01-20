@@ -38,9 +38,7 @@ class SetPasswordCubit extends Cubit<SetPasswordState> {
             .then((id) {
           if (id != null) {
             // Move to next page
-            authenticationCubit.user = authenticationCubit.user.copyWith(
-              id: id,
-            );
+            authenticationCubit.authId = id;
             controller.nextPage(
                 duration: kAnimationDuration, curve: Curves.linear);
           } else {

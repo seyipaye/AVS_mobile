@@ -1,3 +1,4 @@
+import 'package:avs/data/models/tokens.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -19,6 +20,7 @@ class User extends Equatable {
     this.gender,
     this.otherName,
     this.email,
+    this.tokens,
     this.uid,
   });
 
@@ -49,6 +51,8 @@ class User extends Equatable {
   /// Url for the current user's photo.
   final String imageUrl;
 
+  final Tokens tokens;
+
   /// Empty user which represents an unauthenticated user.
   static const empty = User(
     email: UserEmail(address: ''),
@@ -61,8 +65,17 @@ class User extends Equatable {
   );
 
   @override
-  List<Object> get props =>
-      [email, mobile, imageUrl, firstName, lastName, gender, otherName, id];
+  List<Object> get props => [
+        email,
+        mobile,
+        imageUrl,
+        firstName,
+        lastName,
+        gender,
+        otherName,
+        id,
+        tokens
+      ];
 
   bool get isFullyRegistered => true;
 
@@ -75,6 +88,7 @@ class User extends Equatable {
     final String gender,
     final String otherName,
     final UserEmail email,
+    final Tokens tokens,
     final String imageUrl,
   }) {
     return User(
@@ -86,6 +100,7 @@ class User extends Equatable {
       gender: gender ?? this.gender,
       otherName: otherName ?? this.otherName,
       email: email ?? this.email,
+      tokens: tokens ?? this.tokens,
       imageUrl: imageUrl ?? this.imageUrl,
     );
   }
