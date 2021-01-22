@@ -1,3 +1,4 @@
+import 'package:avs/data/models/request.dart';
 import 'package:avs/presentation/screens/photo_view_screen.dart';
 import 'package:avs/presentation/widgets/app_card.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
@@ -10,13 +11,13 @@ import 'package:line_icons/line_icons.dart';
 const double cardsPadding = 15;
 
 class RequestDetailsScreen extends StatelessWidget {
-  final String imageUrl;
-  final String firstName;
+  // final String imageUrl;
+  // final String firstName;
 
-  const RequestDetailsScreen({Key key, this.imageUrl, this.firstName})
-      : super(key: key);
+  const RequestDetailsScreen();
   @override
   Widget build(BuildContext context) {
+    final Request request = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Request Details'),
@@ -31,13 +32,15 @@ class RequestDetailsScreen extends StatelessWidget {
             SizedBox(
               height: 200,
               child: InkWell(
-                child: Hero(tag: firstName, child: AvatarImage(imageUrl)),
+                child: Hero(
+                    tag: request.contact.firstName,
+                    child: AvatarImage('https://i.pravatar.cc/400')),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => PhotoViewScreen(
-                        imageUrl,
-                        heroTag: firstName,
+                        ' https://i.pravatar.cc/400',
+                        heroTag: request.contact.firstName,
                         title: 'Jude' + ' ' + 'Severin',
                       ),
                     ),
@@ -50,8 +53,11 @@ class RequestDetailsScreen extends StatelessWidget {
               title: 'Personal Information',
               child: Column(
                 children: [
-                  _buildRow('Name', value: 'Jude Severing'),
-                  _buildRow('Gender', value: 'Female'),
+                  _buildRow('Name',
+                      value: request.contact.firstName +
+                          ' ' +
+                          request.contact.lastName),
+                  _buildRow('Gender', value: request.contact.gender),
                 ],
               ),
             ),
@@ -60,13 +66,15 @@ class RequestDetailsScreen extends StatelessWidget {
               title: 'Address Information',
               child: Column(
                 children: [
-                  _buildRow('Address', value: '920 Colt Forks'),
-                  _buildRow('State', value: 'Oyo'),
-                  _buildRow('Local Government:', value: 'Yaba'),
-                  _buildRow('Postal Code', value: '538064'),
+                  _buildRow('Address', value: request.address.streetAddress),
+                  _buildRow('State', value: request.address.state),
+                  _buildRow('Local Government:', value: request.address.lga),
+                  _buildRow('Postal Code', value: request.address.postalCode),
                   // _buildRow('Landmark', value: 'Oyo'),
-                  _buildRow('Latitude', value: '6.5295671'),
-                  _buildRow('Longitude', value: '3.29803616'),
+                  _buildRow('Latitude',
+                      value: request.address.geo.coordinates[0].toString()),
+                  _buildRow('Longitude',
+                      value: request.address.geo.coordinates[1].toString()),
                 ],
               ),
             ),

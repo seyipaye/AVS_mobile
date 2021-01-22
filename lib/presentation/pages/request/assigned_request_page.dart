@@ -1,3 +1,4 @@
+import 'package:avs/data/providers/request_provider.dart';
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/logic/bloc/request_bloc.dart';
 import 'package:avs/logic/bloc/request_bloc_states.dart';
@@ -14,9 +15,13 @@ class AssignedRequestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          RequestBloc(RequestRepository(context.read<AuthenticationCubit>()))
-            ..add(AssignedRequestEvent()),
+      create: (context) => RequestBloc(
+        RequestRepository(
+          RequestProvider(
+            context.read<AuthenticationCubit>(),
+          ),
+        ),
+      )..add(AssignedRequestEvent()),
       child: BlocBuilder<RequestBloc, RequestsBlocState>(
           //   listener: (context, state) {
           // if (state is RequestsLoadingState) {
@@ -47,6 +52,12 @@ class AssignedRequestPage extends StatelessWidget {
               child: Container(
                   height: 100, width: 100, child: CircularProgressIndicator()));
         }
+        if (state is RequestsErrorState && list.isEmpty) {
+          /// Show error loading page with option to retry
+        }
+        if (state is RequestsSuccessState && list.isEmpty) {
+          /// Show that the list is empty
+        }
 
         ///Work on the list given on success
         return ListView.separated(
@@ -71,6 +82,15 @@ class AssignedRequestPage extends StatelessWidget {
                 verificationNumber: list[index].verificationNumber,
                 state: list[index].address.state,
                 status: list[index].status,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RequestDetailsScreen(),
+                      settings: RouteSettings(arguments: list[index]),
+                    ),
+                  );
+                },
               );
             },
             separatorBuilder: (BuildContext context, int index) =>

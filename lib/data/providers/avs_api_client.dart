@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:avs/data/api_responses/login_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/api_responses/user_response.dart';
+import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -196,4 +197,15 @@ class AVSApiClient {
         ? Weather.fromJson(weatherJson.first as Map<String, dynamic>)
         : null;
   }*/
+
+  Future<Tokens> refreshTokens(Tokens tokens) async {
+    ///Refresh call
+    final response = await _httpClient.post('$_baseUrl/auth/refresh-tokens',
+        body: {"refreshToken": tokens.refresh.token});
+
+    if (response.statusCode != 200) {
+      ///Means request token is expired should log user out
+    }
+    return Tokens.fromMap(json.decode(response.body));
+  }
 }
