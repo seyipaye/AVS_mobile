@@ -16,8 +16,8 @@ class UserRepository {
   }
 
   Future<User> setUser({User user}) async {
-    return Future.delayed(Duration(seconds: 2)).then((value) => user);
-    await prefs.save('User', user);
+    //return Future.delayed(Duration(seconds: 2)).then((value) => user);
+    //await prefs.save('User', user);
 
     return apiClient.setUser(user: user);
   }

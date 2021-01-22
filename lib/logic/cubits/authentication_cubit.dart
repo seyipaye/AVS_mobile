@@ -69,7 +69,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             emit(Unauthenticated(user: user));
           }
         } else {
-          emit(Unauthenticated());
+          this._user = User.test;
+          emit(Unauthenticated(user: _user));
         }
       }
     }).catchError((error) {
@@ -84,4 +85,6 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       yield AuthenticationUnauthenticated();
     }*/
   }
+
+  void skipRegistration() {}
 }

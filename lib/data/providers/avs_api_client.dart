@@ -52,15 +52,14 @@ class AVSApiClient {
     }
 
     return LoginResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
-    //return UserResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
   }
 
   Future<User> setUser({User user}) async {
-    print(jsonEncode(user.toRequestBody) + user.id);
+    print(jsonEncode(user.toRegisterRequestBody) + user.id);
     final response = await _httpClient.post(
       _baseUrl + '/auth/local/register/agent/${user.id}',
       headers: {"Content-Type": "application/json"},
-      body: (jsonEncode(user.toRequestBody)),
+      body: (jsonEncode(user.toRegisterRequestBody)),
     );
 
     if (printAllResponses) {
@@ -72,7 +71,13 @@ class AVSApiClient {
             response.reasonPhrase,
       );
     }
-    return UserResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
+    try {
+      return RegistrationResponse.fromMap(jsonDecode(response.body))
+          ?.toSimpleUser;
+    } catch (exception) {
+      print(exception);
+      throw ClientError('Something went wrong, please try again later');
+    }
   }
 
   Future<String> setPassword({String mobile, String password}) async {
