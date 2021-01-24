@@ -1,11 +1,13 @@
 import 'package:avs/data/models/document.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
-import 'package:avs/utils/constants.dart';
+import 'package:avs/utils/validators.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'authentication_cubit.dart';
 
@@ -18,18 +20,14 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
 
   final UserRepository userRepository;
   final AuthenticationCubit authenticationCubit;
-
   final PageController controller;
 
-  String firstName;
-  String lastName;
-  String otherNames;
-  String email;
-  Document _selectedDoc;
+  final ImagePicker _picker = ImagePicker();
+
+  PickedFile _photoFile;
   bool isLoading;
 
-  void onDocChanged(Document doc) {
-    _selectedDoc = doc;
+  set selectedDoc(Document doc) {
     emit(state.copyWith(selectedDoc: doc));
   }
 
@@ -37,34 +35,32 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
     FocusScope.of(context).unfocus();
     final form = Form.of(context);
     if (form.validate()) {
-      form.save();
-      // authenticationCubit.setUserInfo(
-      //   firstName: this.firstName,
-      //   lastName: this.lastName,
-      //   otherName: this.otherNames,
-      //   email: this.email,
-      //   gender: this.gender,
-      // );
-      //print(authenticationCubit.user);
-      emit(state.copyWith(isLoading: true));
+      if (Validator.isProfilePhoto(_photoFile) == null) {
+        form.save();
+        emit(state.copyWith(isLoading: true));
 
-      userRepository.setUser(user: authenticationCubit.user).then((user) {
-        if (user != null) {
-          emit(state.copyWith(isLoading: false, showCompletionDialog: true));
-        } else {
-          emit(DocumentUploadState.error(
-              'Something went wrong, please try again later'));
-        }
-      }).catchError((error) {
-        print(error);
-        if (error is ClientError || error is Exception) {
-          emit(DocumentUploadState.error(error.message));
-        } else if (error is Error) {
-          emit(DocumentUploadState.error(Error.safeToString(error)));
-        } else {
-          emit(DocumentUploadState.error(error));
-        }
-      });
+        userRepository
+            .uploadDocs(authenticationCubit.user,
+                photoPath: _photoFile.path, doc: state.selectedDoc)
+            .then((message) {
+          if (message != null) {
+            emit(state.copyWith(isLoading: false, showCompletionDialog: true));
+          } else {
+            _showError('Something went wrong, please try again later');
+          }
+        }).catchError((error) {
+          print(error);
+          if (error is ClientError || error is Exception) {
+            _showError(error.message);
+          } else if (error is Error) {
+            _showError(Error.safeToString(error));
+          } else {
+            _showError(error);
+          }
+        });
+      } else {
+        _showError(Validator.isProfilePhoto(_photoFile));
+      }
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }
@@ -72,8 +68,44 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
 
   //void selected
 
-  void onNegativePressed(BuildContext context) {
-    Navigator.of(context).pop();
-    authenticationCubit.skipRegistration();
+  void _showError(String error) {
+    emit(state.copyWith(isLoading: false, errorMessage: error));
+    Future.delayed(Duration(seconds: 1), () {
+      emit(state.copyWith(errorMessage: ''));
+    });
+  }
+
+  Future<void> onUploadPhotoPressed(BuildContext context) async {
+    _picker
+        .getImage(source: ImageSource.gallery, imageQuality: 50)
+        .then((value) {
+      _photoFile = value;
+      emit(state.copyWith(photoFile: value));
+    }).catchError((error) {
+      if (error is Exception) {
+        _showError((error as dynamic).message);
+      } else {
+        _showError(Error.safeToString(error));
+      }
+    });
+  }
+
+  Future<void> onUploadDocPressed() async {
+    // TODO: Test with files selected from google drive
+    FilePicker.platform.pickFiles().then((result) {
+      //print(result.files.single.path);
+      if (result != null) {
+        selectedDoc =
+            state.selectedDoc.copyWith(value: result.files.single.path);
+      } else {
+        _showError('User canceled the operation');
+      }
+    }).catchError((error) {
+      if (error is Exception) {
+        _showError((error as dynamic).message);
+      } else {
+        _showError(Error.safeToString(error));
+      }
+    });
   }
 }

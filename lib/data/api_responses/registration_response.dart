@@ -14,7 +14,7 @@ class RegistrationResponse {
 
   User get toSimpleUser => User(
         mobile: agent.profile.mobile.number,
-        id: agent.user,
+        id: agent.id,
         imageUrl: null,
         firstName: agent.profile.firstName,
         lastName: agent.profile.lastName,

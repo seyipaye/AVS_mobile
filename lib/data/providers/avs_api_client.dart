@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:avs/data/api_responses/login_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
-import 'package:avs/data/api_responses/user_response.dart';
+import 'package:avs/data/api_responses/upload_file_response.dart';
+import 'package:avs/data/api_responses/registration_response.dart';
+import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 final printAllResponses = true;
@@ -75,6 +79,60 @@ class AVSApiClient {
     try {
       return RegistrationResponse.fromMap(jsonDecode(response.body))
           ?.toSimpleUser;
+    } catch (exception) {
+      print(exception);
+      throw ClientError('Something went wrong, please try again later');
+    }
+  }
+
+  Future<UploadFileResponse> uploadFile(String filePath) async {
+    var dio = new Dio();
+    dio.options.baseUrl = _baseUrl;
+    FormData formData = FormData.fromMap({
+      "file": await MultipartFile.fromFile(filePath, filename: "upload.txt"),
+    });
+
+    final response = await dio.post("/utils/uploads", data: formData);
+
+    if (printAllResponses) {
+      log(jsonEncode(response.data));
+    }
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(response.data)?.message ??
+            response.statusMessage,
+      );
+    }
+    try {
+      return UploadFileResponse.fromMap(response.data);
+    } catch (exception) {
+      print(exception);
+      throw ClientError('Something went wrong, please try again later');
+    }
+  }
+
+  Future<String> uploadDocs(String id, {String photoUrl, Document doc}) async {
+    // TODO: Cross check
+    final response = await _httpClient.post(
+      _baseUrl + '}/auth/local/register/upload/agent/$id',
+      body: {
+        "imageUrl": photoUrl,
+        "type": "NIN",
+        "number": '12365284983',
+        "documentUrl": "https://file1.url"
+      },
+    );
+    if (printAllResponses) {
+      log(response.body);
+    }
+    if (response.statusCode != 200) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.body))?.message ??
+            response.reasonPhrase,
+      );
+    }
+    try {
+      return jsonDecode(response.body)['message']?.toString();
     } catch (exception) {
       print(exception);
       throw ClientError('Something went wrong, please try again later');
