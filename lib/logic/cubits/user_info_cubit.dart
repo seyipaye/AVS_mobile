@@ -47,11 +47,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
 
       userRepository.setUser(user: authenticationCubit.user).then((user) {
         if (user != null) {
-          // Move to next page
-          // authenticationCubit.user = authenticationCubit.user.copyWith(
-          //   id: id,
-          // );
-          authenticationCubit.emit(Authenticated(user: user));
+          emit(state.copyWith(isLoading: false, showCompletionDialog: true));
         } else {
           emit(UserInfoState.error(
               'Something went wrong, please try again later'));
@@ -69,5 +65,16 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }
+  }
+
+  void onPositivePressed(BuildContext context) {
+    Navigator.of(context).pop();
+    // Move to next page
+    controller.nextPage(duration: kAnimationDuration, curve: Curves.linear);
+  }
+
+  void onNegativePressed(BuildContext context) {
+    Navigator.of(context).pop();
+    authenticationCubit.skipRegistration();
   }
 }

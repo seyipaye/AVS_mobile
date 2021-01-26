@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:avs/data/api_responses/status_response.dart';
+import 'package:avs/data/models/address.dart';
+import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/shared_pref.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
@@ -20,6 +22,39 @@ class UserRepository {
     await prefs.save('USER', user.toJson());
     print('code ran');
     return Future.delayed(Duration(seconds: 2)).then((value) => user);
+
+//     //return Future.delayed(Duration(seconds: 2)).then((value) => user);
+//     //await prefs.save('User', user);
+//
+//     return apiClient.setUser(user: user);
+  }
+
+  Future<String> addAddress({User user, Address address}) async {
+    //return Future.delayed(Duration(seconds: 2)).then((value) => user);
+    //await prefs.save('User', user);
+
+    return apiClient.addAddress(user: user, address: address);
+  }
+
+  Future<String> uploadDocs(User user, {String photoPath, Document doc}) async {
+    //return Future.delayed(Duration(seconds: 2)).then((value) => user);
+    //await prefs.save('User', user);
+
+    //'https://api-sandbox.quickavs.ng/v1/files/XhCvmR8cM3cu0vg7HKCe.bin/get';
+    final String photoUrl = await apiClient.uploadFile(photoPath).then((value) {
+      return value.imageUrls.first;
+    });
+
+    //'https://api-sandbox.quickavs.ng/v1/files/BL32YUjZGxoxiu3IMQrY.bin/get';
+    final String docUrl = await apiClient.uploadFile(doc.value).then((value) {
+      return value.imageUrls.first;
+    });
+
+    return apiClient.uploadDocs(
+      user.uid,
+      photoUrl: photoUrl,
+      doc: doc.copyWith(url: docUrl),
+    );
   }
 
   Future<String> setPassword({String mobile, String password}) {

@@ -1,3 +1,4 @@
+import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 
@@ -68,36 +69,6 @@ class LoginResponse {
       tokens: Tokens.fromMap(map['tokens']),
       message: map['message']?.toString(),
       user: LoginResponseUser.fromMap(map['user']),
-    );
-  }
-}
-
-class LoginResponseUserExtraAddressGeo {
-//JsonName:coordinates
-  List<double> coordinates;
-
-//JsonName:type
-  String type;
-
-  LoginResponseUserExtraAddressGeo({
-    this.coordinates,
-    this.type,
-  });
-
-  factory LoginResponseUserExtraAddressGeo.fromMap(dynamic map) {
-    if (null == map) return null;
-    var temp;
-    return LoginResponseUserExtraAddressGeo(
-      coordinates: null == (temp = map['coordinates'])
-          ? []
-          : (temp is List
-              ? temp
-                  .map((map) => null == map
-                      ? null
-                      : (map is num ? map.toDouble() : double.tryParse(map)))
-                  .toList()
-              : []),
-      type: map['type']?.toString(),
     );
   }
 }
@@ -229,59 +200,6 @@ class LoginResponseUserExtraProfileMobile {
   }
 }
 
-class LoginResponseUserExtraAddress {
-//JsonName:geo
-  LoginResponseUserExtraAddressGeo geo;
-
-//JsonName:verifiedOn
-  String verifiedOn;
-
-//JsonName:isVerified
-  bool isVerified;
-
-//JsonName:streetAddress
-  String streetAddress;
-
-//JsonName:lga
-  String lga;
-
-//JsonName:postalCode
-  String postalCode;
-
-//JsonName:state
-  String state;
-
-  LoginResponseUserExtraAddress({
-    this.geo,
-    this.verifiedOn,
-    this.isVerified,
-    this.streetAddress,
-    this.lga,
-    this.postalCode,
-    this.state,
-  });
-
-  factory LoginResponseUserExtraAddress.fromMap(dynamic map) {
-    if (null == map) return null;
-    var temp;
-    return LoginResponseUserExtraAddress(
-      geo: LoginResponseUserExtraAddressGeo.fromMap(map['geo']),
-      verifiedOn: map['verifiedOn']?.toString(),
-      isVerified: null == (temp = map['isVerified'])
-          ? false
-          : (temp is bool
-              ? temp
-              : (temp is num
-                  ? 0 != temp.toInt()
-                  : ('true' == temp.toString()))),
-      streetAddress: map['streetAddress']?.toString(),
-      lga: map['lga']?.toString(),
-      postalCode: map['postalCode']?.toString(),
-      state: map['state']?.toString(),
-    );
-  }
-}
-
 class LoginResponseUserExtraProfileEmail {
 //JsonName:address
   String address;
@@ -320,7 +238,7 @@ class LoginResponseUserExtra {
   int agentId;
 
 //JsonName:address
-  LoginResponseUserExtraAddress address;
+  Address address;
 
 //JsonName:profile
   LoginResponseUserExtraProfile profile;
@@ -386,7 +304,7 @@ class LoginResponseUserExtra {
       agentId: null == (temp = map['agentId'])
           ? null
           : (temp is num ? temp.toInt() : int.tryParse(temp)),
-      address: LoginResponseUserExtraAddress.fromMap(map['address']),
+      address: Address.fromMap(map['address']),
       profile: LoginResponseUserExtraProfile.fromMap(map['profile']),
       history: null == (temp = map['history'])
           ? []

@@ -2,10 +2,12 @@ import 'package:avs/data/models/user.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/presentation/pages/authentication/login_page.dart';
-import 'package:avs/presentation/pages/authentication/phone_number_page.dart';
-import 'package:avs/presentation/pages/authentication/otp_page.dart';
-import 'package:avs/presentation/pages/authentication/set_password_page.dart';
-import 'package:avs/presentation/pages/authentication/user_info_page.dart';
+import 'package:avs/presentation/pages/authentication/reg_page_1_phone_number.dart';
+import 'package:avs/presentation/pages/authentication/reg_page_2_otp.dart';
+import 'package:avs/presentation/pages/authentication/reg_page_3_set_password.dart';
+import 'package:avs/presentation/pages/authentication/reg_page_4_user_info.dart';
+import 'package:avs/presentation/pages/authentication/reg_page_5_document_upload.dart';
+import 'package:avs/presentation/pages/authentication/reg_page_6_address_info.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,17 +30,20 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   @override
   void initState() {
     super.initState();
-    controller = PageController(initialPage: 1);
+    controller = PageController(initialPage: 7);
     final userRepository = context.read<UserRepository>();
     final authenticationCubit = context.read<AuthenticationCubit>();
 
     pages = [
-      PhoneNumberPage(controller, authenticationCubit, userRepository),
+      PhoneNumberPage(controller, authenticationCubit,
+          userRepository), //This should be forgot password page
       LoginPage(controller, authenticationCubit, userRepository),
       PhoneNumberPage(controller, authenticationCubit, userRepository),
       OtpPage(controller, authenticationCubit, userRepository),
       SetPasswordPage(controller, authenticationCubit, userRepository),
       UserInfoPage(controller, authenticationCubit, userRepository),
+      DocumentUploadPage(controller, authenticationCubit, userRepository),
+      AddressInfoPage(controller, authenticationCubit, userRepository),
     ];
   }
 

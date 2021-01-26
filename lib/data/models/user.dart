@@ -88,7 +88,7 @@ class User extends Equatable {
 
   static const test = User(
     email: UserEmail(address: ''),
-    mobile: '08156655655',
+    mobile: '08156659653',
   );
 
   @override
@@ -132,7 +132,7 @@ class User extends Equatable {
     );
   }
 
-  get toRequestBody {
+  get toRegisterRequestBody {
     return {
       'profile': {
         'firstName': firstName,

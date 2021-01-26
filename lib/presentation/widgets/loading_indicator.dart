@@ -5,11 +5,13 @@ class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({
     Key key,
     this.color,
-    this.radius,
+    this.radius = 20,
+    this.strokeWidth = 1.8,
   }) : super(key: key);
 
   final Color color;
   final double radius;
+  final double strokeWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class LoadingIndicator extends StatelessWidget {
       child: CircularProgressIndicator(
         // backgroundColor: Colors.black,
         valueColor: AlwaysStoppedAnimation(color),
-        strokeWidth: 1.8,
+        strokeWidth: strokeWidth,
       ),
     );
   }

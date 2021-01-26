@@ -1,3 +1,5 @@
+import 'package:avs/data/models/address.dart';
+
 class Request {
   final Contact contact;
   final Address address;
@@ -28,7 +30,7 @@ class Request {
 
   Request.fromJson(Map<String, dynamic> json)
       : contact = Contact.fromJson(json['contact']),
-        address = Address.fromJson(json['address']),
+        address = Address.fromMap(json['address']),
         report = Report.fromJson(json['report']),
         status = json['status'],
         verificationNumber = json['verificationNumber'],
@@ -63,28 +65,6 @@ class Contact {
         description = json['description'];
 }
 
-class Address {
-  final String state;
-  final String lga;
-  final String postalCode;
-  final String streetAddress;
-  final String landmark;
-  final Geo geo;
-  final String point;
-
-  Address(this.state, this.lga, this.postalCode, this.streetAddress,
-      this.landmark, this.geo, this.point);
-
-  Address.fromJson(Map<String, dynamic> json)
-      : state = json['state'],
-        lga = json['lga'],
-        postalCode = json['postalCode'],
-        streetAddress = json['streetAddress'],
-        landmark = json['landmark'],
-        geo = Geo.fromJson(json['geo']),
-        point = json['point'];
-}
-
 class Report {
   final List<dynamic> notes;
   final List<dynamic> images;
@@ -96,12 +76,4 @@ class Report {
       : notes = json['notes'],
         images = json['images'],
         extra = json['extra'];
-}
-
-class Geo {
-  final List<dynamic> coordinates;
-
-  Geo(this.coordinates);
-
-  Geo.fromJson(Map<String, dynamic> json) : coordinates = json['coordinates'];
 }

@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:get/utils.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Validator {
   static String isPassword(String value) {
@@ -30,6 +34,13 @@ class Validator {
       return 'This field is required';
     } else if (!GetUtils.isAlphabetOnly(value) || value.length < 2) {
       return 'Please enter a valid name';
+    }
+    return null;
+  }
+
+  static String isPostalCode(String value) {
+    if (value.isEmpty || value.length < 6) {
+      return 'Postal code must be 6 digits long';
     }
     return null;
   }
@@ -77,25 +88,44 @@ class Validator {
     return null;
   }
 
-  static String isInviteCode(String value) {
-    if (value.isNotEmpty && value.length != 6) {
-      return 'Invite code must be six characters long';
+  static String isLessThan5MB(String value) {
+    final _5MB = 5 * 1024 * 1024;
+    if (value.isEmpty) {
+      return 'Click to select a document';
+    } else {
+      final file = File(value);
+      if (file.lengthSync() > _5MB) {
+        return 'Selected file is ${(file.lengthSync() / 1024 / 1024).toPrecision(2)}MB. It should not more than 5MB';
+      }
     }
-
     return null;
   }
 
-  static String isPromoCode(String value) {
-    if (value.isEmpty || value.length != 6) {
-      return 'Promo code must be six characters long';
+  static String isNIN(String value) {
+    if (value.isEmpty || value.length < 11) {
+      return 'National Identity Number must be 11 digits long';
     }
-
     return null;
   }
 
   static String isGender(String value) {
     if (value == null) {
       return 'Please select a valid Gender';
+    }
+    return null;
+  }
+
+  static String isProfilePhoto(PickedFile value) {
+    print(value);
+    if (value == null || value.isBlank) {
+      return 'A clear profile picture is required';
+    }
+    return null;
+  }
+
+  static String isDocument(Document value) {
+    if (value == null || value.isBlank) {
+      return 'Select a valid document to upload';
     }
     return null;
   }

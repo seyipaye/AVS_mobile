@@ -4,6 +4,7 @@ class UserInfoState extends Equatable {
   UserInfoState({
     this.autovalidateMode = AutovalidateMode.disabled,
     this.isLoading = false,
+    this.showCompletionDialog = false,
     this.errorMessage,
   });
 
@@ -12,6 +13,7 @@ class UserInfoState extends Equatable {
         errorMessage: message,
       );
 
+  final bool showCompletionDialog;
   final bool isLoading;
   final String errorMessage;
   final AutovalidateMode autovalidateMode;
@@ -19,13 +21,14 @@ class UserInfoState extends Equatable {
   bool get hasError => errorMessage != null;
 
   UserInfoState copyWith({
-    final bool hidePassword,
-    final AutovalidateMode autovalidateMode,
+    final bool showCompletionDialog,
     final bool isLoading,
+    final AutovalidateMode autovalidateMode,
   }) {
     return UserInfoState(
-      autovalidateMode: autovalidateMode ?? this.autovalidateMode,
+      showCompletionDialog: showCompletionDialog ?? this.showCompletionDialog,
       isLoading: isLoading ?? this.isLoading,
+      autovalidateMode: autovalidateMode ?? this.autovalidateMode,
     );
   }
 

@@ -2,6 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<<<<<<< HEAD
 <key>io.flutter.embedded_views_preview</key>
 <string>YES</string>
 <key>NSLocationWhenInUseUsageDescription</key>
@@ -12,6 +13,14 @@
 <string>Needs to upload various images</string>
 <key>NSMicrophoneUsageDescription</key>
 <string>Needs to upload various images</string>
+=======
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Needs to upload various images</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Needs to upload various images</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Needs to upload various images</string>
+>>>>>>> 6a09eff4f95a34c6ffc6348f9d1a188e8cdd9033
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
