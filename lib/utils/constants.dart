@@ -1,6 +1,12 @@
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+TextStyle get kLabelTextStyle => TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w600,
+      //color: AppColors.label,
+    );
+
 BoxShadow kDropShadow(double dx, double dy, double blurRadius,
         {color = AppColors.offset}) =>
     BoxShadow(

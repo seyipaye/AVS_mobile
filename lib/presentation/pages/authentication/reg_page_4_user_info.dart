@@ -4,6 +4,7 @@ import 'package:avs/presentation/screens/authentication_screen.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/presentation/widgets/auth_header.dart';
+import 'package:avs/presentation/widgets/dialogs.dart';
 import 'package:avs/presentation/widgets/input/app_dropdown_button.dart';
 import 'package:avs/presentation/widgets/input/app_text_form_field.dart';
 import 'package:avs/utils/constants.dart';
@@ -11,6 +12,7 @@ import 'package:avs/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:line_icons/line_icons.dart';
 
 class UserInfoPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
@@ -60,10 +62,32 @@ class UserInfoPage extends StatelessWidget {
                 AppSnackBar.error(state.errorMessage),
               );
           }
+
+          if (state.showCompletionDialog) {
+            final userInfoCubit = context.read<UserInfoCubit>();
+
+            showDialog(
+              context: context,
+              builder: (_) {
+                return AppDialog(
+                  icon: Icon(
+                    LineIcons.check_circle,
+                    size: 125,
+                    color: Colors.lightGreen,
+                  ),
+                  content:
+                      "Well done, ${userInfoCubit.firstName}! You've completed the first stage of the registration process. Complete your profile to start earning money as an Agent",
+                  onPositivePressed: userInfoCubit.onPositivePressed,
+                  onNegativePressed: userInfoCubit.onNegativePressed,
+                );
+              },
+            );
+          }
         },
         builder: (context, state) {
-          //print(state);
           final userInfoCubit = context.watch<UserInfoCubit>();
+
+          //print(state);
           return Form(
             key: formKey,
             autovalidateMode: state.autovalidateMode,
@@ -71,7 +95,7 @@ class UserInfoPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Fields marked with asteriks (*) are compulsory',
+                  'Fields marked with asterisks (*) are compulsory',
                 ),
                 SizedBox(height: 20),
                 AppTextFormField(

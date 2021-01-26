@@ -1,20 +1,20 @@
 import 'package:avs/data/models/user.dart';
 
-class UserResponse {
+class RegistrationResponse {
 //JsonName:agent
   UserResponseAgent agent;
 
 //JsonName:message
   String message;
 
-  UserResponse({
+  RegistrationResponse({
     this.agent,
     this.message,
   });
 
   User get toSimpleUser => User(
         mobile: agent.profile.mobile.number,
-        id: agent.user,
+        id: agent.id,
         imageUrl: null,
         firstName: agent.profile.firstName,
         lastName: agent.profile.lastName,
@@ -23,10 +23,10 @@ class UserResponse {
         email: UserEmail(address: agent.profile.email.address),
       );
 
-  factory UserResponse.fromMap(dynamic map) {
+  factory RegistrationResponse.fromMap(dynamic map) {
     if (null == map) return null;
     var temp;
-    return UserResponse(
+    return RegistrationResponse(
       agent: UserResponseAgent.fromMap(map['agent']),
       message: map['message']?.toString(),
     );

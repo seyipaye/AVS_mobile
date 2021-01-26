@@ -112,15 +112,7 @@ class AppTextFormField extends StatelessWidget {
               SizedBox(
                 height: topPadding ?? 0,
               ),
-              Text(
-                label,
-                style: labelTextStyle ??
-                    TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      //color: AppColors.label,
-                    ),
-              ),
+              Text(label, style: labelTextStyle ?? kLabelTextStyle),
               SizedBox(
                 height: spacerHeight ?? 10.0,
               ),
