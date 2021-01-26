@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:avs/data/api_responses/status_response.dart';
+import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/shared_pref.dart';
 import 'package:avs/data/models/tokens.dart';
@@ -22,6 +23,13 @@ class UserRepository {
     //await prefs.save('User', user);
 
     return apiClient.setUser(user: user);
+  }
+
+  Future<String> addAddress({User user, Address address}) async {
+    //return Future.delayed(Duration(seconds: 2)).then((value) => user);
+    //await prefs.save('User', user);
+
+    return apiClient.addAddress(user: user, address: address);
   }
 
   Future<String> uploadDocs(User user, {String photoPath, Document doc}) async {

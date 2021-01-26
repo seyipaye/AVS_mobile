@@ -66,8 +66,6 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
     }
   }
 
-  //void selected
-
   void _showError(String error) {
     emit(state.copyWith(isLoading: false, errorMessage: error));
     Future.delayed(Duration(seconds: 1), () {
@@ -83,7 +81,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
       emit(state.copyWith(photoFile: value));
     }).catchError((error) {
       if (error is Exception) {
-        _showError((error as dynamic).message);
+        _showError((error as dynamic).errorMessage);
       } else {
         _showError(Error.safeToString(error));
       }
@@ -102,7 +100,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
       }
     }).catchError((error) {
       if (error is Exception) {
-        _showError((error as dynamic).message);
+        _showError((error as dynamic).errorMessage);
       } else {
         _showError(Error.safeToString(error));
       }

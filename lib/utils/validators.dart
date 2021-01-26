@@ -38,6 +38,13 @@ class Validator {
     return null;
   }
 
+  static String isPostalCode(String value) {
+    if (value.isEmpty || value.length < 6) {
+      return 'Postal code must be 6 digits long';
+    }
+    return null;
+  }
+
   static String isOtherName(String value) {
     if (value.isNotEmpty) {
       if (!GetUtils.isAlphabetOnly(value) || value.length < 2) {
