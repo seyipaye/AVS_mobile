@@ -176,10 +176,40 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "geolocator",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-6.1.14",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "geolocator_platform_interface",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_platform_interface-1.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "get",
       "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/get-3.24.0",
       "packageUri": "lib/",
       "languageVersion": "2.10"
+    },
+    {
+      "name": "google_map_polyline",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/google_map_polyline-0.2.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "google_maps_flutter",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-0.5.33",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "google_maps_flutter_platform_interface",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter_platform_interface-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
     },
     {
       "name": "google_nav_bar",
@@ -428,6 +458,12 @@
       "languageVersion": "2.10"
     },
     {
+      "name": "stream_transform",
+      "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/stream_transform-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "string_scanner",
       "rootUri": "file:///Users/macbook/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0-nullsafety.1",
       "packageUri": "lib/",
@@ -494,7 +530,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-20T12:41:47.447794Z",
+  "generated": "2021-01-26T09:33:26.131759Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }

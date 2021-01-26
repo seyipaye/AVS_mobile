@@ -12,6 +12,10 @@ class Tokens extends Equatable {
     this.refresh,
   });
 
+  Map<String, dynamic> toJson() {
+    return {'access': access.toJson(), 'refresh': refresh.toJson()};
+  }
+
   factory Tokens.fromMap(dynamic map) {
     if (null == map) return null;
     return Tokens(
@@ -36,6 +40,10 @@ class LoginResponseTokensAccess extends Equatable {
     this.token,
   });
 
+  Map<String, String> toJson() {
+    return {'expires': expires, 'token': token};
+  }
+
   factory LoginResponseTokensAccess.fromMap(dynamic map) {
     if (null == map) return null;
     return LoginResponseTokensAccess(
@@ -59,6 +67,10 @@ class LoginResponseTokensRefresh extends Equatable {
     this.expires,
     this.token,
   });
+
+  Map<String, String> toJson() {
+    return {'expires': expires, 'token': token};
+  }
 
   factory LoginResponseTokensRefresh.fromMap(dynamic map) {
     if (null == map) return null;

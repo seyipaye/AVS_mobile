@@ -17,10 +17,9 @@ class UserRepository {
   }
 
   Future<User> setUser({User user}) async {
+    await prefs.save('USER', user.toJson());
+    print('code ran');
     return Future.delayed(Duration(seconds: 2)).then((value) => user);
-    await prefs.save('User', user);
-
-    return apiClient.setUser(user: user);
   }
 
   Future<String> setPassword({String mobile, String password}) {
@@ -36,8 +35,12 @@ class UserRepository {
   }
 
   Future<User> getUser() async {
+    var json = await SharedPref().read('USER');
+    if (json != null) {
+      return User.fromMap(json);
+    }
     return Future<User>.delayed(const Duration(seconds: 2), () => null);
-    User user = await prefs.read('User');
+    // User user = await prefs.read('User');
   }
 
   /*Future<User> authenticate ({

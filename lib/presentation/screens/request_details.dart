@@ -1,4 +1,5 @@
 import 'package:avs/data/models/request.dart';
+import 'package:avs/presentation/screens/map_screen.dart';
 import 'package:avs/presentation/screens/photo_view_screen.dart';
 import 'package:avs/presentation/widgets/app_card.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
@@ -111,7 +112,10 @@ class RequestDetailsScreen extends StatelessWidget {
               fontSize: 14,
               text: 'Accept',
               prefixIcon: Icon(LineIcons.thumbs_up),
-              onPressed: (context) {},
+              onPressed: (context) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MapScreen()));
+              },
             ),
           ),
         ],

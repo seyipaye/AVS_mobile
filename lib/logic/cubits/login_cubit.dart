@@ -29,9 +29,10 @@ class LoginCubit extends Cubit<LoginState> {
       form.save();
       emit(state.copyWith(isLoading: true));
 
-      userRepository.login(email: email, password: password).then((user) {
+      userRepository.login(email: email, password: password).then((user) async {
         if (user != null) {
           authenticationCubit.authenticatedUser = user;
+          await userRepository.setUser(user: user);
         } else {
           emit(
               LoginState.error('Something went wrong, please try again later'));
