@@ -1,16 +1,25 @@
 import 'dart:async';
+import 'package:avs/data/models/request.dart';
+import 'package:avs/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_map_polyline/google_map_polyline.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapScreen extends StatefulWidget {
+  final Request request;
+
+  const MapScreen({@required this.request});
+
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
+  double latitude;
+  double longitude;
+
   CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
   GoogleMapController _mapController;
   Position _currentPosition;
@@ -19,12 +28,7 @@ class _MapScreenState extends State<MapScreen> {
   /// Subscription for location changes
   StreamSubscription streamSubscription;
 
-  /// Google map polylines
-  GoogleMapPolyline googleMapPolyline =
-      GoogleMapPolyline(apiKey: 'AIzaSyDWzGqryJyULurQz_nOuTz5L-tktCz60JE');
-  final Set<Polyline> polyline = {};
-
-  ///
+  PolylinePoints polylinePoints;
 
   /// List of coordinates to join
   List<LatLng> polylineCoordinates = [];
@@ -37,8 +41,10 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      getCurrentLocation();
-      test();
+      setLocationListener();
+      latitude = widget.request.address.geo.coordinates[0];
+      longitude = widget.request.address.geo.coordinates[1];
+      placeMarker(latitude: latitude, longitude: longitude);
     });
   }
 
@@ -50,7 +56,7 @@ class _MapScreenState extends State<MapScreen> {
         width: MediaQuery.of(context).size.width,
         child: GoogleMap(
           markers: markers,
-          polylines: polyline,
+          polylines: Set<Polyline>.of(polylines.values),
           initialCameraPosition: _initialLocation,
           myLocationEnabled: true,
           myLocationButtonEnabled: false,
@@ -78,27 +84,6 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ),
       ),
-      // Positioned(
-      //   bottom: 40,
-      //   right: 40,
-      //   child: ClipOval(
-      //     child: Material(
-      //       color: AppColors.primaryColor[200],
-      //       child: InkWell(
-      //         splashColor: AppColors.primaryColor[300],
-      //         child: SizedBox(
-      //           width: 56,
-      //           height: 56,
-      //           child: Icon(Icons.my_location),
-      //         ),
-      //         onTap: () {
-      //           // TODO: Add the operation to be performed
-      //           // on button tap
-      //         },
-      //       ),
-      //     ),
-      //   ),
-      // ),
     ]);
   }
 
@@ -134,56 +119,40 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ),
       );
-      placeMarker(position);
-      // createRoute(
-      //   start: position,
-      // );
     }).catchError((e) {
       print("error:$e");
     });
   }
 
-  void placeMarker(Position position) {
-// Destination Location Marker
+  void placeMarker({double latitude, double longitude}) {
+    /// Destination Location Marker
     Marker destinationMarker = Marker(
       markerId: MarkerId('Address'),
-      position: LatLng(
-        9.081999,
-        8.675277,
-      ),
+      position: LatLng(latitude, longitude),
       infoWindow: InfoWindow(
-        title: 'Destination',
-        snippet: 'Address to be verified',
-      ),
-      icon: BitmapDescriptor.defaultMarker,
-    );
-
-    // Destination Location Marker
-    Marker userMarker = Marker(
-      markerId: MarkerId('Address'),
-      position: LatLng(
-        9.081999,
-        8.675277,
-      ),
-      infoWindow: InfoWindow(
-        title: 'Destination',
-        snippet: 'Address to be verified',
+        title: 'Address to be verified',
+        snippet: '${widget.request.address.streetAddress}',
       ),
       icon: BitmapDescriptor.defaultMarker,
     );
 
     setState(() {
       markers.add(destinationMarker);
-      print(markers.length);
-    });
 
-    setState(() {
-      markers.add(userMarker);
-      print('${markers.length} 2nd');
+      ///Zoom in on destination marker
+      _mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(latitude, longitude),
+            zoom: 10.0,
+          ),
+        ),
+      );
+      print(markers.length);
     });
   }
 
-  void test() {
+  void setLocationListener() {
     streamSubscription = Geolocator.getPositionStream(
             desiredAccuracy: LocationAccuracy.high, distanceFilter: 0)
         .listen((Position position) {
@@ -193,103 +162,76 @@ class _MapScreenState extends State<MapScreen> {
 
         print('CURRENT POSITION: $_currentPosition');
 
-        /// For moving the camera to current location
-        // _mapController.animateCamera(
-        //   CameraUpdate.newCameraPosition(
-        //     CameraPosition(
-        //       target: LatLng(
-        //         // position.latitude, position.longitude
-        //         9.081999,
-        //         8.675277,
-        //       ),
-        //       zoom: 18.0,
-        //     ),
-        //   ),
-        // );
         print('This ran : Listener is set');
         createRoute(
           start: position,
         );
+        calculateDistance(position);
       });
     });
   }
 
-  // void createRoute({@required Position start}) async {
-  //   /// Initializing PolylinePoints
-  //   print('LOG: This working');
-  //   polylinePoints = PolylinePoints();
-  //
-  //   // Generating the list of coordinates to be used for
-  //   // drawing the polylines
-  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-  //     'AIzaSyCItILbUMSoE40E-nSWcvJT_wDQofzl95A', // Google Maps API Key
-  //     PointLatLng(start.latitude, start.longitude),
-  //     PointLatLng(
-  //         // 9.081999,
-  //         // 8.675277,
-  //         6.5244,
-  //         3.3792),
-  //     travelMode: TravelMode.transit,
-  //   );
-  //
-  //   // Adding the coordinates to the list
-  //   if (result.points.isNotEmpty) {
-  //     result.points.forEach((PointLatLng point) {
-  //       polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-  //     });
-  //   }
-  //
-  //   setState(() {
-  //     // Defining an ID
-  //     PolylineId id = PolylineId('poly');
-  //
-  //     // Initializing Polyline
-  //     Polyline polyline = Polyline(
-  //       polylineId: id,
-  //       color: Colors.red,
-  //       points: polylineCoordinates,
-  //       width: 3,
-  //     );
-  //
-  //     /// Adding the polyline to the map
-  //
-  //     polylines[id] = polyline;
-  //     print(polylines.toString());
-  //   });
-  // }
-
   void createRoute({@required Position start}) async {
-    try {
-      var route = await googleMapPolyline.getCoordinatesWithLocation(
-          origin: LatLng(start.latitude, start.longitude),
-          destination: LatLng(6.5244, 3.3792),
-          mode: RouteMode.walking);
-    } catch (e) {
-      print(e);
-    }
+    ///Flutter polylines
+    polylinePoints = PolylinePoints();
 
-    try {
-      // setState(() {
-      //   polyline.add(
-      //     Polyline(
-      //       polylineId: PolylineId('route1'),
-      //       visible: true,
-      //       points: route,
-      //       width: 4,
-      //       color: Theme.of(context).primaryColor,
-      //       startCap: Cap.roundCap,
-      //       endCap: Cap.buttCap,
-      //     ),
-      //   );
-      // });
-    } catch (e) {
-      print('error:$e');
+    /// Generating the list of coordinates to be used for drawing the polylines
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      'AIzaSyDWzGqryJyULurQz_nOuTz5L-tktCz60JE', // Google Maps API Key
+      PointLatLng(6.5236, 3.6006),
+      PointLatLng(latitude, longitude),
+      travelMode: TravelMode.driving,
+    );
+
+    print(result.points);
+    print(result.status);
+
+    /// Adding the coordinates to the list
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    } else {
+      ///What to do if route isn't available
     }
+    print(polylineCoordinates.length);
+
+    PolylineId id = PolylineId('poly');
+
+    setState(() {
+      Polyline polyline = Polyline(
+        polylineId: id,
+        color: AppColors.primaryColor,
+        points: polylineCoordinates,
+        width: 3,
+      );
+
+      polylines[id] = polyline;
+    });
+  }
+
+  void calculateDistance(Position position) async {
+    double distanceInMeters = Geolocator.distanceBetween(
+      6.5236,
+      3.6006,
+      latitude,
+      longitude,
+    );
+
+    print('Distance: $distanceInMeters');
+    if (distanceInMeters < 200) {
+      ///Bring up form to verify address
+      closeSubscription();
+    }
+  }
+
+  void closeSubscription() {
+    streamSubscription?.cancel();
   }
 
   @override
   void dispose() {
-    streamSubscription?.cancel();
+    closeSubscription();
     super.dispose();
   }
 }

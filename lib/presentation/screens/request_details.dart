@@ -23,7 +23,7 @@ class RequestDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Request Details'),
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
+      bottomNavigationBar: _buildBottomNavBar(context),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -85,7 +85,8 @@ class RequestDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavBar() {
+  Widget _buildBottomNavBar(context) {
+    final Request request = ModalRoute.of(context).settings.arguments;
     return Container(
       color: Colors.white,
       padding: EdgeInsets.all(20),
@@ -113,8 +114,14 @@ class RequestDetailsScreen extends StatelessWidget {
               text: 'Accept',
               prefixIcon: Icon(LineIcons.thumbs_up),
               onPressed: (context) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MapScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MapScreen(
+                      request: request,
+                    ),
+                  ),
+                );
               },
             ),
           ),

@@ -184,6 +184,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_polyline_points">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_polyline_points-0.2.4/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_svg">
           <value>
             <list>
@@ -646,6 +653,7 @@
       <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blurhash-0.5.0/lib" />
       <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_cache_manager-2.1.1/lib" />
       <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/lib" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_polyline_points-0.2.4/lib" />
       <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.19.0/lib" />
       <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.11.0/lib" />
       <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-6.1.14/lib" />
