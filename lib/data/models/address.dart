@@ -20,6 +20,10 @@ class Address {
 //JsonName:state
   String state;
 
+  final String landmark;
+
+  final String point;
+
   Address({
     this.geo,
     this.verifiedOn,
@@ -28,6 +32,8 @@ class Address {
     this.lga,
     this.postalCode,
     this.state,
+    this.landmark,
+    this.point,
   });
 
   factory Address.fromMap(dynamic map) {
@@ -47,6 +53,8 @@ class Address {
       lga: map['lga']?.toString(),
       postalCode: map['postalCode']?.toString(),
       state: map['state']?.toString(),
+      landmark: map['landmark']?.toString(),
+      point: map['point']?.toString(),
     );
   }
 }
