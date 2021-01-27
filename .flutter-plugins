@@ -1,6 +1,7 @@
 # This is a generated file; do not edit or check into version control.
 file_picker=/Users/mac/.pub-cache/hosted/pub.dartlang.org/file_picker-2.1.5+1/
 flutter_plugin_android_lifecycle=/Users/mac/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/
+geolocator=/Users/mac/.pub-cache/hosted/pub.dartlang.org/geolocator-6.1.14/
 image_picker=/Users/mac/.pub-cache/hosted/pub.dartlang.org/image_picker-0.6.7+21/
 path_provider=/Users/mac/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.27/
 path_provider_linux=/Users/mac/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/

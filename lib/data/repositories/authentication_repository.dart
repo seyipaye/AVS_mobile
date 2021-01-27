@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:avs/data/api_responses/address_upload_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/document.dart';
@@ -25,11 +26,8 @@ class UserRepository {
     return apiClient.setUser(user: user);
   }
 
-  Future<String> addAddress({User user, Address address}) async {
-    //return Future.delayed(Duration(seconds: 2)).then((value) => user);
-    //await prefs.save('User', user);
-
-    return apiClient.addAddress(user: user, address: address);
+  Future<AddressUploadResponse> addAddress({String id, Address address}) async {
+    return apiClient.addAddress(id: id, address: address);
   }
 
   Future<String> uploadDocs(User user, {String photoPath, Document doc}) async {
@@ -41,16 +39,32 @@ class UserRepository {
       return value.imageUrls.first;
     });
 
-    //'https://api-sandbox.quickavs.ng/v1/files/BL32YUjZGxoxiu3IMQrY.bin/get';
-    final String docUrl = await apiClient.uploadFile(doc.value).then((value) {
-      return value.imageUrls.first;
-    });
+    print(user.id);
 
-    return apiClient.uploadDocs(
-      user.uid,
-      photoUrl: photoUrl,
-      doc: doc.copyWith(url: docUrl),
-    );
+    if (doc.type == DocumentType.NIN) {
+      return apiClient.uploadDocs(
+        user.id,
+        body: {
+          "imageUrl": photoUrl,
+          "number": doc.value,
+          "type": doc.backendType
+        },
+      );
+    } else {
+      //'https://api-sandbox.quickavs.ng/v1/files/BL32YUjZGxoxiu3IMQrY.bin/get';
+      final String docUrl = await apiClient.uploadFile(doc.value).then((value) {
+        return value.imageUrls.first;
+      });
+
+      return apiClient.uploadDocs(
+        user.id,
+        body: {
+          "imageUrl": photoUrl,
+          "documentUrl": docUrl,
+          "type": doc.backendType
+        },
+      );
+    }
   }
 
   Future<String> setPassword({String mobile, String password}) {

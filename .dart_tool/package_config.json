@@ -152,6 +152,12 @@
       "languageVersion": "2.6"
     },
     {
+      "name": "flutter_google_places",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/flutter_google_places-0.2.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "flutter_plugin_android_lifecycle",
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11",
       "packageUri": "lib/",
@@ -182,10 +188,28 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "geolocator",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/geolocator-6.1.14",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "geolocator_platform_interface",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/geolocator_platform_interface-1.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "get",
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/get-3.24.0",
       "packageUri": "lib/",
       "languageVersion": "2.10"
+    },
+    {
+      "name": "google_maps_webservice",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/google_maps_webservice-0.0.19",
+      "packageUri": "lib/",
+      "languageVersion": "1.20"
     },
     {
       "name": "google_nav_bar",
@@ -357,7 +381,7 @@
     },
     {
       "name": "rxdart",
-      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/rxdart-0.25.0",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/rxdart-0.24.1",
       "packageUri": "lib/",
       "languageVersion": "2.6"
     },
@@ -500,7 +524,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-23T12:00:42.385131Z",
+  "generated": "2021-01-27T09:01:31.505170Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }

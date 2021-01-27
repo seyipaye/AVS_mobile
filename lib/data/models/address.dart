@@ -36,6 +36,17 @@ class Address {
     this.point,
   });
 
+  get toRegisterRequestBody {
+    return {
+      'address': {
+        'streetAddress': streetAddress,
+        'lga': lga,
+        'postalCode': postalCode,
+        'state': state,
+      }
+    };
+  }
+
   factory Address.fromMap(dynamic map) {
     if (null == map) return null;
     var temp;
@@ -70,6 +81,12 @@ class AddressGeo {
     this.coordinates,
     this.type,
   });
+
+  get toRegisterRequestBody {
+    return {
+      'coordinates': coordinates?.map((map) => map)?.toList() ?? [],
+    };
+  }
 
   factory AddressGeo.fromMap(dynamic map) {
     if (null == map) return null;

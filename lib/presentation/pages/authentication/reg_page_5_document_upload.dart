@@ -22,21 +22,23 @@ const List<Document> documents = [
   Document(
       type: DocumentType.NIN,
       title: 'National Identification Number',
-      label: 'Enter NIN'),
+      label: 'Enter NIN',
+      backendType: 'NIN'),
   Document(
-    type: DocumentType.DRIVERS_LICENSE,
-    title: "Driver's License",
-    label: "Upload Driver's Card",
-  ),
+      type: DocumentType.DRIVERS_LICENSE,
+      title: "Driver's License",
+      label: "Upload Driver's Card",
+      backendType: 'DRIVER’S LICENSE'),
   Document(
       type: DocumentType.INTERNATIONAL_PASSPORT,
       title: 'International Passport',
-      label: "Upload International passport"),
+      label: "Upload International passport",
+      backendType: 'INTERNATIONAL PASSPORT'),
   Document(
-    type: DocumentType.VOTER_CARD,
-    title: "Voter's Card",
-    label: "Upload Voter's Card",
-  ),
+      type: DocumentType.VOTERS_CARD,
+      title: "Voter's Card",
+      label: "Upload Voter's Card",
+      backendType: 'VOTER’S CARD'),
 ];
 
 class DocumentUploadPage extends StatelessWidget {

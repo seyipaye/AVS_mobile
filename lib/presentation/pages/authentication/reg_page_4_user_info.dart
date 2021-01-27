@@ -75,8 +75,9 @@ class UserInfoPage extends StatelessWidget {
                     size: 125,
                     color: Colors.lightGreen,
                   ),
+                  title: 'Well done, ${userInfoCubit.firstName}!',
                   content:
-                      "Well done, ${userInfoCubit.firstName}! You've completed the first stage of the registration process. Complete your profile to start earning money as an Agent",
+                      "You've completed the first stage of the registration process. Complete your profile to start earning money as an Agent",
                   onPositivePressed: userInfoCubit.onPositivePressed,
                   onNegativePressed: userInfoCubit.onNegativePressed,
                 );

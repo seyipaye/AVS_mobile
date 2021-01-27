@@ -1,6 +1,7 @@
 import 'package:avs/data/models/document.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/validators.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -44,7 +45,9 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
                 photoPath: _photoFile.path, doc: state.selectedDoc)
             .then((message) {
           if (message != null) {
-            emit(state.copyWith(isLoading: false, showCompletionDialog: true));
+            emit(state.copyWith(isLoading: false));
+            controller.nextPage(
+                duration: kAnimationDuration, curve: Curves.bounceOut);
           } else {
             _showError('Something went wrong, please try again later');
           }

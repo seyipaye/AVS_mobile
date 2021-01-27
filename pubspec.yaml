@@ -25,12 +25,14 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^8.11.0
   cupertino_icons: ^1.0.0
-  http: ^0.12.2
   shared_preferences: ^0.5.12+4
-  dio: ^3.0.10
   dotted_border: ^1.0.7
   loading_overlay: ^0.2.1
 
+  # Network
+  dio: ^3.0.10
+  http: ^0.12.2
+  flutter_google_places: ^0.2.6
 
   # Ui
   fl_chart: ^0.12.2
@@ -39,6 +41,7 @@ dependencies:
 
   # Utils
   get: ^3.24.0
+  geolocator: ^6.1.14
 
   # State management
   bloc: ^6.1.1

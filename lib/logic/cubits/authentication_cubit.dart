@@ -1,3 +1,4 @@
+import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
@@ -52,6 +53,14 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   set authenticatedUser(User user) {
     _user = user;
     emit(Authenticated(user: _user));
+  }
+
+  set userAddress(Address address) {
+    _user = _user.copyWith(address: address);
+  }
+
+  set tokens(Tokens tokens) {
+    _user = _user.copyWith(tokens: tokens);
   }
 
   void _initAuth() {

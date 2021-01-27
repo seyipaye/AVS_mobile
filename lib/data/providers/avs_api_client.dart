@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:avs/data/api_responses/address_upload_response.dart';
 import 'package:avs/data/api_responses/login_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/api_responses/upload_file_response.dart';
@@ -33,7 +34,7 @@ class WeatherRequestFailure implements Exception {}
 // primary-agent@quickavs.ng
 // System123!
 
-final baseUrl = 'https://api-sandbox.quickavs.ng/v1';
+final baseUrl = 'https://avs-staging-api.herokuapp.com/v1';
 
 class AVSApiClient {
   AVSApiClient({http.Client httpClient})
@@ -41,25 +42,25 @@ class AVSApiClient {
 
   final http.Client _httpClient;
 
-  Future<String> addAddress({User user, Address address}) async {
-    print(jsonEncode(user.toRegisterRequestBody) + user.id);
+  Future<AddressUploadResponse> addAddress({String id, Address address}) async {
+    print(jsonEncode(address.toRegisterRequestBody) + id);
     final response = await _httpClient.post(
-      baseUrl + '/auth/local/register/address/agent/${user.id}',
+      baseUrl + '/auth/local/register/address/agent/$id',
       headers: {"Content-Type": "application/json"},
-      body: (jsonEncode(user.toRegisterRequestBody)),
+      body: jsonEncode(address.toRegisterRequestBody),
     );
 
     if (printAllResponses) {
       log(response.body);
     }
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 || response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
     }
     try {
-      return jsonDecode(response.body)['message']?.toString();
+      return AddressUploadResponse.fromMap(jsonDecode(response.body));
     } catch (exception) {
       print(exception);
       throw ClientError('Something went wrong, please try again later');
@@ -96,7 +97,7 @@ class AVSApiClient {
     if (printAllResponses) {
       log(response.body);
     }
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 || response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
@@ -123,7 +124,7 @@ class AVSApiClient {
     if (printAllResponses) {
       log(jsonEncode(response.data));
     }
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 || response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(response.data)?.message ??
             response.statusMessage,
@@ -137,17 +138,13 @@ class AVSApiClient {
     }
   }
 
-  Future<String> uploadDocs(String id, {String photoUrl, Document doc}) async {
-    // TODO: Cross check
+  //6010850c8827c3002241341c
+  Future<String> uploadDocs(String id, {dynamic body}) async {
     final response = await _httpClient.post(
-      baseUrl + '}/auth/local/register/upload/agent/$id',
-      body: {
-        "imageUrl": photoUrl,
-        "type": "NIN",
-        "number": '12365284983',
-        "documentUrl": "https://file1.url"
-      },
+      baseUrl + '/auth/local/register/upload/agent/$id',
+      body: body,
     );
+
     if (printAllResponses) {
       log(response.body);
     }
