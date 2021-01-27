@@ -36,6 +36,7 @@ class RequestProvider {
     @required int page,
     @required int limit,
   }) async {
+    print(_authCubit.user.toJson());
     _dio.interceptors.add(ApiInterceptor(_authCubit));
     _dio.options.headers['content-Type'] = 'application/json';
     _dio.options.headers["authorization"] =

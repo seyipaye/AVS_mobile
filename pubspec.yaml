@@ -48,6 +48,12 @@ dependencies:
   flutter_bloc: ^6.1.1
   equatable: ^1.2.5
 
+  #Maps and location
+  google_maps_flutter:  ^0.5.21+6
+  geolocator: ^6.1.14
+  flutter_polyline_points: ^0.2.1
+  google_map_polyline: ^0.2.0
+
   # Assets loading
   photo_view: ^0.10.3
   flutter_svg: 0.19.0

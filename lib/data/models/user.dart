@@ -26,6 +26,33 @@ class User extends Equatable {
     this.uid,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      'mobile': mobile,
+      'id': id,
+      'uid': uid,
+      'firstName': firstName,
+      'lastName': lastName,
+      'gender': gender,
+      'otherName': otherName,
+      'email': email.toJson(),
+      'imageUrl': imageUrl,
+      'tokens': tokens.toJson()
+    };
+  }
+
+  User.fromMap(Map<String, dynamic> json)
+      : mobile = json['mobile'],
+        id = json['id'],
+        uid = json['uid'],
+        firstName = json['firstName'],
+        lastName = json['lastName'],
+        gender = json['gender'],
+        otherName = json['otherName'],
+        email = UserEmail.fromMap(json['email']),
+        imageUrl = json['imageUrl'],
+        tokens = Tokens.fromMap(json['tokens']);
+
   /// The current user's phone number.
   final String mobile;
 
@@ -134,6 +161,14 @@ class UserEmail extends Equatable {
   const UserEmail({
     this.address,
   });
+
+  UserEmail.fromMap(Map<String, dynamic> json) : address = json['address'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'address': address,
+    };
+  }
 
   @override
   List<Object> get props => [address];
