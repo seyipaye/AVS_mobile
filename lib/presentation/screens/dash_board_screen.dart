@@ -1,8 +1,13 @@
+import 'package:avs/logic/cubits/authentication_cubit.dart';
+import 'package:avs/logic/cubits/dashboard_cubit.dart';
+import 'package:avs/logic/cubits/dashboard_state.dart';
+import 'package:avs/presentation/screens/request_details.dart';
 import 'package:avs/presentation/widgets/agent_rating.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/bar_chart.dart';
 import 'package:avs/presentation/widgets/bar_chart_group_data.dart';
 import 'package:avs/presentation/widgets/completion_chart.dart';
+import 'package:avs/presentation/widgets/new_request_item.dart';
 import 'package:avs/presentation/widgets/page_title.dart';
 import 'package:avs/presentation/widgets/profile_image.dart';
 import 'package:avs/presentation/widgets/request_count_card.dart';
@@ -12,6 +17,7 @@ import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen();
@@ -30,6 +36,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var user = BlocProvider.of<AuthenticationCubit>(context).user;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -77,7 +84,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ),
                             space,
                             Text(
-                              'Username',
+                              '${user.firstName} ${user.lastName}',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Theme.of(context).primaryColor),
@@ -88,10 +95,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ),
                             space,
                             Text(
-                              'Username',
+                              user.firstName,
                               style: kBoldTextStyle(context),
                             ),
-                            Text('Usertype'),
+                            Text('Agent'),
                             space,
                             Row(
                               children: <Widget>[
@@ -186,21 +193,48 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                 ),
                 cardSpace,
-                RequestCountCard(
-                  title: 'Total Request',
-                  count: '0',
-                  icon: CupertinoIcons.line_horizontal_3,
-                ),
-                RequestCountCard(
-                  title: 'Total Completed',
-                  count: '0',
-                  icon: CupertinoIcons.person_crop_circle_fill_badge_checkmark,
-                ),
-                RequestCountCard(
-                  title: 'Total Assigned',
-                  count: '0',
-                  icon: CupertinoIcons.waveform,
-                ),
+                BlocBuilder<DashboardCubit, DashBoardState>(
+                    builder: (context, state) {
+                  if (state is LoadedState) {
+                    return Column(
+                      children: [
+                        RequestCountCard(
+                          title: 'Total Request',
+                          count: state.requestTotal.toString(),
+                          icon: CupertinoIcons.line_horizontal_3,
+                        ),
+                        RequestCountCard(
+                          title: 'Total Completed',
+                          count: state.completedTotal.toString(),
+                          icon: CupertinoIcons
+                              .person_crop_circle_fill_badge_checkmark,
+                        ),
+                        RequestCountCard(
+                          title: 'Total Assigned',
+                          count: state.assignedTotal.toString(),
+                          icon: CupertinoIcons.waveform,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
+                // RequestCountCard(
+                //   title: 'Total Request',
+                //   count: '0',
+                //   icon: CupertinoIcons.line_horizontal_3,
+                // ),
+                // RequestCountCard(
+                //   title: 'Total Completed',
+                //   count: '0',
+                //   icon: CupertinoIcons.person_crop_circle_fill_badge_checkmark,
+                // ),
+                // RequestCountCard(
+                //   title: 'Total Assigned',
+                //   count: '0',
+                //   icon: CupertinoIcons.waveform,
+                // ),
                 cardSpace,
                 Card(
                   child: Container(
@@ -290,13 +324,49 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                 ),
                 space,
-                RequestItem(
-                  verificationNumber: '0000000123',
-                  status: 'COMPLETED',
-                  streetAddress: 'No 13 Adeola Adekunmi Street',
-                  lga: "Ibeji-Lekki",
-                  state: 'Lagos State',
-                ),
+                space,
+                BlocBuilder<DashboardCubit, DashBoardState>(
+                    builder: (context, state) {
+                  if (state is LoadedState) {
+                    var list = state.list;
+                    return Container(
+                      height: 700,
+                      child: ListView.separated(
+                          padding: const EdgeInsets.only(
+                              bottom: 20, left: 20, right: 20),
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return NewRequestItem(
+                              imageUrl: 'https://i.pravatar.cc/400',
+                              firstName: list[index].contact.firstName,
+                              lastName: list[index].contact.lastName,
+                              streetAddress: list[index].address.streetAddress,
+                              lga: list[index].address.lga,
+                              verificationNumber:
+                                  list[index].verificationNumber,
+                              state: list[index].address.state,
+                              status: list[index].status,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        RequestDetailsScreen(),
+                                    settings:
+                                        RouteSettings(arguments: list[index]),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(height: 20),
+                          itemCount: list.length),
+                    );
+                  } else {
+                    return Container();
+                  }
+                })
               ],
             ),
           ),

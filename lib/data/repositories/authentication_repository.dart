@@ -19,10 +19,14 @@ class UserRepository {
   }
 
   Future<User> setUser({User user}) async {
-    //return Future.delayed(Duration(seconds: 2)).then((value) => user);
-    //await prefs.save('User', user);
+    await prefs.save('USER', user.toJson());
+    print('code ran');
+    return Future.delayed(Duration(seconds: 2)).then((value) => user);
 
-    return apiClient.setUser(user: user);
+//     //return Future.delayed(Duration(seconds: 2)).then((value) => user);
+//     //await prefs.save('User', user);
+//
+//     return apiClient.setUser(user: user);
   }
 
   Future<String> addAddress({User user, Address address}) async {
@@ -66,8 +70,12 @@ class UserRepository {
   }
 
   Future<User> getUser() async {
+    var json = await SharedPref().read('USER');
+    if (json != null) {
+      return User.fromMap(json);
+    }
     return Future<User>.delayed(const Duration(seconds: 2), () => null);
-    User user = await prefs.read('User');
+    // User user = await prefs.read('User');
   }
 
   /*Future<User> authenticate ({
@@ -104,5 +112,9 @@ class UserRepository {
   ///Function to refresh the request
   Future<Tokens> refreshTokens(Tokens tokens) async {
     return apiClient.refreshTokens(tokens);
+  }
+
+  Future<void> logUserOut() async {
+    await prefs.remove('USER');
   }
 }

@@ -7,16 +7,16 @@ class ApiInterceptor extends Interceptor {
 
   ApiInterceptor(this.authCubit);
 
-  @override
-  Future onResponse(Response response) async {
-    if (response.statusCode == 401) {
-      await authCubit.refreshTokens();
-      return await dio.request(response.request.path,
-          options: Options(
-              headers: {'Authentication': authCubit.user.tokens.access.token}));
-    }
-    return response;
-  }
+  // @override
+  // Future onResponse(Response response) async {
+  //   if (response.statusCode == 401) {
+  //     await authCubit.refreshTokens();
+  //     return await dio.request(response.request.path,
+  //         options: Options(
+  //             headers: {'Authentication': authCubit.user.tokens.access.token}));
+  //   }
+  //   return response;
+  // }
 
   @override
   Future onError(DioError err) async {

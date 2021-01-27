@@ -12,7 +12,7 @@ import 'package:avs/data/models/user.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
-final printAllResponses = true;
+final printAllResponses = false;
 
 /// Exception thrown when locationSearch fails.
 class SendOtpFailure implements Exception {
@@ -287,8 +287,10 @@ class AVSApiClient {
     final response = await _httpClient.post('$baseUrl/auth/refresh-tokens',
         body: {"refreshToken": tokens.refresh.token});
 
+    print(response);
     if (response.statusCode != 200) {
       ///Means request token is expired should log user out
+      return null;
     }
     return Tokens.fromMap(json.decode(response.body));
   }
