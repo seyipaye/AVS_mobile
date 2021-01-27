@@ -2,6 +2,7 @@ import 'package:avs/data/providers/dashboard_provider.dart';
 import 'package:avs/data/repositories/dashboard_repository.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/logic/cubits/dashboard_cubit.dart';
+import 'package:avs/presentation/screens/profile_screen.dart';
 import 'package:avs/presentation/screens/reqests_screen.dart';
 import 'package:avs/presentation/widgets/end_drawer.dart';
 import 'package:avs/utils/styles.dart';
@@ -34,10 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: DashBoardScreen(),
     ),
     RequestsScreen(),
-    Text(
-      'Index 2: Profile',
-      style: optionStyle,
-    ),
+    ProfileScreen(),
     Text(
       'Index 3: More',
       style: optionStyle,

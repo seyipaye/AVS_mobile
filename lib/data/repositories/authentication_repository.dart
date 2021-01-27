@@ -113,4 +113,8 @@ class UserRepository {
   Future<Tokens> refreshTokens(Tokens tokens) async {
     return apiClient.refreshTokens(tokens);
   }
+
+  Future<void> logUserOut() async {
+    await prefs.remove('USER');
+  }
 }

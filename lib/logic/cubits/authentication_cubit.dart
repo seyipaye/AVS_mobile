@@ -83,9 +83,24 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   Future<void> refreshTokens() async {
     final tokens = await _userRepository.refreshTokens(user.tokens);
     print('This is token $tokens');
-    tokens == null
-        ? emit(Unauthenticated())
-        : _user = user.copyWith(tokens: tokens);
+    if (tokens != null) {
+      _user = user.copyWith(tokens: tokens);
+      await _userRepository.logUserOut();
+      await _userRepository.setUser(user: user);
+    } else {
+      await _userRepository.logUserOut();
+      emit(Unauthenticated());
+    }
+
+    // tokens == null
+    //     ? emit(Unauthenticated())
+    //     : _user = user.copyWith(tokens: tokens);
+    // await _userRepository.setUser(user: user);
+  }
+
+  Future<void> logUserOut() async {
+    await _userRepository.logUserOut();
+    emit(Unauthenticated());
   }
 
   void skipRegistration() {}
