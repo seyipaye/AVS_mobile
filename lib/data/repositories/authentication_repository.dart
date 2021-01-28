@@ -2,12 +2,16 @@ import 'dart:async';
 
 import 'package:avs/data/api_responses/address_upload_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
+import 'package:avs/data/interceptor/api_interceptor.dart';
+import 'package:avs/data/interceptor/api_interceptor2.dart';
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/shared_pref.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
+import 'package:avs/logic/cubits/authentication_cubit.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class UserRepository {
@@ -19,19 +23,23 @@ class UserRepository {
     return apiClient.login(email, password);
   }
 
-  Future<User> setUser({User user}) async {
+  Future<User> uploadUserInfo({User user}) async {
     await prefs.save('USER', user.toJson());
-    print('code ran');
-    return Future.delayed(Duration(seconds: 2)).then((value) => user);
+    //print('code ran');
+    return apiClient.uploadUserInfo(user: user);
+  }
 
-//     //return Future.delayed(Duration(seconds: 2)).then((value) => user);
-//     //await prefs.save('User', user);
-//
-//     return apiClient.setUser(user: user);
+  Future saveUser({User user}) async {
+    return prefs.save('USER', user.toJson());
   }
 
   Future<AddressUploadResponse> addAddress({String id, Address address}) async {
     return apiClient.addAddress(id: id, address: address);
+  }
+
+  Future<String> verifyAddress(AuthenticationCubit authCubit) async {
+    return apiClient.verifyAddress(
+        user: authCubit.user, interceptor: ApiInterceptor2(authCubit));
   }
 
   Future<String> uploadDocs(User user, {String photoPath, Document doc}) async {
@@ -85,10 +93,11 @@ class UserRepository {
 
   Future<User> getUser() async {
     var json = await SharedPref().read('USER');
+    return Future<User>.delayed(const Duration(seconds: 2), () => null);
+// Todo Check
     if (json != null) {
       return User.fromMap(json);
     }
-    return Future<User>.delayed(const Duration(seconds: 2), () => null);
     // User user = await prefs.read('User');
   }
 

@@ -37,7 +37,7 @@ class User extends Equatable {
       'otherName': otherName,
       'email': email.toJson(),
       'imageUrl': imageUrl,
-      'tokens': tokens.toJson()
+      'tokens': tokens?.toJson()
     };
   }
 
@@ -51,6 +51,7 @@ class User extends Equatable {
         otherName = json['otherName'],
         email = UserEmail.fromMap(json['email']),
         imageUrl = json['imageUrl'],
+        address = null,
         tokens = Tokens.fromMap(json['tokens']);
 
   /// The current user's phone number.
@@ -90,10 +91,17 @@ class User extends Equatable {
     mobile: '',
   );
 
-  static const test = User(
+  static final test = User(
       email: UserEmail(address: ''),
-      mobile: '08156659674',
-      id: '6010850c8827c3002241341c');
+      mobile: '08190629074',
+      id: '6012aed347266d001d4577dc',
+      tokens: Tokens(
+          access: LoginResponseTokensAccess(
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEyYWVkMzQ3MjY2ZDAwMWQ0NTc3ZGMiLCJ1c2VyIjp7ImF1dGhNZXRob2RzIjpbIkxPQ0FMIl0sIm1vYmlsZSI6IjA4MTUyNjQyNTMzMyIsInR5cGUiOiJBR0VOVCIsImNyZWF0ZWRBdCI6IjIwMjEtMDEtMjhUMTI6MzI6MTkuODMyWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMjhUMTI6MzI6MjcuODYzWiIsImVtYWlsIjoib21vdG9sZ3NkdWVqakBnbWFpbC5jb20iLCJpZCI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImV4dHJhIjp7InByb2ZpbGUiOnsiZW1haWwiOnsiaXNWZXJpZmllZCI6ZmFsc2UsImFkZHJlc3MiOiJvbW90b2xnc2R1ZWpqQGdtYWlsLmNvbSJ9LCJtb2JpbGUiOnsiaXNWZXJpZmllZCI6dHJ1ZSwibnVtYmVyIjoiMDgxNTI2NDI1MzMzIiwidmVyaWZpZWRPbiI6IjIwMjEtMDEtMjhUMTI6MzI6MjcuODcxWiJ9LCJmaXJzdE5hbWUiOiJUb2xhbmkiLCJsYXN0TmFtZSI6Ill1bnVzIiwib3RoZXJOYW1lIjoiRHVwc3kiLCJnZW5kZXIiOiJmZW1hbGUifSwiYWRkcmVzcyI6eyJpc1ZlcmlmaWVkIjp0cnVlLCJzdGF0ZSI6IkxhZ29zIiwibGdhIjoiRXRpLW9zYSIsInBvc3RhbENvZGUiOiIxMDEyMjIiLCJzdHJlZXRBZGRyZXNzIjoiMjYxIEV0aW0gSW55YW5nIENyZXNjZW50LCBWaWN0b3JpYSBJc2xhbmQiLCJnZW8iOnsiY29vcmRpbmF0ZXMiOlszLjQzNjA4MjIsNi40MzMyNTUzXSwidHlwZSI6IlBvaW50In0sInZlcmlmaWVkT24iOiIyMDIxLTAxLTI4VDEzOjAyOjI2Ljk4N1oifSwic3RhdHVzIjoiUEVORElORyIsInR5cGUiOiJJTkRfQUdFTlQiLCJ3YWxsZXRCYWxhbmNlIjowLCJyYXRpbmciOjAsInRvdGFsQXNzaWduZWRSZXF1ZXN0cyI6MCwidXNlciI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImNyZWF0ZWRCeSI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImhpc3RvcnkiOltdLCJJRCI6W10sInJlcXVlc3RzUmVqZWN0ZWQiOltdLCJjcmVhdGVkQXQiOiIyMDIxLTAxLTI4VDEyOjMyOjI3Ljg3NloiLCJ1cGRhdGVkQXQiOiIyMDIxLTAxLTI4VDEzOjAyOjI2Ljk4OVoiLCJhZ2VudElkIjoyMSwiaWQiOiI2MDEyYWVkYjQ3MjY2ZDAwMWQ0NTc3ZGQifX0sImlhdCI6MTYxMTgzOTM2OSwiZXhwIjoxNjExODQxMTY5fQ.IgZXZS9cIljWpXqQEpKk75wSoJta9r8IlTFG31m75vA'),
+          refresh: LoginResponseTokensRefresh(
+              token:
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEyNzgwNmMyMjBiNzAwMWRlNzVlYjkiLCJ1c2VyIjp7ImF1dGhNZXRob2RzIjpbIkxPQ0FMIl0sIm1vYmlsZSI6IjA4MTUyNjI1MzMzIiwidHlwZSI6IkFHRU5UIiwiY3JlYXRlZEF0IjoiMjAyMS0wMS0yOFQwODozODozMC44ODNaIiwidXBkYXRlZEF0IjoiMjAyMS0wMS0yOFQwODozODo0MS4xMTZaIiwiZW1haWwiOiJvbW90b2xnc2R1ZWpqQGdtYWlsLmNvbSIsImlkIjoiNjAxMjc4MDZjMjIwYjcwMDFkZTc1ZWI5In0sImlhdCI6MTYxMTgyMzE0NCwiZXhwIjoxNjE0NDE1MTQ0fQ._aDuPicTL1IZdq6iohGKri16J1ZSQmaDdaaxmWKwxiQ')));
 
   @override
   List<Object> get props => [

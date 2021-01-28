@@ -52,7 +52,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   Future<bool> onWillPop() {
     bool result = true;
     if (controller.page != 1) {
-      controller.animateToPage(1,
+      // controller.animateToPage(1,
+      //     duration: kAnimationDuration, curve: Curves.linear);
+      controller.previousPage(
           duration: kAnimationDuration, curve: Curves.linear);
       result = false;
     }

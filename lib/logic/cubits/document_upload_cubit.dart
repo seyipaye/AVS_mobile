@@ -17,7 +17,8 @@ part 'document_upload_state.dart';
 class DocumentUploadCubit extends Cubit<DocumentUploadState> {
   DocumentUploadCubit(this.userRepository, this.authenticationCubit,
       {this.controller})
-      : super(DocumentUploadState());
+      : super(
+            DocumentUploadState(firstName: authenticationCubit.user.firstName));
 
   final UserRepository userRepository;
   final AuthenticationCubit authenticationCubit;
@@ -33,6 +34,8 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
   }
 
   void handleContinue(BuildContext context) {
+    print('ffe ${authenticationCubit.user}');
+
     FocusScope.of(context).unfocus();
     final form = Form.of(context);
     if (form.validate()) {
@@ -52,7 +55,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
             _showError('Something went wrong, please try again later');
           }
         }).catchError((error) {
-          print(error);
+          print(error.message);
           if (error is ClientError || error is Exception) {
             _showError(error.message);
           } else if (error is Error) {

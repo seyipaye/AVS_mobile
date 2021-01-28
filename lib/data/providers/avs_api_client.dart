@@ -1,19 +1,23 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:avs/data/api_responses/address_upload_response.dart';
 import 'package:avs/data/api_responses/login_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/api_responses/upload_file_response.dart';
 import 'package:avs/data/api_responses/registration_response.dart';
+import 'package:avs/data/interceptor/api_interceptor.dart';
+import 'package:avs/data/interceptor/api_interceptor2.dart';
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
+import 'package:avs/utils/constant_strings.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
-final printAllResponses = false;
+final printAllResponses = true;
 
 /// Exception thrown when locationSearch fails.
 class SendOtpFailure implements Exception {
@@ -27,9 +31,6 @@ class ClientError implements Exception {
 
   final String message;
 }
-
-/// Exception thrown when getWeather fails.
-class WeatherRequestFailure implements Exception {}
 
 // primary-agent@quickavs.ng
 // System123!
@@ -53,7 +54,7 @@ class AVSApiClient {
     if (printAllResponses) {
       log(response.body);
     }
-    if (response.statusCode != 200 || response.statusCode != 201) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
@@ -65,6 +66,45 @@ class AVSApiClient {
       print(exception);
       throw ClientError('Something went wrong, please try again later');
     }
+  }
+
+  Future<String> verifyAddress({User user, ApiInterceptor2 interceptor}) async {
+    print('${user.id} ...');
+
+    final _dio = Dio();
+    _dio.interceptors.add(interceptor);
+
+    final response = await _httpClient.post(
+      baseUrl + '/agents/verifyAddress/${user.id}',
+      body: {"status": "VERIFY"},
+      headers: {
+        HttpHeaders.authorizationHeader: 'Basic ' +
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEyYWVkMzQ3MjY2ZDAwMWQ0NTc3ZGMiLCJ1c2VyIjp7ImF1dGhNZXRob2RzIjpbIkxPQ0FMIl0sIm1vYmlsZSI6IjA4MTUyNjQyNTMzMyIsInR5cGUiOiJBR0VOVCIsImNyZWF0ZWRBdCI6IjIwMjEtMDEtMjhUMTI6MzI6MTkuODMyWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMjhUMTI6MzI6MjcuODYzWiIsImVtYWlsIjoib21vdG9sZ3NkdWVqakBnbWFpbC5jb20iLCJpZCI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImV4dHJhIjp7InByb2ZpbGUiOnsiZW1haWwiOnsiaXNWZXJpZmllZCI6ZmFsc2UsImFkZHJlc3MiOiJvbW90b2xnc2R1ZWpqQGdtYWlsLmNvbSJ9LCJtb2JpbGUiOnsiaXNWZXJpZmllZCI6dHJ1ZSwibnVtYmVyIjoiMDgxNTI2NDI1MzMzIiwidmVyaWZpZWRPbiI6IjIwMjEtMDEtMjhUMTI6MzI6MjcuODcxWiJ9LCJmaXJzdE5hbWUiOiJUb2xhbmkiLCJsYXN0TmFtZSI6Ill1bnVzIiwib3RoZXJOYW1lIjoiRHVwc3kiLCJnZW5kZXIiOiJmZW1hbGUifSwiYWRkcmVzcyI6eyJpc1ZlcmlmaWVkIjp0cnVlLCJzdGF0ZSI6IkxhZ29zIiwibGdhIjoiRXRpLW9zYSIsInBvc3RhbENvZGUiOiIxMDEyMjIiLCJzdHJlZXRBZGRyZXNzIjoiMjYxIEV0aW0gSW55YW5nIENyZXNjZW50LCBWaWN0b3JpYSBJc2xhbmQiLCJnZW8iOnsiY29vcmRpbmF0ZXMiOlszLjQzNjA4MjIsNi40MzMyNTUzXSwidHlwZSI6IlBvaW50In0sInZlcmlmaWVkT24iOiIyMDIxLTAxLTI4VDEzOjI4OjM5Ljg2NFoifSwic3RhdHVzIjoiUEVORElORyIsInR5cGUiOiJJTkRfQUdFTlQiLCJ3YWxsZXRCYWxhbmNlIjowLCJyYXRpbmciOjAsInRvdGFsQXNzaWduZWRSZXF1ZXN0cyI6MCwidXNlciI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImNyZWF0ZWRCeSI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImhpc3RvcnkiOltdLCJJRCI6W10sInJlcXVlc3RzUmVqZWN0ZWQiOltdLCJjcmVhdGVkQXQiOiIyMDIxLTAxLTI4VDEyOjMyOjI3Ljg3NloiLCJ1cGRhdGVkQXQiOiIyMDIxLTAxLTI4VDEzOjI4OjM5Ljg2N1oiLCJhZ2VudElkIjoyMSwiaWQiOiI2MDEyYWVkYjQ3MjY2ZDAwMWQ0NTc3ZGQifX0sImlhdCI6MTYxMTg1MDI4OSwiZXhwIjoxNjExODUyMDg5fQ.Ud7GmTqZSGvNWWYLyjBl5j_oqgOW2CnlaQapftkVUaY"
+      },
+    ).then((value) {
+      print('ff $value');
+      print('ff ${value.headers}');
+
+      return value;
+    });
+
+    if (printAllResponses) {
+      log(' fdfdf ${jsonEncode(response.body)}');
+    }
+
+    /* if (response.statusCode != 200 && response.statusCode != 201) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.data))?.message ??
+            response.statusMessage,
+      );
+    }
+    try {
+      return StatusResponse.fromMap(jsonDecode(response.data))?.message ??
+          response.statusMessage;
+    } catch (exception) {
+      print('fdfdf $exception');
+      throw ClientError('Something went wrong, please try again later');
+    }*/
   }
 
   Future<User> login(String email, String password) async {
@@ -86,7 +126,7 @@ class AVSApiClient {
     return LoginResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
   }
 
-  Future<User> setUser({User user}) async {
+  Future<User> uploadUserInfo({User user}) async {
     print(jsonEncode(user.toRegisterRequestBody) + user.id);
     final response = await _httpClient.post(
       baseUrl + '/auth/local/register/agent/${user.id}',
@@ -97,7 +137,7 @@ class AVSApiClient {
     if (printAllResponses) {
       log(response.body);
     }
-    if (response.statusCode != 200 || response.statusCode != 201) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
@@ -124,7 +164,7 @@ class AVSApiClient {
     if (printAllResponses) {
       log(jsonEncode(response.data));
     }
-    if (response.statusCode != 200 || response.statusCode != 201) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(response.data)?.message ??
             response.statusMessage,

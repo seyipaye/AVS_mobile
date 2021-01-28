@@ -41,7 +41,6 @@ dependencies:
 
   # Utils
   get: ^3.24.0
-  geolocator: ^6.1.14
 
   # State management
   bloc: ^6.1.1

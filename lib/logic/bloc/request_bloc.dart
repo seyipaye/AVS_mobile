@@ -1,7 +1,6 @@
 import 'package:avs/data/models/request.dart';
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/logic/bloc/request_bloc_states.dart';
-import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:bloc/bloc.dart';
 
 ///Events

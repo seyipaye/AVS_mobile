@@ -52,8 +52,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.red,
                           text: 'Log Out',
                           onTap: () {
-                            BlocProvider.of<AuthenticationCubit>(context)
-                                .logUserOut();
+                            // BlocProvider.of<AuthenticationCubit>(context)
+                            //     .logUserOut();
                           }),
                     ],
                   ),

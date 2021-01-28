@@ -23,6 +23,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   User _user;
+  //BehaviorSubject
   final UserRepository _userRepository;
 
   User get user => _user;
@@ -63,6 +64,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     _user = _user.copyWith(tokens: tokens);
   }
 
+  set freshUser(User user) {
+    this._user = user;
+  }
+
   void _initAuth() {
     //userRepository.hasToken()
 
@@ -84,15 +89,22 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         }
       }
     }).catchError((error) {
+      print(error);
       emit(AuthError(Error.safeToString(error)));
     });
   }
 
-  Future<void> refreshTokens() async {
+  Future<bool> refreshTokens() async {
     final tokens = await _userRepository.refreshTokens(user.tokens);
-    tokens == null
-        ? emit(Unauthenticated())
-        : _user = user.copyWith(tokens: tokens);
+
+    if (tokens == null) {
+      emit(Unauthenticated());
+      print("Couldn't refresh token");
+      return false;
+    } else {
+      _user = user.copyWith(tokens: tokens);
+      return true;
+    }
   }
 
   void skipRegistration() {}

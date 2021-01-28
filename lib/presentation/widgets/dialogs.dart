@@ -98,13 +98,13 @@ class AppConfirmationDialog extends StatelessWidget {
   final String title;
   final String content;
   final String buttonTitle;
-  final Function(BuildContext context) onPressed;
+  final Function(BuildContext context) onButtonPressed;
 
   const AppConfirmationDialog({
     Key key,
     this.content,
     this.icon,
-    this.onPressed,
+    this.onButtonPressed,
     this.title,
     this.buttonTitle,
   }) : super(key: key);
@@ -149,7 +149,7 @@ class AppConfirmationDialog extends StatelessWidget {
                     height: kLineHeight(fontSize: 16, height: 20)),
               ),
               SizedBox(height: 30),
-              _buildButton(title: buttonTitle, onPressed: onPressed),
+              _buildButton(title: buttonTitle, onPressed: onButtonPressed),
             ],
           ),
         ),

@@ -27,7 +27,7 @@ const List<Document> documents = [
   Document(
       type: DocumentType.DRIVERS_LICENSE,
       title: "Driver's License",
-      label: "Upload Driver's Card",
+      label: "Upload Driver's License",
       backendType: 'DRIVER’S LICENSE'),
   Document(
       type: DocumentType.INTERNATIONAL_PASSPORT,
@@ -75,7 +75,8 @@ class DocumentUploadPage extends StatelessWidget {
       child: Column(
         children: [
           AuthAppBar(
-            title: 'Awesome ${authenticationCubit.user?.firstName}',
+            key: GlobalKey(),
+            title: 'Awesome ${authenticationCubit.user.firstName ?? ''}',
             subTitle: 'Please upload your documents',
           ),
           SizedBox(height: 20.0),
