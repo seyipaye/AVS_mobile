@@ -61,7 +61,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       if (skipAuthentication) {
         emit(Authenticated(user: User.test));
       } else {
-        print(user.isFullyRegistered);
+        // print(user.isFullyRegistered);
         if (user != null) {
           this._user = user;
           // TODO: Check if the user gotten has completed registration
@@ -73,6 +73,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         } else {
           this._user = User.test;
           emit(Unauthenticated(user: _user));
+          print('unauth');
         }
       }
     }).catchError((error) {

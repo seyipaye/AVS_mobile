@@ -28,6 +28,7 @@ class _MapScreenState extends State<MapScreen> {
   /// Subscription for location changes
   StreamSubscription streamSubscription;
 
+  ///Polylines points for flutter
   PolylinePoints polylinePoints;
 
   /// List of coordinates to join
@@ -178,7 +179,7 @@ class _MapScreenState extends State<MapScreen> {
     /// Generating the list of coordinates to be used for drawing the polylines
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       'AIzaSyDWzGqryJyULurQz_nOuTz5L-tktCz60JE', // Google Maps API Key
-      PointLatLng(6.5236, 3.6006),
+      PointLatLng(start.latitude, start.longitude),
       PointLatLng(latitude, longitude),
       travelMode: TravelMode.driving,
     );
@@ -188,6 +189,7 @@ class _MapScreenState extends State<MapScreen> {
 
     /// Adding the coordinates to the list
     if (result.points.isNotEmpty) {
+      polylineCoordinates.clear();
       result.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
@@ -212,8 +214,8 @@ class _MapScreenState extends State<MapScreen> {
 
   void calculateDistance(Position position) async {
     double distanceInMeters = Geolocator.distanceBetween(
-      6.5236,
-      3.6006,
+      position.latitude,
+      position.longitude,
       latitude,
       longitude,
     );

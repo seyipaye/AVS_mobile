@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   radius: 80,
                   backgroundColor: Colors.blue,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(''),
+                    backgroundImage: NetworkImage('https://i.pravatar.cc/400'),
                     radius: 75,
                   ),
                 ),

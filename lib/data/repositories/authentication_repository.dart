@@ -20,7 +20,6 @@ class UserRepository {
 
   Future<User> setUser({User user}) async {
     await prefs.save('USER', user.toJson());
-    print('code ran');
     return Future.delayed(Duration(seconds: 2)).then((value) => user);
 
 //     //return Future.delayed(Duration(seconds: 2)).then((value) => user);

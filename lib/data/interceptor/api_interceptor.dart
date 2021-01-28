@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:dio/dio.dart';
 
@@ -26,8 +30,17 @@ class ApiInterceptor extends Interceptor {
       RequestOptions options = err.response.request;
       options.headers["Authorization"] =
           "Bearer " + authCubit.user.tokens.access.token;
-      return await dio.request(options.path, options: options);
+      return await dio
+          .request(options.path, options: options)
+          .catchError((error) {
+        print(error);
+      });
     }
-    return err;
+
+    if (err is SocketException) {
+      throw ('Unable to Connect at this time');
+    }
+
+    print(err.response.data);
   }
 }
