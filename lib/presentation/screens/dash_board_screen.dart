@@ -84,7 +84,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ),
                             space,
                             Text(
-                              '${user.firstName} ${user.lastName}',
+                              '${user?.firstName} ${user?.lastName}',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Theme.of(context).primaryColor),
@@ -95,7 +95,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ),
                             space,
                             Text(
-                              user.firstName,
+                              user?.firstName ?? '',
                               style: kBoldTextStyle(context),
                             ),
                             Text('Agent'),

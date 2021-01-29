@@ -7,13 +7,10 @@ import 'package:avs/data/api_responses/login_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/api_responses/upload_file_response.dart';
 import 'package:avs/data/api_responses/registration_response.dart';
-import 'package:avs/data/interceptor/api_interceptor.dart';
 import 'package:avs/data/interceptor/api_interceptor2.dart';
 import 'package:avs/data/models/address.dart';
-import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
-import 'package:avs/utils/constant_strings.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,7 +32,7 @@ class ClientError implements Exception {
 // primary-agent@quickavs.ng
 // System123!
 
-final baseUrl = 'https://avs-staging-api.herokuapp.com/v1';
+final baseUrl = 'https://api-sandbox.quickavs.ng/v1';
 
 class AVSApiClient {
   AVSApiClient({http.Client httpClient})
@@ -69,17 +66,17 @@ class AVSApiClient {
   }
 
   Future<String> verifyAddress({User user, ApiInterceptor2 interceptor}) async {
-    print('${user.id} ...');
+    log('fdfdfdfffd ...');
 
     final _dio = Dio();
     _dio.interceptors.add(interceptor);
 
     final response = await _httpClient.post(
-      baseUrl + '/agents/verifyAddress/${user.id}',
+      baseUrl + '/agents/verifyAddress/6013cce086b6b6001d16146a',
       body: {"status": "VERIFY"},
       headers: {
-        HttpHeaders.authorizationHeader: 'Basic ' +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEyYWVkMzQ3MjY2ZDAwMWQ0NTc3ZGMiLCJ1c2VyIjp7ImF1dGhNZXRob2RzIjpbIkxPQ0FMIl0sIm1vYmlsZSI6IjA4MTUyNjQyNTMzMyIsInR5cGUiOiJBR0VOVCIsImNyZWF0ZWRBdCI6IjIwMjEtMDEtMjhUMTI6MzI6MTkuODMyWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMjhUMTI6MzI6MjcuODYzWiIsImVtYWlsIjoib21vdG9sZ3NkdWVqakBnbWFpbC5jb20iLCJpZCI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImV4dHJhIjp7InByb2ZpbGUiOnsiZW1haWwiOnsiaXNWZXJpZmllZCI6ZmFsc2UsImFkZHJlc3MiOiJvbW90b2xnc2R1ZWpqQGdtYWlsLmNvbSJ9LCJtb2JpbGUiOnsiaXNWZXJpZmllZCI6dHJ1ZSwibnVtYmVyIjoiMDgxNTI2NDI1MzMzIiwidmVyaWZpZWRPbiI6IjIwMjEtMDEtMjhUMTI6MzI6MjcuODcxWiJ9LCJmaXJzdE5hbWUiOiJUb2xhbmkiLCJsYXN0TmFtZSI6Ill1bnVzIiwib3RoZXJOYW1lIjoiRHVwc3kiLCJnZW5kZXIiOiJmZW1hbGUifSwiYWRkcmVzcyI6eyJpc1ZlcmlmaWVkIjp0cnVlLCJzdGF0ZSI6IkxhZ29zIiwibGdhIjoiRXRpLW9zYSIsInBvc3RhbENvZGUiOiIxMDEyMjIiLCJzdHJlZXRBZGRyZXNzIjoiMjYxIEV0aW0gSW55YW5nIENyZXNjZW50LCBWaWN0b3JpYSBJc2xhbmQiLCJnZW8iOnsiY29vcmRpbmF0ZXMiOlszLjQzNjA4MjIsNi40MzMyNTUzXSwidHlwZSI6IlBvaW50In0sInZlcmlmaWVkT24iOiIyMDIxLTAxLTI4VDEzOjI4OjM5Ljg2NFoifSwic3RhdHVzIjoiUEVORElORyIsInR5cGUiOiJJTkRfQUdFTlQiLCJ3YWxsZXRCYWxhbmNlIjowLCJyYXRpbmciOjAsInRvdGFsQXNzaWduZWRSZXF1ZXN0cyI6MCwidXNlciI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImNyZWF0ZWRCeSI6IjYwMTJhZWQzNDcyNjZkMDAxZDQ1NzdkYyIsImhpc3RvcnkiOltdLCJJRCI6W10sInJlcXVlc3RzUmVqZWN0ZWQiOltdLCJjcmVhdGVkQXQiOiIyMDIxLTAxLTI4VDEyOjMyOjI3Ljg3NloiLCJ1cGRhdGVkQXQiOiIyMDIxLTAxLTI4VDEzOjI4OjM5Ljg2N1oiLCJhZ2VudElkIjoyMSwiaWQiOiI2MDEyYWVkYjQ3MjY2ZDAwMWQ0NTc3ZGQifX0sImlhdCI6MTYxMTg1MDI4OSwiZXhwIjoxNjExODUyMDg5fQ.Ud7GmTqZSGvNWWYLyjBl5j_oqgOW2CnlaQapftkVUaY"
+        HttpHeaders.authorizationHeader: 'Bearer ' +
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEzY2NlMDg2YjZiNjAwMWQxNjE0NmEiLCJ1c2VyIjp7ImF1dGhNZXRob2RzIjpbIkxPQ0FMIl0sIm1vYmlsZSI6IjA4MTUyNjQyNTMzMyIsInR5cGUiOiJBR0VOVCIsImNyZWF0ZWRBdCI6IjIwMjEtMDEtMjlUMDg6NTI6NDguMjg4WiIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMjlUMDg6NTM6MDQuNzIzWiIsImVtYWlsIjoib21vdG9sZ3NkdWVqakBnbWFpbC5jb20iLCJpZCI6IjYwMTNjY2UwODZiNmI2MDAxZDE2MTQ2YSJ9LCJpYXQiOjE2MTE5MTEyOTUsImV4cCI6MTYxMTkxMzA5NX0.LIEPqdprGPwICttZhCUNGHyqVjjNM7yp4rqHAhX5IaU"
       },
     ).then((value) {
       print('ff $value');
@@ -108,8 +105,9 @@ class AVSApiClient {
   }
 
   Future<User> login(String email, String password) async {
+    print('$email...$password');
     final response = await _httpClient.post(
-      baseUrl + '/auth/local/agent/login',
+      baseUrl + '/auth/local/login',
       body: {"credential": email, "password": password},
     );
 

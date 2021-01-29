@@ -67,7 +67,7 @@ class UserInfoPage extends StatelessWidget {
             showDialog(
               context: context,
               builder: (_) {
-                return AppDialog(
+                return ButtonDialog(
                   icon: Icon(
                     LineIcons.check_circle,
                     size: 125,

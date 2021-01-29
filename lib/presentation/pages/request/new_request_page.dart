@@ -17,9 +17,7 @@ class NewRequestPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => RequestBloc(
         RequestRepository(
-          RequestProvider(
-            context.read<AuthenticationCubit>(),
-          ),
+          context.read<AuthenticationCubit>(),
         ),
       )..add(NewRequestEvent()),
       child: BlocBuilder<RequestBloc, RequestsBlocState>(

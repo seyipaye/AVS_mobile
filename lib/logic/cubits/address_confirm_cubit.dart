@@ -102,7 +102,7 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
     }
   }
 
-  successDialog() => AppConfirmationDialog(
+  successDialog() => SingleButtonDialog(
         icon: Icon(
           LineIcons.check_circle,
           size: 100,
@@ -120,7 +120,7 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
         },
       );
 
-  failureDialog(double distanceInMeters) => AppConfirmationDialog(
+  failureDialog(double distanceInMeters) => SingleButtonDialog(
         icon: Icon(
           LineIcons.times_circle,
           size: 100,

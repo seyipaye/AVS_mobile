@@ -93,12 +93,11 @@ class UserRepository {
 
   Future<User> getUser() async {
     var json = await SharedPref().read('USER');
-    return Future<User>.delayed(const Duration(seconds: 2), () => null);
-// Todo Check
+    //return Future<User>.delayed(const Duration(seconds: 2), () => null);
     if (json != null) {
       return User.fromMap(json);
     }
-    // User user = await prefs.read('User');
+    return Future<User>.delayed(const Duration(seconds: 2), () => null);
   }
 
   /*Future<User> authenticate ({
