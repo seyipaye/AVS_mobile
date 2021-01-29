@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MapScreen extends StatefulWidget {
   final Request request;
@@ -28,6 +29,7 @@ class _MapScreenState extends State<MapScreen> {
   /// Subscription for location changes
   StreamSubscription streamSubscription;
 
+  ///Polylines points for flutter
   PolylinePoints polylinePoints;
 
   /// List of coordinates to join
@@ -40,12 +42,20 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
+
     Future.delayed(Duration(seconds: 3), () {
-      setLocationListener();
+      checkLocationPermission();
       latitude = widget.request.address.geo.coordinates[0];
       longitude = widget.request.address.geo.coordinates[1];
       placeMarker(latitude: latitude, longitude: longitude);
     });
+
+    // Future.delayed(Duration(seconds: 3), () {
+    //   setLocationListener();
+    //   latitude = widget.request.address.geo.coordinates[0];
+    //   longitude = widget.request.address.geo.coordinates[1];
+    //   placeMarker(latitude: latitude, longitude: longitude);
+    // });
   }
 
   @override
@@ -161,6 +171,7 @@ class _MapScreenState extends State<MapScreen> {
         _currentPosition = position;
 
         print('CURRENT POSITION: $_currentPosition');
+        print("${position.longitude}, ${position.longitude}");
 
         print('This ran : Listener is set');
         createRoute(
@@ -175,10 +186,12 @@ class _MapScreenState extends State<MapScreen> {
     ///Flutter polylines
     polylinePoints = PolylinePoints();
 
+    print("@nd $longitude, $longitude}");
+
     /// Generating the list of coordinates to be used for drawing the polylines
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       'AIzaSyDWzGqryJyULurQz_nOuTz5L-tktCz60JE', // Google Maps API Key
-      PointLatLng(6.5236, 3.6006),
+      PointLatLng(start.latitude, start.longitude),
       PointLatLng(latitude, longitude),
       travelMode: TravelMode.driving,
     );
@@ -188,6 +201,7 @@ class _MapScreenState extends State<MapScreen> {
 
     /// Adding the coordinates to the list
     if (result.points.isNotEmpty) {
+      polylineCoordinates.clear();
       result.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
@@ -212,8 +226,8 @@ class _MapScreenState extends State<MapScreen> {
 
   void calculateDistance(Position position) async {
     double distanceInMeters = Geolocator.distanceBetween(
-      6.5236,
-      3.6006,
+      position.latitude,
+      position.longitude,
       latitude,
       longitude,
     );
@@ -233,5 +247,20 @@ class _MapScreenState extends State<MapScreen> {
   void dispose() {
     closeSubscription();
     super.dispose();
+  }
+
+  void checkLocationPermission() async {
+    if (await Permission.location.status != PermissionStatus.granted) {
+      print('No permission');
+      var permissionStatus = await Permission.location.request();
+      print(permissionStatus);
+      if (permissionStatus == PermissionStatus.granted) {
+        setLocationListener();
+      } else {
+        // Navigator.of(context).pop();
+      }
+    } else {
+      setLocationListener();
+    }
   }
 }
