@@ -1,3 +1,4 @@
+import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
@@ -101,7 +102,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     if (tokens != null) {
       _user = user.copyWith(tokens: tokens);
       await _userRepository.logUserOut();
-      await _userRepository.setUser(user: user);
+      await _userRepository.saveUser(user: user);
       return true;
     } else {
       print("Couldn't refresh token");

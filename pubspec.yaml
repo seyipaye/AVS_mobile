@@ -32,6 +32,7 @@ dependencies:
   fl_chart: ^0.12.2
   line_icons: ^0.2.0
   google_nav_bar: ^3.2.0
+  page_transition: ^1.1.7+6
 
   # Connectivity
   http: ^0.12.2
@@ -50,6 +51,8 @@ dependencies:
   geolocator: ^6.1.14
   flutter_polyline_points: ^0.2.1
   google_map_polyline: ^0.2.0
+  flutter_google_places: ^0.2.6
+
 
   # Assets loading
   photo_view: ^0.10.3

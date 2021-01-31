@@ -26,27 +26,33 @@ class ProfileScreen extends StatelessWidget {
                   width: double.infinity,
                 ),
                 Container(
-                  // width: MediaQuery.of(context).size.width/2,
-                  child: Column(
-                    children: [
-                      _profileOption(
-                          icon: Icons.edit,
-                          text: 'Change Password',
-                          onTap: () {}),
-                      _profileOption(
-                          icon: Icons.payment, text: 'Wallet', onTap: () {}),
-                      _profileOption(
-                          icon: Icons.power_settings_new_rounded,
-                          color: Colors.red,
-                          text: 'Log Out',
-                          onTap: () {
-                            BlocProvider.of<AuthenticationCubit>(context)
-                                .logUserOut();
-                          }),
-                    ],
+                  height: 250,
+                  width: double.infinity,
+                ),
+                Positioned(
+                  top: 10,
+                  // right: 30,
+                  child: SafeArea(
+                    child: PageHeader(
+                      title: 'User Profile',
+                    ),
                   ),
-                )
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: ProfileImage(radius: 60),
+                ),
+                // ProfileImage(
+                //   radius: 60,
+                // )
               ],
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[Text('User Name'), Text('AGENT')],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(20),
@@ -74,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCard({@required String title, Widget child}) {
+  Widget _buildCard({Widget child}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

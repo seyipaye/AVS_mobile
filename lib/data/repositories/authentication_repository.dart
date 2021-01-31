@@ -27,6 +27,7 @@ class UserRepository {
     await prefs.save('USER', user.toJson());
     print('code ran');
     return user;
+  }
 
   Future saveUser({User user}) async {
     return prefs.save('USER', user.toJson());
