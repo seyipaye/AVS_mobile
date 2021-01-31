@@ -3,7 +3,9 @@ import 'package:avs/data/repositories/dashboard_repository.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/logic/cubits/dashboard_cubit.dart';
 import 'package:avs/presentation/screens/profile_screen.dart';
+import 'package:avs/presentation/screens/settings_screen.dart';
 import 'package:avs/presentation/screens/reqests_screen.dart';
+import 'package:avs/presentation/screens/update_password_screen.dart';
 import 'package:avs/presentation/widgets/end_drawer.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:bloc/bloc.dart';
@@ -36,10 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     RequestsScreen(),
     ProfileScreen(),
-    Text(
-      'Index 3: More',
-      style: optionStyle,
-    ),
+    SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {

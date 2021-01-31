@@ -1,4 +1,3 @@
-import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
@@ -13,7 +12,7 @@ final skipAuthentication = false;
 
 /*
 primary-agent@quickavs.ng
-System1234
+System123!
  */
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit({@required UserRepository userRepository})
@@ -75,6 +74,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       if (skipAuthentication) {
         emit(Authenticated(user: User.test));
       } else {
+        // print(user.isFullyRegistered);
         if (user != null) {
           this._user = user;
           // TODO: Check if the user gotten has completed registration
@@ -86,6 +86,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         } else {
           this._user = User.test;
           emit(Unauthenticated(user: _user));
+          print('unauth');
         }
       }
     }).catchError((error) {
@@ -96,15 +97,28 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   Future<bool> refreshTokens() async {
     final tokens = await _userRepository.refreshTokens(user.tokens);
-
-    if (tokens == null) {
-      emit(Unauthenticated());
-      print("Couldn't refresh token");
-      return false;
-    } else {
+    print('This is token $tokens');
+    if (tokens != null) {
       _user = user.copyWith(tokens: tokens);
+      await _userRepository.logUserOut();
+      await _userRepository.setUser(user: user);
       return true;
+    } else {
+      print("Couldn't refresh token");
+      await _userRepository.logUserOut();
+      emit(Unauthenticated());
+      return false;
     }
+
+    // tokens == null
+    //     ? emit(Unauthenticated())
+    //     : _user = user.copyWith(tokens: tokens);
+    // await _userRepository.setUser(user: user);
+  }
+
+  Future<void> logUserOut() async {
+    await _userRepository.logUserOut();
+    emit(Unauthenticated());
   }
 
   void skipRegistration() {}

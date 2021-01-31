@@ -5,7 +5,7 @@ class ProfileImage extends StatelessWidget {
   final double radius;
   final String imageUrl;
 
-  const ProfileImage({this.radius, this.imageUrl});
+  const ProfileImage({@required this.radius, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

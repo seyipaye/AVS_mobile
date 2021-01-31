@@ -23,23 +23,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^8.11.0
-  cupertino_icons: ^1.0.0
-  shared_preferences: ^0.5.12+4
-  loading_overlay: ^0.2.1
-
-  # Network
-  dio: ^3.0.10
-  http: ^0.12.2
-  flutter_google_places: ^0.2.6
 
   # Ui
+  font_awesome_flutter: ^8.11.0
+  cupertino_icons: ^1.0.0
+  dotted_border: ^1.0.7
+  loading_overlay: ^0.2.1
   fl_chart: ^0.12.2
   line_icons: ^0.2.0
   google_nav_bar: ^3.2.0
-  page_transition: ^1.1.7+6
-  dotted_border: ^1.0.7
 
+  # Connectivity
+  http: ^0.12.2
+  dio: ^3.0.10
 
   # Utils
   get: ^3.24.0
@@ -61,6 +57,12 @@ dependencies:
   image_picker: ^0.6.7+21
   cached_network_image: ^2.5.0
   file_picker: ^2.1.5+1
+
+  # Data Persistence
+  shared_preferences: ^0.5.12+4
+
+  # Permissions
+  permission_handler: ^5.0.1+1
 
 
 dev_dependencies:

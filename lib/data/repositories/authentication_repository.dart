@@ -25,9 +25,8 @@ class UserRepository {
 
   Future<User> uploadUserInfo({User user}) async {
     await prefs.save('USER', user.toJson());
-    //print('code ran');
-    return apiClient.uploadUserInfo(user: user);
-  }
+    print('code ran');
+    return user;
 
   Future saveUser({User user}) async {
     return prefs.save('USER', user.toJson());
@@ -98,6 +97,7 @@ class UserRepository {
       return User.fromMap(json);
     }
     return Future<User>.delayed(const Duration(seconds: 2), () => null);
+    // User user = await prefs.read('User');
   }
 
   /*Future<User> authenticate ({

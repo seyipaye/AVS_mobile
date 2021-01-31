@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:get/utils.dart';
@@ -126,6 +125,13 @@ class Validator {
   static String isDocument(Document value) {
     if (value == null || value.isBlank) {
       return 'Select a valid document to upload';
+    }
+    return null;
+  }
+
+  static String isEightDigit(String value) {
+    if (value.isEmpty || value.length < 8) {
+      return 'Password must be digits 8 long';
     }
     return null;
   }
