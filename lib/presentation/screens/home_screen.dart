@@ -2,8 +2,8 @@ import 'package:avs/data/providers/dashboard_provider.dart';
 import 'package:avs/data/repositories/dashboard_repository.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/logic/cubits/dashboard_cubit.dart';
+import 'package:avs/presentation/screens/full_profile_screen.dart';
 import 'package:avs/presentation/screens/profile_screen.dart';
-import 'package:avs/presentation/screens/settings_screen.dart';
 import 'package:avs/presentation/screens/reqests_screen.dart';
 import 'package:avs/presentation/screens/update_password_screen.dart';
 import 'package:avs/presentation/widgets/end_drawer.dart';
@@ -38,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     RequestsScreen(),
     ProfileScreen(),
-    SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -80,10 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: LineIcons.user,
                   text: 'Profile',
                 ),
-                GButton(
-                  icon: LineIcons.ellipsis_v,
-                  text: 'More',
-                ),
+                // GButton(
+                //   icon: LineIcons.ellipsis_v,
+                //   text: 'More',
+                // ),
               ],
               selectedIndex: _selectedIndex,
               onTabChange: (index) {

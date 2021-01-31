@@ -33,14 +33,13 @@ class _RequestsScreenState extends State<RequestsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Requests'),
-      //   centerTitle: true,
-      // ),
+      appBar: AppBar(
+        title: Text('Requests'),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            PageHeader(title: 'Requests'),
             CupertinoSegmentedControl(
               children: tabs,
               groupValue: selectedIndex,

@@ -3,6 +3,7 @@ import 'package:avs/logic/cubits/dashboard_cubit.dart';
 import 'package:avs/logic/cubits/dashboard_state.dart';
 import 'package:avs/presentation/screens/request_details.dart';
 import 'package:avs/presentation/widgets/agent_rating.dart';
+import 'package:avs/presentation/widgets/app_card.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/bar_chart.dart';
 import 'package:avs/presentation/widgets/bar_chart_group_data.dart';
@@ -34,28 +35,40 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     height: 20,
   );
 
+  final double cardRadius = 15;
+
   @override
   Widget build(BuildContext context) {
     var user = BlocProvider.of<AuthenticationCubit>(context).user;
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                PageHeader(title: "DASHBOARD"),
-                Card(
+                AppCard(
+                  radius: 5,
                   child: Stack(
                     children: [
                       Column(
                         children: [
                           Container(
                             height: 130,
-                            color: AppColors.primaryColor[100],
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor[100],
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5)),
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -125,7 +138,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                 ),
                 cardSpace,
-                Card(
+                AppCard(
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Row(
@@ -236,7 +249,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 //   icon: CupertinoIcons.waveform,
                 // ),
                 cardSpace,
-                Card(
+                AppCard(
                   child: Container(
                     width: double.infinity,
                     child: Center(
@@ -324,7 +337,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                 ),
                 space,
-                space,
                 BlocBuilder<DashboardCubit, DashBoardState>(
                     builder: (context, state) {
                   if (state is LoadedState) {
@@ -332,8 +344,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     return Container(
                       height: 700,
                       child: ListView.separated(
-                          padding: const EdgeInsets.only(
-                              bottom: 20, left: 20, right: 20),
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return NewRequestItem(
