@@ -1,10 +1,13 @@
+import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/request.dart';
+import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/providers/request_provider.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
+import 'package:avs/presentation/screens/process_request_screen.dart';
 import 'package:flutter/material.dart';
 
 class RequestRepository {
-  /*static RequestRepository _instance;
+  static RequestRepository _instance;
 
   RequestRepository._internal(this.authCubit)
       : this.provider = RequestProvider(authCubit) {
@@ -13,9 +16,9 @@ class RequestRepository {
 
   factory RequestRepository(AuthenticationCubit authCubit) =>
       _instance ?? RequestRepository._internal(authCubit);
-*/
-  RequestRepository(this.authCubit)
-      : this.provider = RequestProvider(authCubit);
+
+  /* RequestRepository(this.authCubit)
+      : this.provider = RequestProvider(authCubit);*/
 
   final AuthenticationCubit authCubit;
   final RequestProvider provider;
@@ -37,5 +40,27 @@ class RequestRepository {
 
   Future<String> rejectRequest({String id}) {
     return provider.rejectRequest(id: id);
+  }
+
+  Future<String> processRequest({
+    String id,
+    AddressStatus status,
+    final List<String> reasons,
+    final String assessment,
+    final List<Document> images,
+  }) async {
+    // Upload images
+    final String imageUrl =
+        await AVSApiClient().uploadFile(images.first.value).then((value) {
+      return value.imageUrls.first;
+    });
+
+    return provider.processRequest(id: id, data: {
+      "notes": assessment,
+      "signature": "bsufheiwfnkewih",
+      "geotag": {"lat": "35.66", "long": "21.45"},
+      "images": [imageUrl],
+      "verified": status == AddressStatus.Approved
+    });
   }
 }

@@ -1,14 +1,18 @@
+import 'package:avs/data/models/request.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/logic/cubits/requests/request_details_cubit.dart';
 import 'package:avs/presentation/screens/photo_view_screen.dart';
 import 'package:avs/presentation/widgets/app_card.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/avatar_image.dart';
+import 'package:avs/presentation/screens/process_request_screen.dart';
 import 'package:avs/presentation/widgets/input/app_text_form_field.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:page_transition/page_transition.dart';
 
 const double cardsPadding = 15;
 
@@ -124,39 +128,55 @@ class RequestDetailsScreen extends StatelessWidget {
     return BlocBuilder<RequestDetailsCubit, RequestDetailsState>(
       builder: (context, state) {
         return Container(
-          color: Colors.white,
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            children: [
-              Expanded(
-                child: AppRaisedButton(
-                  isLoading: state.isLoading,
-                  elevation: 0,
-                  shrink: true,
-                  fontSize: 14,
-                  backgroundColor: Colors.redAccent,
-                  text: 'Reject',
-                  prefixIcon: Icon(LineIcons.thumbs_down),
-                  onPressed:
-                      context.watch<RequestDetailsCubit>().onRejectPressed,
-                ),
-              ),
-              SizedBox(width: 20),
-              Expanded(
-                child: AppRaisedButton(
-                    isLoading: state.isLoading,
-                    elevation: 0,
-                    shrink: true,
-                    fontSize: 14,
-                    text: 'Accept',
-                    prefixIcon: Icon(LineIcons.thumbs_up),
-                    onPressed:
-                        context.watch<RequestDetailsCubit>().onAcceptPressed),
-              ),
-            ],
-          ),
-        );
+            color: Colors.white,
+            padding: const EdgeInsets.all(20),
+            child: Request.getStatus(state.request) == RequestStatus.NEW
+                ? _buildButtonsForNew(state, context)
+                : _buildButtonsForAssigned(state, context));
       },
+    );
+  }
+
+  Widget _buildButtonsForAssigned(
+      RequestDetailsState state, BuildContext context) {
+    return AppRaisedButton(
+      isLoading: state.isLoading,
+      elevation: 0,
+      shrink: true,
+      fontSize: 14,
+      backgroundColor: Colors.green,
+      text: 'Process Request',
+      onPressed: context.watch<RequestDetailsCubit>().onProcessPressed,
+    );
+  }
+
+  Row _buildButtonsForNew(RequestDetailsState state, BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: AppRaisedButton(
+            isLoading: state.isLoading,
+            elevation: 0,
+            shrink: true,
+            fontSize: 14,
+            backgroundColor: Colors.redAccent,
+            text: 'Reject',
+            prefixIcon: Icon(LineIcons.thumbs_down),
+            onPressed: context.watch<RequestDetailsCubit>().onRejectPressed,
+          ),
+        ),
+        SizedBox(width: 20),
+        Expanded(
+          child: AppRaisedButton(
+              isLoading: state.isLoading,
+              elevation: 0,
+              shrink: true,
+              fontSize: 14,
+              text: 'Accept',
+              prefixIcon: Icon(LineIcons.thumbs_up),
+              onPressed: context.watch<RequestDetailsCubit>().onAcceptPressed),
+        ),
+      ],
     );
   }
 

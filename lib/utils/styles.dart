@@ -5,8 +5,6 @@ class AppColors {
 
   static const background = Color(0xFFf8f8fb);
 
-  static const drawerBackground = Color(0xFF2a3042);
-
   static const icons = Color(0xFF555b6d);
 
   static const offset = Color(0x14323247);

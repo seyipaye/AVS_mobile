@@ -11,9 +11,8 @@ import 'package:flutter/material.dart';
 import 'avs_api_client.dart';
 
 class RequestProvider {
-  RequestProvider(this._authCubit, {Dio dio})
-      : _dio = dio ?? Dio()
-          ..interceptors.add(ApiInterceptor2(_authCubit));
+  RequestProvider(this._authCubit)
+      : _dio = Dio()..interceptors.add(ApiInterceptor2(_authCubit));
 
   final Dio _dio;
   final AuthenticationCubit _authCubit;
@@ -37,6 +36,20 @@ class RequestProvider {
     return _dio.post(baseUrl + '/requests/assign/' + id,
         options: Options(headers: {requiresToken: true}),
         data: {"status": "REJECTED"}).then((response) {
+      return StatusResponse.fromMap(response.data).message ??
+          response.statusMessage;
+    });
+  }
+
+  Future<String> processRequest({
+    @required String id,
+    dynamic data,
+  }) async {
+    //log(id);
+    return _dio
+        .post(baseUrl + '/requests/process/' + id,
+            options: Options(headers: {requiresToken: true}), data: data)
+        .then((response) {
       return StatusResponse.fromMap(response.data).message ??
           response.statusMessage;
     });

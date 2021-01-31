@@ -314,6 +314,12 @@
       "languageVersion": "2.7"
     },
     {
+      "name": "page_transition",
+      "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/page_transition-1.1.7+6",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/mac/.pub-cache/hosted/pub.dartlang.org/path-1.8.0-nullsafety.1",
       "packageUri": "lib/",
@@ -554,7 +560,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-29T06:08:20.982789Z",
+  "generated": "2021-01-30T13:46:13.898113Z",
   "generator": "pub",
   "generatorVersion": "2.10.5"
 }

@@ -75,7 +75,6 @@ class DocumentUploadPage extends StatelessWidget {
       child: Column(
         children: [
           AuthAppBar(
-            key: GlobalKey(),
             title: 'Awesome ${authenticationCubit.user.firstName ?? ''}',
             subTitle: 'Please upload your documents',
           ),

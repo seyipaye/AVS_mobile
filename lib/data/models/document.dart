@@ -1,6 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-enum DocumentType { INTERNATIONAL_PASSPORT, DRIVERS_LICENSE, VOTERS_CARD, NIN }
+enum DocumentType {
+  INTERNATIONAL_PASSPORT,
+  DRIVERS_LICENSE,
+  VOTERS_CARD,
+  NIN,
+  PHOTO
+}
 
 class Document {
   final String title;
