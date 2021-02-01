@@ -1,4 +1,7 @@
 import 'package:avs/data/models/address.dart';
+import 'package:avs/presentation/widgets/input/request_status.dart';
+
+enum RequestStatus { NEW, ASSIGNED, UNKNOWN }
 
 class Request {
   final Contact contact;
@@ -41,6 +44,16 @@ class Request {
         requestId = json['requestId'],
         createdAt = json['createdAt'],
         id = json['id'];
+
+  static RequestStatus getStatus(Request request) {
+    RequestStatus status = RequestStatus.UNKNOWN;
+    if (request.status == 'NEW') {
+      status = RequestStatus.NEW;
+    } else if (request.status == 'ASSIGNED') {
+      status = RequestStatus.ASSIGNED;
+    }
+    return status;
+  }
 }
 
 class Contact {

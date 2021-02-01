@@ -1,3 +1,4 @@
+import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
@@ -22,6 +23,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   User _user;
+  //BehaviorSubject
   final UserRepository _userRepository;
 
   User get user => _user;
@@ -54,7 +56,19 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(Authenticated(user: _user));
   }
 
-  void _initAuth() async {
+  set userAddress(Address address) {
+    _user = _user.copyWith(address: address);
+  }
+
+  set tokens(Tokens tokens) {
+    _user = _user.copyWith(tokens: tokens);
+  }
+
+  set freshUser(User user) {
+    this._user = user;
+  }
+
+  void _initAuth() {
     //userRepository.hasToken()
 
     _userRepository.getUser().then((user) {
@@ -77,20 +91,24 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         }
       }
     }).catchError((error) {
+      print(error);
       emit(AuthError(Error.safeToString(error)));
     });
   }
 
-  Future<void> refreshTokens() async {
+  Future<bool> refreshTokens() async {
     final tokens = await _userRepository.refreshTokens(user.tokens);
     print('This is token $tokens');
     if (tokens != null) {
       _user = user.copyWith(tokens: tokens);
       await _userRepository.logUserOut();
-      await _userRepository.setUser(user: user);
+      await _userRepository.saveUser(user: user);
+      return true;
     } else {
+      print("Couldn't refresh token");
       await _userRepository.logUserOut();
       emit(Unauthenticated());
+      return false;
     }
 
     // tokens == null

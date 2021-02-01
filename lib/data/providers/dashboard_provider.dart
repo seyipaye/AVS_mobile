@@ -2,11 +2,11 @@ import 'package:avs/data/interceptor/api_interceptor.dart';
 import 'package:avs/data/models/request.dart';
 import 'package:dio/dio.dart';
 
+import 'avs_api_client.dart';
+
 class DashboardProvider {
   final _authCubit;
   final Dio _dio;
-
-  static const _baseUrl = 'https://api-sandbox.quickavs.ng/v1';
 
   DashboardProvider(this._authCubit, {Dio dio}) : _dio = dio ?? Dio();
 
@@ -16,7 +16,7 @@ class DashboardProvider {
     _dio.options.headers["authorization"] =
         "Bearer ${_authCubit.user.tokens.access.token}";
 
-    var response = await _dio.get(_baseUrl + '/requests/total?status=ASSIGNED');
+    var response = await _dio.get(baseUrl + '/requests/total?status=ASSIGNED');
 
     if (response.statusCode != 200) {
       return null;
@@ -31,8 +31,7 @@ class DashboardProvider {
     _dio.options.headers["authorization"] =
         "Bearer ${_authCubit.user.tokens.access.token}";
 
-    var response =
-        await _dio.get(_baseUrl + '/requests/total?status=COMPLETED');
+    var response = await _dio.get(baseUrl + '/requests/total?status=COMPLETED');
 
     if (response.statusCode != 200) {
       return null;
@@ -47,7 +46,7 @@ class DashboardProvider {
     _dio.options.headers["authorization"] =
         "Bearer ${_authCubit.user.tokens.access.token}";
 
-    var response = await _dio.get(_baseUrl + '/requests/total?');
+    var response = await _dio.get(baseUrl + '/requests/total?');
 
     if (response.statusCode != 200) {
       return null;
@@ -62,7 +61,7 @@ class DashboardProvider {
     _dio.options.headers["authorization"] =
         "Bearer ${_authCubit.user.tokens.access.token}";
 
-    final response = await _dio.get(_baseUrl + '/requests?status=NEW&limit=5');
+    final response = await _dio.get(baseUrl + '/requests?status=NEW&limit=5');
     if (response.statusCode != 200) {
       return null;
     }

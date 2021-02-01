@@ -1,29 +1,67 @@
-import 'dart:convert';
-import 'package:avs/data/interceptor/api_interceptor.dart';
+import 'dart:developer';
+
+import 'package:avs/data/api_responses/status_response.dart';
+import 'package:avs/data/interceptor/api_interceptor2.dart';
 import 'package:avs/data/models/request.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
+import 'package:avs/utils/constant_strings.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
+import 'avs_api_client.dart';
 
 class RequestProvider {
-  RequestProvider(this._authCubit, {Dio dio}) : _dio = dio ?? Dio();
+  RequestProvider(this._authCubit)
+      : _dio = Dio()..interceptors.add(ApiInterceptor2(_authCubit));
 
   final Dio _dio;
   final AuthenticationCubit _authCubit;
 
-  static const _baseUrl = 'https://api-sandbox.quickavs.ng/v1';
+  Future<String> acceptRequest({
+    @required String id,
+  }) async {
+    //log(id);
+    return _dio.post(baseUrl + '/requests/assign/' + id,
+        options: Options(headers: {requiresToken: true}),
+        data: {"status": "ACCEPTED"}).then((response) {
+      return StatusResponse.fromMap(response.data).message ??
+          response.statusMessage;
+    });
+  }
+
+  Future<String> rejectRequest({
+    @required String id,
+  }) async {
+    //log(id);
+    return _dio.post(baseUrl + '/requests/assign/' + id,
+        options: Options(headers: {requiresToken: true}),
+        data: {"status": "REJECTED"}).then((response) {
+      return StatusResponse.fromMap(response.data).message ??
+          response.statusMessage;
+    });
+  }
+
+  Future<String> processRequest({
+    @required String id,
+    dynamic data,
+  }) async {
+    //log(id);
+    return _dio
+        .post(baseUrl + '/requests/process/' + id,
+            options: Options(headers: {requiresToken: true}), data: data)
+        .then((response) {
+      return StatusResponse.fromMap(response.data).message ??
+          response.statusMessage;
+    });
+  }
 
   Future<List<Request>> getNewRequests({
     @required int page,
     @required int limit,
   }) async {
-    _dio.interceptors.add(ApiInterceptor(_authCubit));
-    _dio.options.headers['content-Type'] = 'application/json';
-    _dio.options.headers["authorization"] =
-        "Bearer ${_authCubit.user.tokens.access.token}";
     final response = await _dio.get(
-        _baseUrl + '/requests?page=${page.toString()}&status=NEW&limit=$limit');
+        baseUrl + '/requests?page=${page.toString()}&status=NEW&limit=$limit',
+        options: Options(headers: {requiresToken: true}));
     if (response.statusCode != 200) {
       return null;
     }
@@ -37,12 +75,10 @@ class RequestProvider {
     @required int limit,
   }) async {
     print(_authCubit.user.toJson());
-    _dio.interceptors.add(ApiInterceptor(_authCubit));
-    _dio.options.headers['content-Type'] = 'application/json';
-    _dio.options.headers["authorization"] =
-        "Bearer ${_authCubit.user.tokens.access.token}";
-    final response = await _dio.get(_baseUrl +
-        '/requests?page=${page.toString()}&status=ASSIGNED&limit=$limit');
+    final response = await _dio.get(
+        baseUrl +
+            '/requests?page=${page.toString()}&status=ASSIGNED&limit=$limit',
+        options: Options(headers: {requiresToken: true}));
     if (response.statusCode != 200) {
       return null;
     }

@@ -4,6 +4,7 @@ import 'package:avs/logic/bloc/request_bloc.dart';
 import 'package:avs/logic/bloc/request_bloc_states.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/presentation/screens/request_details.dart';
+import 'package:avs/presentation/widgets/loading_indicator.dart';
 import 'package:avs/presentation/widgets/new_request_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +18,7 @@ class NewRequestPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => RequestBloc(
         RequestRepository(
-          RequestProvider(
-            context.read<AuthenticationCubit>(),
-          ),
+          context.read<AuthenticationCubit>(),
         ),
       )..add(NewRequestEvent()),
       child: BlocBuilder<RequestBloc, RequestsBlocState>(
@@ -48,9 +47,7 @@ class NewRequestPage extends StatelessWidget {
         final list = BlocProvider.of<RequestBloc>(context).requestList;
         if (state is RequestsInitialState ||
             state is RequestsLoadingState && list.isEmpty) {
-          return Center(
-              child: Container(
-                  height: 100, width: 100, child: CircularProgressIndicator()));
+          return Center(child: LoadingIndicator(radius: 35));
         }
         if (state is RequestsErrorState && list.isEmpty) {
           /// Show error loading page with option to retry

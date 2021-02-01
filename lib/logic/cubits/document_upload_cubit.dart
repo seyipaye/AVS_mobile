@@ -1,6 +1,7 @@
 import 'package:avs/data/models/document.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
+import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/validators.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -16,7 +17,8 @@ part 'document_upload_state.dart';
 class DocumentUploadCubit extends Cubit<DocumentUploadState> {
   DocumentUploadCubit(this.userRepository, this.authenticationCubit,
       {this.controller})
-      : super(DocumentUploadState());
+      : super(
+            DocumentUploadState(firstName: authenticationCubit.user.firstName));
 
   final UserRepository userRepository;
   final AuthenticationCubit authenticationCubit;
@@ -32,6 +34,8 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
   }
 
   void handleContinue(BuildContext context) {
+    print('ffe ${authenticationCubit.user}');
+
     FocusScope.of(context).unfocus();
     final form = Form.of(context);
     if (form.validate()) {
@@ -44,12 +48,14 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
                 photoPath: _photoFile.path, doc: state.selectedDoc)
             .then((message) {
           if (message != null) {
-            emit(state.copyWith(isLoading: false, showCompletionDialog: true));
+            emit(state.copyWith(isLoading: false));
+            controller.nextPage(
+                duration: kAnimationDuration, curve: Curves.bounceOut);
           } else {
             _showError('Something went wrong, please try again later');
           }
         }).catchError((error) {
-          print(error);
+          print(error.message);
           if (error is ClientError || error is Exception) {
             _showError(error.message);
           } else if (error is Error) {
@@ -81,7 +87,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
       emit(state.copyWith(photoFile: value));
     }).catchError((error) {
       if (error is Exception) {
-        _showError((error as dynamic).errorMessage);
+        _showError((error as dynamic).snackBar);
       } else {
         _showError(Error.safeToString(error));
       }
@@ -100,7 +106,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
       }
     }).catchError((error) {
       if (error is Exception) {
-        _showError((error as dynamic).errorMessage);
+        _showError((error as dynamic).snackBar);
       } else {
         _showError(Error.safeToString(error));
       }

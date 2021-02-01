@@ -45,8 +45,13 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       //print(authenticationCubit.user);
       emit(state.copyWith(isLoading: true));
 
-      userRepository.setUser(user: authenticationCubit.user).then((user) {
+      userRepository
+          .uploadUserInfo(user: authenticationCubit.user)
+          .then((user) {
         if (user != null) {
+          //print(user);
+          authenticationCubit.freshUser = user;
+          print(authenticationCubit.user);
           emit(state.copyWith(isLoading: false, showCompletionDialog: true));
         } else {
           emit(UserInfoState.error(

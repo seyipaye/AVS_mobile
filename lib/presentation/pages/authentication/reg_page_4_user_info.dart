@@ -1,4 +1,3 @@
-import 'package:avs/data/models/user.dart';
 import 'package:avs/logic/cubits/user_info_cubit.dart';
 import 'package:avs/presentation/screens/authentication_screen.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
@@ -7,7 +6,6 @@ import 'package:avs/presentation/widgets/auth_header.dart';
 import 'package:avs/presentation/widgets/dialogs.dart';
 import 'package:avs/presentation/widgets/input/app_dropdown_button.dart';
 import 'package:avs/presentation/widgets/input/app_text_form_field.dart';
-import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -69,14 +67,15 @@ class UserInfoPage extends StatelessWidget {
             showDialog(
               context: context,
               builder: (_) {
-                return AppDialog(
+                return ButtonDialog(
                   icon: Icon(
                     LineIcons.check_circle,
                     size: 125,
                     color: Colors.lightGreen,
                   ),
+                  title: 'Well done, ${userInfoCubit.firstName}!',
                   content:
-                      "Well done, ${userInfoCubit.firstName}! You've completed the first stage of the registration process. Complete your profile to start earning money as an Agent",
+                      "You've completed the first stage of the registration process. Complete your profile to start earning money as an Agent",
                   onPositivePressed: userInfoCubit.onPositivePressed,
                   onNegativePressed: userInfoCubit.onNegativePressed,
                 );

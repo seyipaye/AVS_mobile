@@ -1,3 +1,4 @@
+import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -12,6 +13,7 @@ import 'package:meta/meta.dart';
 class User extends Equatable {
   /// {@macro user}
   const User({
+    this.address,
     this.mobile,
     this.id,
     this.imageUrl,
@@ -35,7 +37,7 @@ class User extends Equatable {
       'otherName': otherName,
       'email': email.toJson(),
       'imageUrl': imageUrl,
-      'tokens': tokens.toJson()
+      'tokens': tokens?.toJson()
     };
   }
 
@@ -49,6 +51,7 @@ class User extends Equatable {
         otherName = json['otherName'],
         email = UserEmail.fromMap(json['email']),
         imageUrl = json['imageUrl'],
+        address = null,
         tokens = Tokens.fromMap(json['tokens']);
 
   /// The current user's phone number.
@@ -80,15 +83,18 @@ class User extends Equatable {
 
   final Tokens tokens;
 
+  final Address address;
+
   /// Empty user which represents an unauthenticated user.
   static const empty = User(
     email: UserEmail(address: ''),
     mobile: '',
   );
 
-  static const test = User(
+  static final test = User(
     email: UserEmail(address: ''),
-    mobile: '08156659653',
+    mobile: '08190629074',
+    id: '6012aed347266d001d4577dc',
   );
 
   @override
@@ -101,7 +107,8 @@ class User extends Equatable {
         gender,
         otherName,
         id,
-        tokens
+        tokens,
+        address
       ];
 
   bool get isFullyRegistered => true;
@@ -115,8 +122,9 @@ class User extends Equatable {
     final String gender,
     final String otherName,
     final UserEmail email,
-    final Tokens tokens,
     final String imageUrl,
+    final Tokens tokens,
+    final Address address,
   }) {
     return User(
       mobile: mobile ?? this.mobile,
@@ -127,8 +135,9 @@ class User extends Equatable {
       gender: gender ?? this.gender,
       otherName: otherName ?? this.otherName,
       email: email ?? this.email,
-      tokens: tokens ?? this.tokens,
       imageUrl: imageUrl ?? this.imageUrl,
+      tokens: tokens ?? this.tokens,
+      address: address ?? this.address,
     );
   }
 

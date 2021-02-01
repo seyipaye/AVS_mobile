@@ -1,18 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:avs/data/api_responses/address_upload_response.dart';
 import 'package:avs/data/api_responses/login_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
 import 'package:avs/data/api_responses/upload_file_response.dart';
 import 'package:avs/data/api_responses/registration_response.dart';
+import 'package:avs/data/interceptor/api_interceptor2.dart';
 import 'package:avs/data/models/address.dart';
-import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
-final printAllResponses = false;
+final printAllResponses = true;
 
 /// Exception thrown when locationSearch fails.
 class SendOtpFailure implements Exception {
@@ -27,9 +29,6 @@ class ClientError implements Exception {
   final String message;
 }
 
-/// Exception thrown when getWeather fails.
-class WeatherRequestFailure implements Exception {}
-
 // primary-agent@quickavs.ng
 // System123!
 
@@ -41,34 +40,74 @@ class AVSApiClient {
 
   final http.Client _httpClient;
 
-  Future<String> addAddress({User user, Address address}) async {
-    print(jsonEncode(user.toRegisterRequestBody) + user.id);
+  Future<AddressUploadResponse> addAddress({String id, Address address}) async {
+    print(jsonEncode(address.toRegisterRequestBody) + id);
     final response = await _httpClient.post(
-      baseUrl + '/auth/local/register/address/agent/${user.id}',
+      baseUrl + '/auth/local/register/address/agent/$id',
       headers: {"Content-Type": "application/json"},
-      body: (jsonEncode(user.toRegisterRequestBody)),
+      body: jsonEncode(address.toRegisterRequestBody),
     );
 
     if (printAllResponses) {
       log(response.body);
     }
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
     }
     try {
-      return jsonDecode(response.body)['message']?.toString();
+      return AddressUploadResponse.fromMap(jsonDecode(response.body));
     } catch (exception) {
       print(exception);
       throw ClientError('Something went wrong, please try again later');
     }
   }
 
-  Future<User> login(String email, String password) async {
+  Future<String> verifyAddress({User user, ApiInterceptor2 interceptor}) async {
+    log('fdfdfdfffd ...');
+
+    final _dio = Dio();
+    _dio.interceptors.add(interceptor);
+
     final response = await _httpClient.post(
-      baseUrl + '/auth/local/agent/login',
+      baseUrl + '/agents/verifyAddress/6013cce086b6b6001d16146a',
+      body: {"status": "VERIFY"},
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer ' +
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEzY2NlMDg2YjZiNjAwMWQxNjE0NmEiLCJ1c2VyIjp7ImF1dGhNZXRob2RzIjpbIkxPQ0FMIl0sIm1vYmlsZSI6IjA4MTUyNjQyNTMzMyIsInR5cGUiOiJBR0VOVCIsImNyZWF0ZWRBdCI6IjIwMjEtMDEtMjlUMDg6NTI6NDguMjg4WiIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMjlUMDg6NTM6MDQuNzIzWiIsImVtYWlsIjoib21vdG9sZ3NkdWVqakBnbWFpbC5jb20iLCJpZCI6IjYwMTNjY2UwODZiNmI2MDAxZDE2MTQ2YSJ9LCJpYXQiOjE2MTE5MTEyOTUsImV4cCI6MTYxMTkxMzA5NX0.LIEPqdprGPwICttZhCUNGHyqVjjNM7yp4rqHAhX5IaU"
+      },
+    ).then((value) {
+      print('ff $value');
+      print('ff ${value.headers}');
+
+      return value;
+    });
+
+    if (printAllResponses) {
+      log(' fdfdf ${jsonEncode(response.body)}');
+    }
+
+    /* if (response.statusCode != 200 && response.statusCode != 201) {
+      throw ClientError(
+        StatusResponse.fromMap(jsonDecode(response.data))?.message ??
+            response.statusMessage,
+      );
+    }
+    try {
+      return StatusResponse.fromMap(jsonDecode(response.data))?.message ??
+          response.statusMessage;
+    } catch (exception) {
+      print('fdfdf $exception');
+      throw ClientError('Something went wrong, please try again later');
+    }*/
+  }
+
+  Future<User> login(String email, String password) async {
+    print('$email...$password');
+    final response = await _httpClient.post(
+      baseUrl + '/auth/local/login',
       body: {"credential": email, "password": password},
     );
 
@@ -85,7 +124,7 @@ class AVSApiClient {
     return LoginResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
   }
 
-  Future<User> setUser({User user}) async {
+  Future<User> uploadUserInfo({User user}) async {
     print(jsonEncode(user.toRegisterRequestBody) + user.id);
     final response = await _httpClient.post(
       baseUrl + '/auth/local/register/agent/${user.id}',
@@ -96,7 +135,7 @@ class AVSApiClient {
     if (printAllResponses) {
       log(response.body);
     }
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
@@ -123,7 +162,7 @@ class AVSApiClient {
     if (printAllResponses) {
       log(jsonEncode(response.data));
     }
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw ClientError(
         StatusResponse.fromMap(response.data)?.message ??
             response.statusMessage,
@@ -137,17 +176,13 @@ class AVSApiClient {
     }
   }
 
-  Future<String> uploadDocs(String id, {String photoUrl, Document doc}) async {
-    // TODO: Cross check
+  //6010850c8827c3002241341c
+  Future<String> uploadDocs(String id, {dynamic body}) async {
     final response = await _httpClient.post(
-      baseUrl + '}/auth/local/register/upload/agent/$id',
-      body: {
-        "imageUrl": photoUrl,
-        "type": "NIN",
-        "number": '12365284983',
-        "documentUrl": "https://file1.url"
-      },
+      baseUrl + '/auth/local/register/upload/agent/$id',
+      body: body,
     );
+
     if (printAllResponses) {
       log(response.body);
     }

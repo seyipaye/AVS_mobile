@@ -2,13 +2,16 @@ part of 'document_upload_cubit.dart';
 
 class DocumentUploadState extends Equatable {
   DocumentUploadState({
+    this.firstName,
     this.photoFile,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.isLoading = false,
     this.showCompletionDialog = false,
     this.errorMessage,
     this.selectedDoc,
-  });
+  }) {
+    //print(firstName);
+  }
 
   final bool showCompletionDialog;
   final bool isLoading;
@@ -16,6 +19,7 @@ class DocumentUploadState extends Equatable {
   final AutovalidateMode autovalidateMode;
   final Document selectedDoc;
   final PickedFile photoFile;
+  final String firstName;
 
   bool get hasError => errorMessage != null && errorMessage != '';
 
@@ -26,6 +30,7 @@ class DocumentUploadState extends Equatable {
     final AutovalidateMode autovalidateMode,
     final Document selectedDoc,
     final PickedFile photoFile,
+    final String firstName,
   }) {
     return DocumentUploadState(
       showCompletionDialog: showCompletionDialog ?? this.showCompletionDialog,
@@ -34,11 +39,20 @@ class DocumentUploadState extends Equatable {
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
       selectedDoc: selectedDoc ?? this.selectedDoc,
       photoFile: photoFile ?? this.photoFile,
+      firstName: firstName ?? this.firstName,
     );
   }
 
   @override
   // TODO: implement props
-  List<Object> get props =>
-      [photoFile, selectedDoc, autovalidateMode, isLoading, errorMessage];
+  List<Object> get props => [
+        firstName,
+        photoFile,
+        selectedDoc,
+        autovalidateMode,
+        isLoading,
+        errorMessage,
+        showCompletionDialog,
+        selectedDoc,
+      ];
 }

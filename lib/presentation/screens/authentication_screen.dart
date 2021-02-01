@@ -8,6 +8,7 @@ import 'package:avs/presentation/pages/authentication/reg_page_3_set_password.da
 import 'package:avs/presentation/pages/authentication/reg_page_4_user_info.dart';
 import 'package:avs/presentation/pages/authentication/reg_page_5_document_upload.dart';
 import 'package:avs/presentation/pages/authentication/reg_page_6_address_info.dart';
+import 'package:avs/presentation/pages/authentication/reg_page_7_address_confirm.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,13 +45,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       UserInfoPage(controller, authenticationCubit, userRepository),
       DocumentUploadPage(controller, authenticationCubit, userRepository),
       AddressInfoPage(controller, authenticationCubit, userRepository),
+      AddressConfirmPage(controller, authenticationCubit, userRepository),
     ];
   }
 
   Future<bool> onWillPop() {
     bool result = true;
     if (controller.page != 1) {
-      controller.animateToPage(1,
+      // controller.animateToPage(1,
+      //     duration: kAnimationDuration, curve: Curves.linear);
+      controller.previousPage(
           duration: kAnimationDuration, curve: Curves.linear);
       result = false;
     }

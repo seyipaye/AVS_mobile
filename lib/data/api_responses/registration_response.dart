@@ -12,16 +12,20 @@ class RegistrationResponse {
     this.message,
   });
 
-  User get toSimpleUser => User(
-        mobile: agent.profile.mobile.number,
-        id: agent.id,
-        imageUrl: null,
-        firstName: agent.profile.firstName,
-        lastName: agent.profile.lastName,
-        gender: agent.profile.gender,
-        otherName: agent.profile.otherName,
-        email: UserEmail(address: agent.profile.email.address),
-      );
+  User get toSimpleUser {
+    print(agent.user);
+    print(agent.id);
+    return User(
+      mobile: agent.profile.mobile.number,
+      id: agent.user,
+      imageUrl: null,
+      firstName: agent.profile.firstName,
+      lastName: agent.profile.lastName,
+      gender: agent.profile.gender,
+      otherName: agent.profile.otherName,
+      email: UserEmail(address: agent.profile.email.address),
+    );
+  }
 
   factory RegistrationResponse.fromMap(dynamic map) {
     if (null == map) return null;
