@@ -32,6 +32,5 @@ class AddressConfirmState extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object> get props => [dialog, isLoading, errorMessage];
 }

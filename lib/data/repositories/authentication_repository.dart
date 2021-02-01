@@ -20,13 +20,14 @@ class UserRepository {
   final prefs = SharedPref();
 
   Future<User> login({String email, String password}) async {
-    return apiClient.login(email, password);
+    return apiClient.login(email, password).then((user) async {
+      await saveUser(user: user);
+      return user;
+    });
   }
 
   Future<User> uploadUserInfo({User user}) async {
-    await prefs.save('USER', user.toJson());
-    print('code ran');
-    return user;
+    return apiClient.uploadUserInfo(user: user);
   }
 
   Future saveUser({User user}) async {
@@ -43,9 +44,6 @@ class UserRepository {
   }
 
   Future<String> uploadDocs(User user, {String photoPath, Document doc}) async {
-    //return Future.delayed(Duration(seconds: 2)).then((value) => user);
-    //await prefs.save('User', user);
-
     //'https://api-sandbox.quickavs.ng/v1/files/XhCvmR8cM3cu0vg7HKCe.bin/get';
     final String photoUrl = await apiClient.uploadFile(photoPath).then((value) {
       return value.imageUrls.first;
@@ -97,39 +95,7 @@ class UserRepository {
     if (json != null) {
       return User.fromMap(json);
     }
-    return Future<User>.delayed(const Duration(seconds: 2), () => null);
-    // User user = await prefs.read('User');
-  }
-
-  /*Future<User> authenticate ({
-    @required String username,
-    @required String password,
-  }) async {
-    UserLogin userLogin = UserLogin(
-        username: username,
-        password: password
-    );
-    Token token = await getToken(userLogin);
-    User user = User(
-      id: 0,
-      username: username,
-      token: token.token,
-    );
-    return user;
-  }
-*/
-  Future<void> persistToken({@required User user}) async {
-    // write token with the user to the database
-    //await userDao.createUser(user);
-  }
-
-  Future<void> deleteToken({@required int id}) async {
-    //await userDao.deleteUser(id);
-  }
-
-  Future<bool> hasToken() async {
-    //bool result = await userDao.checkUser(0);
-    return true; //result;
+    return null;
   }
 
   ///Function to refresh the request

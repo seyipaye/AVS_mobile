@@ -11,17 +11,11 @@ import 'package:avs/data/interceptor/api_interceptor2.dart';
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
+import 'package:avs/utils/constant_strings.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 final printAllResponses = true;
-
-/// Exception thrown when locationSearch fails.
-class SendOtpFailure implements Exception {
-  SendOtpFailure(this.message);
-
-  final message;
-}
 
 class ClientError implements Exception {
   ClientError(this.message);
@@ -68,40 +62,22 @@ class AVSApiClient {
   Future<String> verifyAddress({User user, ApiInterceptor2 interceptor}) async {
     log('fdfdfdfffd ...');
 
-    final _dio = Dio();
-    _dio.interceptors.add(interceptor);
+    final _dio = Dio()..interceptors.add(interceptor);
 
-    final response = await _httpClient.post(
-      baseUrl + '/agents/verifyAddress/6013cce086b6b6001d16146a',
-      body: {"status": "VERIFY"},
-      headers: {
-        HttpHeaders.authorizationHeader: 'Bearer ' +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDEzY2NlMDg2YjZiNjAwMWQxNjE0NmEiLCJ1c2VyIjp7ImF1dGhNZXRob2RzIjpbIkxPQ0FMIl0sIm1vYmlsZSI6IjA4MTUyNjQyNTMzMyIsInR5cGUiOiJBR0VOVCIsImNyZWF0ZWRBdCI6IjIwMjEtMDEtMjlUMDg6NTI6NDguMjg4WiIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMjlUMDg6NTM6MDQuNzIzWiIsImVtYWlsIjoib21vdG9sZ3NkdWVqakBnbWFpbC5jb20iLCJpZCI6IjYwMTNjY2UwODZiNmI2MDAxZDE2MTQ2YSJ9LCJpYXQiOjE2MTE5MTEyOTUsImV4cCI6MTYxMTkxMzA5NX0.LIEPqdprGPwICttZhCUNGHyqVjjNM7yp4rqHAhX5IaU"
-      },
-    ).then((value) {
-      print('ff $value');
-      print('ff ${value.headers}');
+    return _dio
+        .post(
+      baseUrl + '/agents/verifyAddress/' + user.id,
+      data: {"status": "VERIFY"},
+      options: Options(headers: {requiresToken: true}),
+    )
+        .then((response) {
+      if (printAllResponses) {
+        log(' fdfdf ${jsonEncode(response.data)}');
+      }
 
-      return value;
-    });
-
-    if (printAllResponses) {
-      log(' fdfdf ${jsonEncode(response.body)}');
-    }
-
-    /* if (response.statusCode != 200 && response.statusCode != 201) {
-      throw ClientError(
-        StatusResponse.fromMap(jsonDecode(response.data))?.message ??
-            response.statusMessage,
-      );
-    }
-    try {
-      return StatusResponse.fromMap(jsonDecode(response.data))?.message ??
+      return StatusResponse.fromMap(response.data).message ??
           response.statusMessage;
-    } catch (exception) {
-      print('fdfdf $exception');
-      throw ClientError('Something went wrong, please try again later');
-    }*/
+    });
   }
 
   Future<User> login(String email, String password) async {
@@ -254,7 +230,6 @@ class AVSApiClient {
       },
     );
 
-    print(response);
     if (printAllResponses) {
       print(response.body);
     }
@@ -265,57 +240,7 @@ class AVSApiClient {
       );
     }
     return StatusResponse.fromMap(jsonDecode(response.body));
-
-    /*final responseJson = jsonDecode(
-      response.body,
-    ) as List;
-    return weatherJson?.isNotEmpty == true
-        ? Weather.fromJson(weatherJson.first as Map<String, dynamic>)
-        : null;
-
-    final locationJson = jsonDecode(
-      response.body,
-    ) as List;
-    return locationJson?.isNotEmpty == true
-        ? Location.fromJson(locationJson.first as Map<String, dynamic>)
-        : null;*/
   }
-
-  /*/// Finds a [Location] `/api/location/search/?query=(query)`.
-  Future<Location> locationSearch(String query) async {
-    final locationRequest = Uri.https(_baseUrl, '/api/location/search', {
-      'query': query,
-    });
-    final locationResponse = await _httpClient.get(locationRequest);
-
-    if (locationResponse.statusCode != 200) {
-      throw LocationIdRequestFailure();
-    }
-
-    final locationJson = jsonDecode(
-      locationResponse.body,
-    ) as List;
-    return locationJson?.isNotEmpty == true
-        ? Location.fromJson(locationJson.first as Map<String, dynamic>)
-        : null;
-  }*/
-
-  /* /// Fetches [Weather] for a given [locationId].
-  Future<Weather> getWeather(int locationId) async {
-    final weatherRequest = Uri.https(_baseUrl, '/api/location/$locationId');
-    final weatherResponse = await _httpClient.get(weatherRequest);
-
-    if (weatherResponse.statusCode != 200) {
-      throw WeatherRequestFailure();
-    }
-
-    final weatherJson = jsonDecode(
-      weatherResponse.body,
-    )['consolidated_weather'] as List;
-    return weatherJson?.isNotEmpty == true
-        ? Weather.fromJson(weatherJson.first as Map<String, dynamic>)
-        : null;
-  }*/
 
   Future<Tokens> refreshTokens(Tokens tokens) async {
     ///Refresh call

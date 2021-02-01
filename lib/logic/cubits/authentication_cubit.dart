@@ -69,13 +69,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   void _initAuth() {
-    //userRepository.hasToken()
-
     _userRepository.getUser().then((user) {
       if (skipAuthentication) {
         emit(Authenticated(user: User.test));
       } else {
-        // print(user.isFullyRegistered);
         if (user != null) {
           this._user = user;
           // TODO: Check if the user gotten has completed registration
@@ -85,9 +82,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             emit(Unauthenticated(user: user));
           }
         } else {
-          this._user = User.test;
-          emit(Unauthenticated(user: _user));
-          print('unauth');
+          emit(Unauthenticated());
+          // this._user = User.test;
+          // emit(Unauthenticated(user: _user));
+          // print('unauth');
         }
       }
     }).catchError((error) {
@@ -110,11 +108,6 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(Unauthenticated());
       return false;
     }
-
-    // tokens == null
-    //     ? emit(Unauthenticated())
-    //     : _user = user.copyWith(tokens: tokens);
-    // await _userRepository.setUser(user: user);
   }
 
   Future<void> logUserOut() async {

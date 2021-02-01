@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'app_card.dart';
 import 'loading_indicator.dart';
 
-class NewRequestItem extends StatelessWidget {
+class RequestItem extends StatelessWidget {
   final String verificationNumber;
   final String status;
   final String firstName;
@@ -25,7 +25,7 @@ class NewRequestItem extends StatelessWidget {
     'NEW': Colors.yellow,
   };
 
-  NewRequestItem(
+  RequestItem(
       {this.verificationNumber,
       this.status,
       this.firstName,
