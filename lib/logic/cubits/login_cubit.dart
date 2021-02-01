@@ -32,7 +32,6 @@ class LoginCubit extends Cubit<LoginState> {
       userRepository.login(email: email, password: password).then((user) async {
         if (user != null) {
           authenticationCubit.authenticatedUser = user;
-          await userRepository.saveUser(user: user);
         } else {
           emit(
               LoginState.error('Something went wrong, please try again later'));

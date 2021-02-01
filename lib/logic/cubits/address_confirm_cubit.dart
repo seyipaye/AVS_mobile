@@ -28,23 +28,6 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
   }
 
   Future<void> handleContinue(BuildContext context) async {
-    // Tell backend, agent is at location
-    //emit(state.copyWith(isLoading: true));
-    if (authenticationCubit.user != null) {
-      final message = await userRepository
-          .verifyAddress(authenticationCubit)
-          .catchError((error) {
-        print(error);
-        emit(state.copyWith(isLoading: false));
-      });
-      if (message != null) {
-        emit(state.copyWith(isLoading: false, dialog: successDialog()));
-      }
-    } else {
-      emit(state.error('Something went wrong, please try again later'));
-    }
-    return;
-
     if (authenticationCubit.user?.address?.geo?.coordinates?.isNotEmpty ??
         false) {
       // Get device current location
@@ -66,15 +49,16 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
                 coordinates.first);
             print(distanceInMeters);
 
-            //Todo: Check if greater then 5KM
-            if (distanceInMeters < 5000) {
-              emit(state.copyWith(
-                  dialog: failureDialog(distanceInMeters), isLoading: false));
-            } else {
+            // TODO: Check if less or equal to 5KM not 15KM
+            if (distanceInMeters < 15000) {
               // Tell backend, agent is at location
               if (authenticationCubit.user != null) {
-                final message =
-                    await userRepository.verifyAddress(authenticationCubit);
+                final message = await userRepository
+                    .verifyAddress(authenticationCubit)
+                    .catchError((error) {
+                  print(error);
+                  emit(state.copyWith(isLoading: false));
+                });
                 if (message != null) {
                   emit(state.copyWith(
                       isLoading: false, dialog: successDialog()));
@@ -83,6 +67,9 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
                 emit(state
                     .error('Something went wrong, please try again later'));
               }
+            } else {
+              emit(state.copyWith(
+                  dialog: failureDialog(distanceInMeters), isLoading: false));
             }
           }
         },
@@ -114,8 +101,7 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
             "You've fully completed the registration process. You can start earning money as an Agent now",
         onButtonPressed: (BuildContext context) {
           Navigator.of(context).pop();
-          // Move to next page
-          controller.nextPage(
+          controller.animateToPage(1,
               duration: kAnimationDuration, curve: Curves.linear);
         },
       );
