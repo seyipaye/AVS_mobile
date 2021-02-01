@@ -11,20 +11,25 @@ class DashboardCubit extends Cubit<DashBoardState> {
 
   Future<void> fetchData() async {
     emit(LoadingState());
-    var totalAssigned = await repository.getAssignedTotal();
-    var totalCompleted = await repository.getCompletedTotal();
-    var totalRequest = await repository.getTotalRequest();
-    var list = await repository.getDashboardRequests();
-    if (totalRequest != null &&
-        totalAssigned != null &&
-        totalCompleted != null) {
-      emit(LoadedState(
-          list: list,
-          assignedTotal: totalAssigned,
-          completedTotal: totalCompleted,
-          requestTotal: totalRequest));
-    } else {
-      emit(ErrorState('Something went wrong'));
+
+    try {
+      var totalAssigned = await repository.getAssignedTotal();
+      var totalCompleted = await repository.getCompletedTotal();
+      var totalRequest = await repository.getTotalRequest();
+      var list = await repository.getDashboardRequests();
+      if (totalRequest != null &&
+          totalAssigned != null &&
+          totalCompleted != null) {
+        emit(LoadedState(
+            list: list,
+            assignedTotal: totalAssigned,
+            completedTotal: totalCompleted,
+            requestTotal: totalRequest));
+      } else {
+        emit(ErrorState('Something went wrong'));
+      }
+    } catch (e) {
+      print(e);
     }
   }
 }

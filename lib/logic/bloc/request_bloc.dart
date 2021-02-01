@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:avs/data/database/database.dart';
 import 'package:avs/data/models/request.dart';
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/logic/bloc/request_bloc_states.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 
 ///Events
 class RequestEvent {}
@@ -32,7 +36,6 @@ class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
         if (requests.isNotEmpty) {
           requestList.addAll(requests);
           yield RequestsSuccessState();
-          print(page);
           page++;
           isLoading = false;
         }
@@ -46,21 +49,41 @@ class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
 
     /// Pagination For Assigned Requests
     else if (event is AssignedRequestEvent && isLoading == false) {
-      yield RequestsLoadingState(message: "Loading Requests");
-      isLoading = true;
-      final List<Request> requests =
-          await _repository.getAssignedRequests(page: page);
-      if (requests != null && requests.isNotEmpty) {
-        requestList.addAll(requests);
-        yield RequestsSuccessState();
-        print(page);
-        page++;
-        isLoading = false;
-      } else if (requests != null && requests.isEmpty) {
-        isLoading = false;
-        yield RequestsErrorState(error: 'Pages exceeded');
-      } else
-        yield RequestsErrorState(error: 'List is null');
+      try {
+        yield RequestsLoadingState(message: "Loading Requests");
+        isLoading = true;
+        final List<Request> requests =
+            await _repository.getAssignedRequests(page: page);
+        if (requests != null && requests.isNotEmpty) {
+          requestList.addAll(requests);
+          yield RequestsSuccessState();
+
+          ///Save Data offline
+          print('executed');
+          requests.forEach((request) async {
+            var res = await DBProvider.db.addRequest(request.toJson());
+            print(res);
+          });
+          page++;
+          isLoading = false;
+        } else if (requests != null && requests.isEmpty) {
+          isLoading = false;
+          yield RequestsErrorState(error: 'Pages exceeded');
+        } else
+          yield RequestsErrorState(error: 'List is null');
+      } catch (e) {
+        print(e);
+        if (e is DioError) {
+          if (e.error is SocketException) {
+            if (requestList.isEmpty) {
+              var list = await DBProvider.db.getAssignedRequests();
+              print('This is list $list');
+              requestList.addAll(list);
+              // print(list.length);
+            }
+          }
+        }
+      }
     }
   }
 }

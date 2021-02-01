@@ -14,38 +14,16 @@ class FullProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<AuthenticationCubit>(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Container(
-                  color: AppColors.primaryColor[100],
-                  height: 190,
-                  width: double.infinity,
-                ),
-                Container(
-                  height: 250,
-                  width: double.infinity,
-                ),
-                Positioned(
-                  top: 10,
-                  // right: 30,
-                  child: SafeArea(
-                    child: PageHeader(
-                      title: 'User Profile',
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: ProfileImage(radius: 60),
-                ),
-                // ProfileImage(
-                //   radius: 60,
-                // )
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ProfileImage(radius: 60),
             ),
             Center(
               child: Column(
@@ -63,10 +41,12 @@ class FullProfileScreen extends StatelessWidget {
                         value: '${bloc.user.firstName} ${bloc.user.lastName}'),
                     _buildRow('Mobile', value: bloc.user.mobile),
                     _buildRow(' E-mail', value: bloc.user.email.address),
-                    _buildRow('Street Address', value: ''),
-                    _buildRow('Local Government', value: ''),
-                    _buildRow('State', value: ''),
-                    _buildRow('Postal Code', value: ''),
+                    _buildRow('Street Address',
+                        value: bloc.user.address.streetAddress),
+                    _buildRow('Local Government', value: bloc.user.address.lga),
+                    _buildRow('State', value: bloc.user.address.state),
+                    _buildRow('Postal Code',
+                        value: bloc.user.address.postalCode),
                   ],
                 ),
               ),

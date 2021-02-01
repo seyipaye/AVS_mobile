@@ -68,6 +68,21 @@ class Address {
       point: map['point']?.toString(),
     );
   }
+
+  factory Address.fromDB(Map<String, dynamic> json) {
+    if (null == json) return null;
+    return Address(
+      geo: AddressGeo.fromDB(json),
+      verifiedOn: null,
+      isVerified: null,
+      streetAddress: json['streetAddress'],
+      lga: json['lga'],
+      postalCode: json['postalCode'],
+      state: json['state'],
+      landmark: null,
+      point: null,
+    );
+  }
 }
 
 class AddressGeo {
@@ -102,6 +117,16 @@ class AddressGeo {
                   .toList()
               : []),
       type: map['type']?.toString(),
+    );
+  }
+
+  factory AddressGeo.fromDB(Map<String, dynamic> json) {
+    return AddressGeo(
+      coordinates: [
+        double.parse(json['latitude']),
+        double.parse(json['longitude'])
+      ],
+      type: null,
     );
   }
 }

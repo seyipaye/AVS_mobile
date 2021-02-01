@@ -121,6 +121,7 @@ class AVSApiClient {
       );
     }
 
+    print(response.body);
     return LoginResponse.fromMap(jsonDecode(response.body))?.toSimpleUser;
   }
 
