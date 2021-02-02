@@ -1,139 +1,164 @@
 import 'dart:async';
 import 'package:avs/data/models/request.dart';
+import 'package:avs/logic/cubits/map_cubit.dart';
+import 'package:avs/logic/cubits/map_state.dart';
+import 'package:avs/presentation/widgets/app_raised_button.dart';
+import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-class MapScreen extends StatefulWidget {
+class MapScreen2 extends StatefulWidget {
   final Request request;
 
-  const MapScreen({@required this.request});
+  const MapScreen2({@required this.request});
 
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _MapScreen2State createState() => _MapScreen2State();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreen2State extends State<MapScreen2> {
   double latitude;
   double longitude;
 
   CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
-  GoogleMapController _mapController;
-  Position _currentPosition;
+  GoogleMapController mapController;
   Set<Marker> markers = {};
-
-  /// Subscription for location changes
-  StreamSubscription streamSubscription;
-
-  ///Polylines points for flutter
-  PolylinePoints polylinePoints;
-
-  /// List of coordinates to join
-  List<LatLng> polylineCoordinates = [];
-
-  /// Map storing polylines created by connecting
-  /// two points
-  Map<PolylineId, Polyline> polylines = {};
 
   @override
   void initState() {
     super.initState();
-
     Future.delayed(Duration(seconds: 3), () {
-      checkLocationPermission();
       latitude = widget.request.address.geo.coordinates[0];
       longitude = widget.request.address.geo.coordinates[1];
       placeMarker(latitude: latitude, longitude: longitude);
     });
-
-    // Future.delayed(Duration(seconds: 3), () {
-    //   setLocationListener();
-    //   latitude = widget.request.address.geo.coordinates[0];
-    //   longitude = widget.request.address.geo.coordinates[1];
-    //   placeMarker(latitude: latitude, longitude: longitude);
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: GoogleMap(
-          markers: markers,
-          polylines: Set<Polyline>.of(polylines.values),
-          initialCameraPosition: _initialLocation,
-          myLocationEnabled: true,
-          myLocationButtonEnabled: false,
-          mapType: MapType.normal,
-          zoomGesturesEnabled: true,
-          zoomControlsEnabled: false,
-          onMapCreated: (GoogleMapController controller) {
-            _mapController = controller;
-          },
-        ),
-      ),
-      Positioned(
-        child: SafeArea(
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              height: 50,
-              width: 100,
-              child: Center(
-                child: Icon(CupertinoIcons.back),
+    return BlocProvider(
+      create: (context) =>
+          MapCubit(widget.request, mapController)..checkLocationPermission(),
+      child: Scaffold(
+        body: Scaffold(
+          body: BlocBuilder<MapCubit, MapState>(builder: (context, state) {
+            return Stack(children: [
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: GoogleMap(
+                  markers: markers,
+                  polylines: Set<Polyline>.of(state.polylines.values),
+                  initialCameraPosition: _initialLocation,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  mapType: MapType.normal,
+                  zoomGesturesEnabled: true,
+                  zoomControlsEnabled: false,
+                  onMapCreated: (GoogleMapController controller) {
+                    mapController = controller;
+                  },
+                ),
               ),
+              Positioned(
+                child: SafeArea(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 100,
+                      child: Center(
+                        child: Icon(CupertinoIcons.back),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ]);
+          }),
+          bottomNavigationBar: BlocConsumer<MapCubit, MapState>(
+            listener: (context, state) {
+              if (state.hasError && state.hasPermission) {
+                Scaffold.of(context)
+                    .showSnackBar(AppSnackBar.error(state.errorMessage));
+              } else if (state.hasError && !state.hasPermission) {
+                showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                          title: Text('Location Permission Denied'),
+                          content:
+                              Text('Please enable permissions and try again'),
+                          actions: [
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                  print('clicked');
+                                },
+                                child: Text('Dismiss'))
+                          ],
+                        ),
+                    barrierDismissible: false);
+              }
+            },
+            builder: (context, state) {
+              if (!state.hasPermission) {
+                return SizedBox();
+              } else {
+                return state.hasArrived
+                    ? _buildBottomButton(state, context)
+                    : Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                        ),
+                        height: 150,
+                        child: Center(
+                            child: Text(
+                          'You need to be within 100 meters of Location to verify address',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 20),
+                        )),
+                      );
+              }
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildBottomButton(state, context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(topLeft: Radius.circular(40)),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        height: 150,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Center(
+            child: AppRaisedButton(
+              height: 50,
+              text: 'Verify Address',
+              backgroundColor: AppColors.primaryColor,
+              onPressed: (context) {
+                BlocProvider.of<MapCubit>(context).handleClick(context);
+              },
+              // BlocProvider.of<MapCubit>(context).handleClick(context),
             ),
           ),
         ),
       ),
-    ]);
+    );
   }
 
-  void getCurrentLocation() async {
-    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-        .then((Position position) async {
-      setState(() {
-        // Store the position in the variable
-        _currentPosition = position;
-
-        print('CURRENT POSITION: $_currentPosition');
-
-        // For moving the camera to current location
-        // _mapController.animateCamera(
-        //   CameraUpdate.newCameraPosition(
-        //     CameraPosition(
-        //       target: LatLng(position.latitude, position.longitude),
-        //       zoom: 18.0,
-        //     ),
-        //   ),
-        // );
-      });
-
-      _mapController.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(
-              9.081999,
-              8.675277,
-              // position.latitude, position.longitude
-            ),
-            zoom: 5.0,
-          ),
-        ),
-      );
-    }).catchError((e) {
-      print("error:$e");
-    });
-  }
-
+  //
   void placeMarker({double latitude, double longitude}) {
     /// Destination Location Marker
     Marker destinationMarker = Marker(
@@ -150,7 +175,7 @@ class _MapScreenState extends State<MapScreen> {
       markers.add(destinationMarker);
 
       ///Zoom in on destination marker
-      _mapController.animateCamera(
+      mapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: LatLng(latitude, longitude),
@@ -160,107 +185,5 @@ class _MapScreenState extends State<MapScreen> {
       );
       print(markers.length);
     });
-  }
-
-  void setLocationListener() {
-    streamSubscription = Geolocator.getPositionStream(
-            desiredAccuracy: LocationAccuracy.high, distanceFilter: 0)
-        .listen((Position position) {
-      setState(() {
-        /// Store the position in the variable
-        _currentPosition = position;
-
-        print('CURRENT POSITION: $_currentPosition');
-        print("${position.longitude}, ${position.longitude}");
-
-        print('This ran : Listener is set');
-        createRoute(
-          start: position,
-        );
-        calculateDistance(position);
-      });
-    });
-  }
-
-  void createRoute({@required Position start}) async {
-    ///Flutter polylines
-    polylinePoints = PolylinePoints();
-
-    print("@nd $longitude, $longitude}");
-
-    /// Generating the list of coordinates to be used for drawing the polylines
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      'AIzaSyDWzGqryJyULurQz_nOuTz5L-tktCz60JE', // Google Maps API Key
-      PointLatLng(start.latitude, start.longitude),
-      PointLatLng(latitude, longitude),
-      travelMode: TravelMode.driving,
-    );
-
-    print(result.points);
-    print(result.status);
-
-    /// Adding the coordinates to the list
-    if (result.points.isNotEmpty) {
-      polylineCoordinates.clear();
-      result.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    } else {
-      ///What to do if route isn't available
-    }
-    print(polylineCoordinates.length);
-
-    PolylineId id = PolylineId('poly');
-
-    setState(() {
-      Polyline polyline = Polyline(
-        polylineId: id,
-        color: AppColors.primaryColor,
-        points: polylineCoordinates,
-        width: 3,
-      );
-
-      polylines[id] = polyline;
-    });
-  }
-
-  void calculateDistance(Position position) async {
-    double distanceInMeters = Geolocator.distanceBetween(
-      position.latitude,
-      position.longitude,
-      latitude,
-      longitude,
-    );
-
-    print('Distance: $distanceInMeters');
-    if (distanceInMeters < 200) {
-      ///Bring up form to verify address
-      closeSubscription();
-    }
-  }
-
-  void closeSubscription() {
-    streamSubscription?.cancel();
-  }
-
-  @override
-  void dispose() {
-    closeSubscription();
-    super.dispose();
-  }
-
-  void checkLocationPermission() async {
-    if (await Permission.location.status != PermissionStatus.granted) {
-      print('No permission');
-      var permissionStatus = await Permission.location.request();
-      print(permissionStatus);
-      if (permissionStatus == PermissionStatus.granted) {
-        setLocationListener();
-      } else {
-        // Navigator.of(context).pop();
-      }
-    } else {
-      setLocationListener();
-    }
   }
 }

@@ -10,6 +10,7 @@ import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:avs/utils/validators.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
@@ -195,10 +196,18 @@ class _ProcessRequestSheet extends State<ProcessRequestScreen> {
                           spacer,
                           AppRaisedButton(
                             //isLoading: state.isLoading,
+                            prefixIcon: state.isGeoTagged
+                                ? Icon(
+                                    CupertinoIcons.location,
+                                    size: 15,
+                                  )
+                                : null,
                             elevation: 0,
                             backgroundColor: AppColors.icons,
                             text: 'Geotag this location',
-                            onPressed: (context) {},
+                            onPressed: context
+                                .watch<ProcessRequestCubit>()
+                                .geoTagLocation,
                           ),
                           spacer,
                           AppRaisedButton(

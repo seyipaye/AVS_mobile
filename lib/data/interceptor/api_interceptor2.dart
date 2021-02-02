@@ -57,7 +57,9 @@ class ApiInterceptor2 extends Interceptor {
       return StatusResponse.fromMap(err.response.data)?.message ??
           err.response.statusMessage;
     } else {
-      print('pure Error  ${err.response.data}');
+      if (err.response != null) {
+        print('pure Error  ${err.response.data}');
+      }
       return err;
     }
   }

@@ -138,7 +138,9 @@ class RequestDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildButtonsForAssigned(
-      RequestDetailsState state, BuildContext context) {
+    RequestDetailsState state,
+    BuildContext context,
+  ) {
     return AppRaisedButton(
       isLoading: state.isLoading,
       elevation: 0,
