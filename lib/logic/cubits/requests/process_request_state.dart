@@ -8,6 +8,7 @@ class ProcessRequestState extends Equatable {
     this.assessment,
     this.images,
     this.isLoading = false,
+    this.isGeoTagged = false,
     this.snackBar,
   });
 
@@ -16,6 +17,7 @@ class ProcessRequestState extends Equatable {
   final List<String> reasons;
   final String assessment;
   final List<Document> images;
+  final bool isGeoTagged;
   final bool isLoading;
   final Widget snackBar;
 
@@ -27,6 +29,7 @@ class ProcessRequestState extends Equatable {
     final List<Document> images,
     final bool isLoading,
     final Widget snackBar,
+    final bool isGeoTagged,
     final bool clearOverlays = false,
   }) {
     return ProcessRequestState(
@@ -36,6 +39,7 @@ class ProcessRequestState extends Equatable {
       assessment: assessmentDetail ?? this.assessment,
       images: images ?? this.images,
       isLoading: isLoading ?? this.isLoading,
+      isGeoTagged: isGeoTagged ?? this.isGeoTagged,
       snackBar: clearOverlays ? null : snackBar ?? this.snackBar,
     );
   }
@@ -48,6 +52,7 @@ class ProcessRequestState extends Equatable {
         images,
         isLoading,
         snackBar,
-        autovalidateMode
+        autovalidateMode,
+        isGeoTagged
       ];
 }

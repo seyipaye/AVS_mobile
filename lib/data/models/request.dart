@@ -17,6 +17,22 @@ class Request {
   final String id;
   final String createdAt;
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'firstName': contact.firstName,
+      'lastName': contact.lastName,
+      'gender': contact.gender,
+      'streetAddress': address.streetAddress,
+      'state': address.state,
+      'lga': address.lga,
+      'postalCode': address.postalCode,
+      'latitude': address.geo.coordinates[0].toString(),
+      'longitude': address.geo.coordinates[1].toString(),
+      'status': status
+    };
+  }
+
   Request(
       this.contact,
       this.address,
@@ -30,6 +46,20 @@ class Request {
       this.requestId,
       this.id,
       this.createdAt);
+
+  Request.fromDb(Map<String, dynamic> json)
+      : contact = Contact.fromDB(json),
+        address = Address.fromMap(json),
+        report = null,
+        status = json['status'],
+        verificationNumber = json['verificationNumber'],
+        createdBy = null,
+        merchant = null,
+        history = null,
+        updatedAt = null,
+        requestId = null,
+        createdAt = null,
+        id = json['id'];
 
   Request.fromJson(Map<String, dynamic> json)
       : contact = Contact.fromJson(json['contact']),
@@ -76,6 +106,15 @@ class Contact {
         email = json['email'],
         gender = json['gender'],
         description = json['description'];
+
+  Contact.fromDB(Map<String, dynamic> json)
+      : createdAt = null,
+        firstName = json['firstName'],
+        lastName = json['lastName'],
+        phoneNumber = null,
+        email = null,
+        gender = json['gender'],
+        description = null;
 }
 
 class Report {
