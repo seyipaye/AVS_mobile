@@ -7,7 +7,9 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../authentication_cubit.dart';
 
@@ -21,6 +23,7 @@ class ProcessRequestCubit extends Cubit<ProcessRequestState> {
   final ImagePicker _picker = ImagePicker();
   final RequestRepository repository;
   final Request _request;
+  Position position;
 
   clearOverlays(_) {
     emit(state.copyWith(clearOverlays: true));
@@ -28,6 +31,20 @@ class ProcessRequestCubit extends Cubit<ProcessRequestState> {
 
   setSelectedRadio(AddressStatus val) {
     emit(state.copyWith(status: val));
+  }
+
+  geoTagLocation(BuildContext context) async {
+    if (await Permission.location.status != PermissionStatus.granted) {
+      emit(state.copyWith(
+          snackBar: AppSnackBar.error(
+              'Please enable location settings to geo tag location')));
+    } else {
+      position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      emit(state.copyWith(
+          isGeoTagged: true,
+          snackBar: AppSnackBar.success('Location geo tagged successfully')));
+    }
   }
 
   onSubmitPressed(BuildContext context) {
@@ -56,12 +73,19 @@ class ProcessRequestCubit extends Cubit<ProcessRequestState> {
                 'Please select one or more images for upload')));
         return;
       }
+      //Check position
+      if (position == null) {
+        emit(state.copyWith(
+            snackBar: AppSnackBar.error('Please geo tag location')));
+        return;
+      }
       // Ride on
       emit(state.copyWith(isLoading: true));
       repository
           .processRequest(
               id: _request.id,
               status: state.status,
+              position: position,
               reasons: state.reasons,
               assessment: state.assessment,
               images: state.images)

@@ -8,11 +8,10 @@ import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/bar_chart.dart';
 import 'package:avs/presentation/widgets/bar_chart_group_data.dart';
 import 'package:avs/presentation/widgets/completion_chart.dart';
-import 'package:avs/presentation/widgets/new_request_item.dart';
+import 'package:avs/presentation/widgets/request_item.dart';
 import 'package:avs/presentation/widgets/page_title.dart';
 import 'package:avs/presentation/widgets/profile_image.dart';
 import 'package:avs/presentation/widgets/request_count_card.dart';
-import 'package:avs/presentation/widgets/request_item_card.dart';
 import 'package:avs/presentation/widgets/wallet_data.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
@@ -346,7 +345,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       child: ListView.separated(
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return NewRequestItem(
+                            return RequestItem(
                               imageUrl: 'https://i.pravatar.cc/400',
                               firstName: list[index].contact.firstName,
                               lastName: list[index].contact.lastName,

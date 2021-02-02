@@ -106,10 +106,10 @@ class RequestDetailsScreen extends StatelessWidget {
                               value: state.request.address.postalCode),
                           // _buildRow('Landmark', value: 'Oyo'),
                           _buildRow('Latitude',
-                              value: "state.request.address.geo.coordinates[0]"
+                              value: state.request.address.geo.coordinates[0]
                                   .toString()),
                           _buildRow('Longitude',
-                              value: " state.request.address.geo.coordinates[1]"
+                              value: state.request.address.geo.coordinates[1]
                                   .toString()),
                         ],
                       ),
@@ -138,7 +138,9 @@ class RequestDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildButtonsForAssigned(
-      RequestDetailsState state, BuildContext context) {
+    RequestDetailsState state,
+    BuildContext context,
+  ) {
     return AppRaisedButton(
       isLoading: state.isLoading,
       elevation: 0,

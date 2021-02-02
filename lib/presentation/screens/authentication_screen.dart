@@ -9,6 +9,7 @@ import 'package:avs/presentation/pages/authentication/reg_page_4_user_info.dart'
 import 'package:avs/presentation/pages/authentication/reg_page_5_document_upload.dart';
 import 'package:avs/presentation/pages/authentication/reg_page_6_address_info.dart';
 import 'package:avs/presentation/pages/authentication/reg_page_7_address_confirm.dart';
+import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,9 @@ final authSpacer = SizedBox(
 );
 
 class AuthenticationScreen extends StatefulWidget {
-  const AuthenticationScreen();
+  const AuthenticationScreen({this.errorMessage});
+
+  final errorMessage;
 
   @override
   _AuthenticationScreenState createState() => _AuthenticationScreenState();
@@ -47,11 +50,20 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       AddressInfoPage(controller, authenticationCubit, userRepository),
       AddressConfirmPage(controller, authenticationCubit, userRepository),
     ];
+
+    if (widget.errorMessage != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Scaffold.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(AppSnackBar.error(widget.errorMessage));
+      });
+    }
   }
 
   Future<bool> onWillPop() {
     bool result = true;
     if (controller.page != 1) {
+      // TODO: swap
       // controller.animateToPage(1,
       //     duration: kAnimationDuration, curve: Curves.linear);
       controller.previousPage(
@@ -68,8 +80,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         listener: (context, state) {
           if (state is Unauthenticated) {
             if (state.user != null && state.user != User.empty) {
-              // Check where user stopped registration
-              // move to the page for user to continue
+              // Todo: Check where user stopped registration
+              // move to the specific page for user to continue
             }
           }
         },

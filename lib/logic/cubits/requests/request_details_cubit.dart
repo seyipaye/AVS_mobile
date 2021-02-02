@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:avs/data/models/request.dart';
 import 'package:avs/data/repositories/request_repository.dart';
-import 'package:avs/presentation/screens/process_request_screen.dart';
+import 'package:avs/presentation/screens/map_screen.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/presentation/widgets/dialogs.dart';
@@ -37,7 +37,9 @@ class RequestDetailsCubit extends Cubit<RequestDetailsState> {
         curve: Curves.bounceOut,
         duration: const Duration(milliseconds: 400),
         settings: RouteSettings(arguments: _request),
-        child: ProcessRequestScreen(),
+        child: MapScreen2(
+          request: state.request,
+        ),
       ),
     );
 

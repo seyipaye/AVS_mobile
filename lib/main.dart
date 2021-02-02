@@ -46,7 +46,7 @@ class AVSApp extends StatelessWidget {
             return HomeScreen();
           }
           if (state is AuthError) {
-            return AuthenticationScreen();
+            return AuthenticationScreen(errorMessage: state.message);
           }
           return LoadingScreen();
         },

@@ -5,6 +5,7 @@ import 'package:avs/data/providers/request_provider.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/presentation/screens/process_request_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class RequestRepository {
   static RequestRepository _instance;
@@ -45,6 +46,7 @@ class RequestRepository {
   Future<String> processRequest({
     String id,
     AddressStatus status,
+    Position position,
     final List<String> reasons,
     final String assessment,
     final List<Document> images,
@@ -58,7 +60,10 @@ class RequestRepository {
     return provider.processRequest(id: id, data: {
       "notes": assessment,
       "signature": "bsufheiwfnkewih",
-      "geotag": {"lat": "35.66", "long": "21.45"},
+      "geotag": {
+        "lat": position.longitude.toString(),
+        "long": position.longitude.toString()
+      },
       "images": [imageUrl],
       "verified": status == AddressStatus.Approved
     });

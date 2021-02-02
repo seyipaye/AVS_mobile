@@ -87,7 +87,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
       emit(state.copyWith(photoFile: value));
     }).catchError((error) {
       if (error is Exception) {
-        _showError((error as dynamic).snackBar);
+        _showError((error as dynamic).message);
       } else {
         _showError(Error.safeToString(error));
       }
