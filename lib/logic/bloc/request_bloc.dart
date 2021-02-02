@@ -59,11 +59,11 @@ class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
           yield RequestsSuccessState();
 
           ///Save Data offline
-          print('executed');
-          requests.forEach((request) async {
-            var res = await DBProvider.db.addRequest(request.toJson());
-            print(res);
-          });
+          // print('executed');
+          // requests.forEach((request) async {
+          //   var res = await DBProvider.db.addRequest(request.toJson());
+          //   print(res);
+          // });
           page++;
           isLoading = false;
         } else if (requests != null && requests.isEmpty) {
@@ -76,9 +76,9 @@ class RequestBloc extends Bloc<RequestEvent, RequestsBlocState> {
         if (e is DioError) {
           if (e.error is SocketException) {
             if (requestList.isEmpty) {
-              var list = await DBProvider.db.getAssignedRequests();
-              print('This is list $list');
-              requestList.addAll(list);
+              // var list = await DBProvider.db.getAssignedRequests();
+              // print('This is list $list');
+              // requestList.addAll(list);
               // print(list.length);
             }
           }
