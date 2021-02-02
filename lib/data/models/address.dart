@@ -47,6 +47,20 @@ class Address {
     };
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'geo': geo?.toMap(),
+      'verifiedOn': verifiedOn,
+      'isVerified': isVerified,
+      'streetAddress': streetAddress,
+      'lga': lga,
+      'postalCode': postalCode,
+      'state': state,
+      'landmark': landmark,
+      'point': point,
+    };
+  }
+
   factory Address.fromMap(dynamic map) {
     if (null == map) return null;
     var temp;
@@ -85,6 +99,13 @@ class AddressGeo {
   get toRegisterRequestBody {
     return {
       'coordinates': coordinates?.map((map) => map)?.toList() ?? [],
+    };
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'coordinates': coordinates?.map((map) => map)?.toList() ?? [],
+      'type': type,
     };
   }
 

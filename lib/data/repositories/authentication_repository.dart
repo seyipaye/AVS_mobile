@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:avs/data/api_responses/address_upload_response.dart';
 import 'package:avs/data/api_responses/status_response.dart';
-import 'package:avs/data/interceptor/api_interceptor.dart';
 import 'package:avs/data/interceptor/api_interceptor2.dart';
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/document.dart';
@@ -11,8 +10,6 @@ import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class UserRepository {
   //final userDao = UserDao();

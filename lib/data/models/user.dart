@@ -1,7 +1,6 @@
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 /// {@template user}
 /// User model
