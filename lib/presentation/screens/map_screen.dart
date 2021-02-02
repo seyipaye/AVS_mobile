@@ -84,8 +84,8 @@ class _MapScreen2State extends State<MapScreen2> {
           bottomNavigationBar: BlocConsumer<MapCubit, MapState>(
             listener: (context, state) {
               if (state.hasError && state.hasPermission) {
-                Scaffold.of(context).showSnackBar(AppSnackBar.error(
-                    'Please enable location settings to geo tag location'));
+                Scaffold.of(context)
+                    .showSnackBar(AppSnackBar.error(state.errorMessage));
               } else if (state.hasError && !state.hasPermission) {
                 showDialog(
                     context: context,
