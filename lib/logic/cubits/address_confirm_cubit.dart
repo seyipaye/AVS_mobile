@@ -20,7 +20,7 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
       : super(AddressConfirmState());
 
   final PageController controller;
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   void dialogClosed() {
@@ -75,7 +75,7 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
         },
       ).catchError((error) {
         print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is AppError || error is Exception) {
           emit(state.error(error.message));
         } else if (error is Error) {
           emit(state.error(Error.safeToString(error)));

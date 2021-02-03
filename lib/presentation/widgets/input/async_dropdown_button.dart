@@ -81,7 +81,7 @@ class _AsyncDropDownButtonState<T> extends State<AsyncDropDownButton<T>> {
     }).catchError((error) {
       if (error is SocketException) {
         errorMessage = "Couldn't connect";
-      } else if (Error is ClientError) {
+      } else if (Error is AppError) {
         errorMessage = error.message;
       } else {
         errorMessage = error.toString();
@@ -155,7 +155,7 @@ Future<Map> _getData(String url) async {
     //log(response.body);
   }
   if (response.statusCode != 200 && response.statusCode != 201) {
-    throw ClientError(
+    throw AppError(
       StatusResponse.fromMap(jsonDecode(response.body))?.message ??
           response.reasonPhrase,
     );

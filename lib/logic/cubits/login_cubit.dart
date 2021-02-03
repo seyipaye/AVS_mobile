@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this.userRepository, this.authenticationCubit, {this.controller})
       : super(LoginState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final PageController controller;
@@ -38,7 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is AppError || error is Exception) {
           emit(LoginState.error(error.message));
         } else if (error is Error) {
           emit(LoginState.error(Error.safeToString(error)));

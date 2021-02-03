@@ -24,7 +24,7 @@ class RequestProvider {
     return _dio.post(baseUrl + '/requests/assign/' + id,
         options: Options(headers: {requiresToken: true}),
         data: {"status": "ACCEPTED"}).then((response) {
-      return StatusResponse.fromMap(response.data).message ??
+      return StatusResponse.fromMap(response.data)?.message ??
           response.statusMessage;
     });
   }
@@ -36,7 +36,7 @@ class RequestProvider {
     return _dio.post(baseUrl + '/requests/assign/' + id,
         options: Options(headers: {requiresToken: true}),
         data: {"status": "REJECTED"}).then((response) {
-      return StatusResponse.fromMap(response.data).message ??
+      return StatusResponse.fromMap(response.data)?.message ??
           response.statusMessage;
     });
   }
@@ -50,7 +50,7 @@ class RequestProvider {
         .post(baseUrl + '/requests/process/' + id,
             options: Options(headers: {requiresToken: true}), data: data)
         .then((response) {
-      return StatusResponse.fromMap(response.data).message ??
+      return StatusResponse.fromMap(response.data)?.message ??
           response.statusMessage;
     });
   }

@@ -15,7 +15,7 @@ class SetPasswordCubit extends Cubit<SetPasswordState> {
       {this.controller})
       : super(SetPasswordState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final PageController controller;
@@ -47,7 +47,7 @@ class SetPasswordCubit extends Cubit<SetPasswordState> {
           }
         }).catchError((error) {
           print(error);
-          if (error is ClientError || error is Exception) {
+          if (error is AppError || error is Exception) {
             emit(SetPasswordState.error(error.message));
           } else if (error is Error) {
             emit(SetPasswordState.error(Error.safeToString(error)));

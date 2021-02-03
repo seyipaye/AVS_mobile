@@ -17,8 +17,8 @@ import 'package:http/http.dart' as http;
 
 final printAllResponses = true;
 
-class ClientError implements Exception {
-  ClientError(this.message);
+class AppError implements Exception {
+  AppError(this.message);
 
   final String message;
 }
@@ -46,7 +46,7 @@ class AVSApiClient {
       log(response.body);
     }
     if (response.statusCode != 200 && response.statusCode != 201) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
@@ -55,7 +55,7 @@ class AVSApiClient {
       return AddressUploadResponse.fromMap(jsonDecode(response.body));
     } catch (exception) {
       print(exception);
-      throw ClientError('Something went wrong, please try again later');
+      throw AppError('Something went wrong, please try again later');
     }
   }
 
@@ -91,7 +91,7 @@ class AVSApiClient {
       log(response.body);
     }
     if (response.statusCode != 200) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
@@ -113,7 +113,7 @@ class AVSApiClient {
       log(response.body);
     }
     if (response.statusCode != 200 && response.statusCode != 201) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
@@ -123,7 +123,7 @@ class AVSApiClient {
           ?.toSimpleUser;
     } catch (exception) {
       print(exception);
-      throw ClientError('Something went wrong, please try again later');
+      throw AppError('Something went wrong, please try again later');
     }
   }
 
@@ -140,7 +140,7 @@ class AVSApiClient {
       log(jsonEncode(response.data));
     }
     if (response.statusCode != 200 && response.statusCode != 201) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(response.data)?.message ??
             response.statusMessage,
       );
@@ -149,7 +149,7 @@ class AVSApiClient {
       return UploadFileResponse.fromMap(response.data);
     } catch (exception) {
       print(exception);
-      throw ClientError('Something went wrong, please try again later');
+      throw AppError('Something went wrong, please try again later');
     }
   }
 
@@ -164,7 +164,7 @@ class AVSApiClient {
       log(response.body);
     }
     if (response.statusCode != 200) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
@@ -173,7 +173,7 @@ class AVSApiClient {
       return jsonDecode(response.body)['message']?.toString();
     } catch (exception) {
       print(exception);
-      throw ClientError('Something went wrong, please try again later');
+      throw AppError('Something went wrong, please try again later');
     }
   }
 
@@ -191,7 +191,7 @@ class AVSApiClient {
       print(response.body);
     }
     if (response.statusCode != 200) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
@@ -213,7 +213,7 @@ class AVSApiClient {
       print(response.body);
     }
     if (response.statusCode != 200) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );
@@ -235,7 +235,7 @@ class AVSApiClient {
       print(response.body);
     }
     if (response.statusCode != 200) {
-      throw ClientError(
+      throw AppError(
         StatusResponse.fromMap(jsonDecode(response.body))?.message ??
             response.reasonPhrase,
       );

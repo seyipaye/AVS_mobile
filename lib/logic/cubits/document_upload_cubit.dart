@@ -20,7 +20,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
       : super(
             DocumentUploadState(firstName: authenticationCubit.user.firstName));
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
   final PageController controller;
 
@@ -56,7 +56,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
           }
         }).catchError((error) {
           print(error.message);
-          if (error is ClientError || error is Exception) {
+          if (error is AppError || error is Exception) {
             _showError(error.message);
           } else if (error is Error) {
             _showError(Error.safeToString(error));

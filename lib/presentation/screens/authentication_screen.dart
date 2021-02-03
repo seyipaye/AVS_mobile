@@ -35,7 +35,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   void initState() {
     super.initState();
     controller = PageController(initialPage: 1);
-    final userRepository = context.read<UserRepository>();
+    final userRepository = context.read<AuthenticationRepository>();
     final authenticationCubit = context.read<AuthenticationCubit>();
 
     pages = [

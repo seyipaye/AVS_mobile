@@ -22,7 +22,7 @@ class AddressInfoCubit extends Cubit<AddressInfoState> {
       : super(AddressInfoState());
 
   final PageController controller;
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   onStreetAddressTap(BuildContext context) async {
@@ -85,7 +85,7 @@ class AddressInfoCubit extends Cubit<AddressInfoState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is AppError || error is Exception) {
           emit(state.error(error.message));
         } else if (error is Error) {
           emit(state.error(Error.safeToString(error)));

@@ -16,7 +16,7 @@ class OtpCubit extends Cubit<OtpState> {
       {this.formKey, this.controller})
       : super(OtpState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final GlobalKey<FormState> formKey;
@@ -41,7 +41,7 @@ class OtpCubit extends Cubit<OtpState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is AppError || error is Exception) {
           emit(OtpState.error(error.message));
         } else if (error is Error) {
           emit(OtpState.error(Error.safeToString(error)));

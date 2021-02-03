@@ -18,7 +18,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       {this.controller})
       : super(UserInfoState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final PageController controller;
@@ -59,7 +59,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is AppError || error is Exception) {
           emit(UserInfoState.error(error.message));
         } else if (error is Error) {
           emit(UserInfoState.error(Error.safeToString(error)));

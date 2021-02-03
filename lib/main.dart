@@ -12,15 +12,14 @@ import 'logic/cubits/authentication_cubit.dart';
 import 'presentation/widgets/loading_screen.dart';
 
 void main() {
-  final UserRepository userRepository = UserRepository();
   EquatableConfig.stringify = true;
   runApp(
-    RepositoryProvider.value(
-      value: userRepository,
-      child: BlocProvider(
-        create: (context) {
-          return AuthenticationCubit(userRepository: userRepository);
-        },
+    BlocProvider(
+      create: (context) {
+        return AuthenticationCubit();
+      },
+      child: RepositoryProvider(
+        create: (context) => context.read<AuthenticationCubit>().authRepository,
         child: AVSApp(),
       ),
     ),

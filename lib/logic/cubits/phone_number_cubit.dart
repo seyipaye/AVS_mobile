@@ -16,7 +16,7 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
       {this.formKey, this.controller})
       : super(PhoneNumberState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final GlobalKey<FormState> formKey;
@@ -45,7 +45,7 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
         }
       }).catchError((error) {
         print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is AppError || error is Exception) {
           emit(PhoneNumberState.error(error.message));
         } else if (error is Error) {
           emit(PhoneNumberState.error(Error.safeToString(error)));
