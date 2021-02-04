@@ -5,34 +5,37 @@ class UserInfoState extends Equatable {
     this.autovalidateMode = AutovalidateMode.disabled,
     this.isLoading = false,
     this.showCompletionDialog = false,
-    this.errorMessage,
+    this.snackBar,
   });
-
-  factory UserInfoState.error(String message) => UserInfoState(
-        isLoading: false,
-        errorMessage: message,
-      );
 
   final bool showCompletionDialog;
   final bool isLoading;
-  final String errorMessage;
+  final Widget snackBar;
   final AutovalidateMode autovalidateMode;
-
-  bool get hasError => errorMessage != null;
 
   UserInfoState copyWith({
     final bool showCompletionDialog,
     final bool isLoading,
+    final Widget snackBar,
     final AutovalidateMode autovalidateMode,
+    final bool clearOverlays = false,
   }) {
     return UserInfoState(
       showCompletionDialog: showCompletionDialog ?? this.showCompletionDialog,
       isLoading: isLoading ?? this.isLoading,
+      snackBar: clearOverlays ? null : snackBar ?? this.snackBar,
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
     );
   }
 
+  UserInfoState error(String message) {
+    return this.copyWith(
+      isLoading: false,
+      showCompletionDialog: false,
+      snackBar: AppSnackBar.error(message),
+    );
+  }
+
   @override
-  // TODO: implement props
-  List<Object> get props => [autovalidateMode, isLoading, errorMessage];
+  List<Object> get props => [autovalidateMode, isLoading, snackBar];
 }

@@ -10,6 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../logic/cubits/phone_number_cubit.dart';
+
 class PhoneNumberPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final PageController controller;
@@ -52,12 +54,12 @@ class PhoneNumberPage extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: BlocConsumer<PhoneNumberCubit, PhoneNumberState>(
         listener: (context, state) {
-          if (state.hasError) {
+          if (state.snackBar != null) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                AppSnackBar.error(state.errorMessage),
-              );
+              ..showSnackBar(state.snackBar)
+                  .closed
+                  .then(context.read<PhoneNumberCubit>().clearOverlays);
           }
         },
         builder: (context, state) {

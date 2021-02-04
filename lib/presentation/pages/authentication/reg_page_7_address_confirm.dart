@@ -50,15 +50,10 @@ class AddressConfirmPage extends StatelessWidget {
       child: BlocConsumer<AddressConfirmCubit, AddressConfirmState>(
         listener: (context, state) {
           final cubit = context.read<AddressConfirmCubit>();
-
-          if (state.hasError) {
+          if (state.snackBar != null) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                AppSnackBar.error(state.errorMessage),
-              ).closed.then((value) {
-                context.read<AddressConfirmCubit>().dialogClosed();
-              });
+              ..showSnackBar(state.snackBar).closed.then(cubit.clearOverlays);
           }
 
           if (state.dialog != null) {
@@ -67,7 +62,7 @@ class AddressConfirmPage extends StatelessWidget {
               builder: (_) {
                 return state.dialog;
               },
-            ).then((value) => cubit.dialogClosed());
+            ).then(cubit.clearOverlays);
           }
         },
         builder: (context, state) {

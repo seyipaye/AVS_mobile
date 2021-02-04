@@ -3,10 +3,12 @@ import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../presentation/widgets/app_snack_bar.dart';
 import 'authentication_cubit.dart';
 
 part 'otp_state.dart';
@@ -16,7 +18,7 @@ class OtpCubit extends Cubit<OtpState> {
       {this.formKey, this.controller})
       : super(OtpState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final GlobalKey<FormState> formKey;
@@ -37,20 +39,21 @@ class OtpCubit extends Cubit<OtpState> {
           controller.nextPage(
               duration: kAnimationDuration, curve: Curves.linear);
         } else {
-          emit(OtpState.error('Something went wrong, please try again later'));
+          emit(state.error('Something went wrong, please try again later'));
         }
       }).catchError((error) {
-        print(error);
-        if (error is ClientError || error is Exception) {
-          emit(OtpState.error(error.message));
-        } else if (error is Error) {
-          emit(OtpState.error(Error.safeToString(error)));
+        if (error is DioError) {
+          emit(state.error(error.message));
         } else {
-          emit(OtpState.error(error));
+          emit(state.error(Error.safeToString(error)));
         }
       });
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }
+  }
+
+  clearOverlays(_) {
+    emit(state.copyWith(clearOverlays: true));
   }
 }

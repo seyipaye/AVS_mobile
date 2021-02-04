@@ -2,9 +2,11 @@ import 'package:avs/data/api_responses/location_response.dart';
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
+import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/presentation/widgets/dialogs.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,11 +22,11 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
       : super(AddressConfirmState());
 
   final PageController controller;
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
-  void dialogClosed() {
-    emit(state.copyWith(removeDialogs: true));
+  clearOverlays(_) {
+    emit(state.copyWith(clearOverlays: true));
   }
 
   Future<void> handleContinue(BuildContext context) async {
@@ -74,18 +76,14 @@ class AddressConfirmCubit extends Cubit<AddressConfirmState> {
           }
         },
       ).catchError((error) {
-        print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is DioError) {
           emit(state.error(error.message));
-        } else if (error is Error) {
-          emit(state.error(Error.safeToString(error)));
         } else {
-          emit(state.error(error));
+          emit(state.error(Error.safeToString(error)));
         }
       });
     } else {
-      emit(state.copyWith(
-          errorMessage: 'Something went wrong, please try again later'));
+      emit(state.error('Something went wrong, please try again later'));
     }
   }
 

@@ -6,6 +6,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/repositories/authentication_repository.dart';
+
 part 'authentication_state.dart';
 
 // TODO: Check for normal functionality
@@ -16,15 +18,14 @@ primary-agent@quickavs.ng
 System123!
  */
 class AuthenticationCubit extends Cubit<AuthenticationState> {
-  AuthenticationCubit({@required UserRepository userRepository})
-      : _userRepository = userRepository,
-        super(Uninitialized()) {
+  AuthenticationCubit() : super(Uninitialized()) {
+    authRepository = AuthenticationRepository(this);
     _initAuth();
   }
 
   User _user;
   //BehaviorSubject
-  final UserRepository _userRepository;
+  AuthenticationRepository authRepository;
 
   User get user => _user;
 
@@ -69,7 +70,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   void _initAuth() {
-    _userRepository.getUser().then((user) {
+    authRepository.getUser().then((user) {
       if (skipAuthentication) {
         emit(Authenticated(user: User.test));
       } else {
@@ -95,23 +96,23 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<bool> refreshTokens() async {
-    final tokens = await _userRepository.refreshTokens(user.tokens);
+    final tokens = await authRepository.refreshTokens(user.tokens);
     print('This is token $tokens');
     if (tokens != null) {
       _user = user.copyWith(tokens: tokens);
-      await _userRepository.logUserOut();
-      await _userRepository.saveUser(user: user);
+      await authRepository.logUserOut();
+      await authRepository.saveUser(user: user);
       return true;
     } else {
       print("Couldn't refresh token");
-      await _userRepository.logUserOut();
+      await authRepository.logUserOut();
       emit(Unauthenticated());
       return false;
     }
   }
 
   Future<void> logUserOut() async {
-    await _userRepository.logUserOut();
+    await authRepository.logUserOut();
     emit(Unauthenticated());
   }
 

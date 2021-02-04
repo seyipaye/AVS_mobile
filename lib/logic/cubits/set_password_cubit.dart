@@ -2,10 +2,12 @@ import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../presentation/widgets/app_snack_bar.dart';
 import 'authentication_cubit.dart';
 
 part 'set_password_state.dart';
@@ -15,7 +17,7 @@ class SetPasswordCubit extends Cubit<SetPasswordState> {
       {this.controller})
       : super(SetPasswordState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final PageController controller;
@@ -42,25 +44,25 @@ class SetPasswordCubit extends Cubit<SetPasswordState> {
             controller.nextPage(
                 duration: kAnimationDuration, curve: Curves.linear);
           } else {
-            emit(SetPasswordState.error(
-                'Something went wrong, please try again later'));
+            emit(state.error('Something went wrong, please try again later'));
           }
         }).catchError((error) {
-          print(error);
-          if (error is ClientError || error is Exception) {
-            emit(SetPasswordState.error(error.message));
-          } else if (error is Error) {
-            emit(SetPasswordState.error(Error.safeToString(error)));
+          if (error is DioError) {
+            emit(state.error(error.message));
           } else {
-            emit(SetPasswordState.error(error));
+            emit(state.error(Error.safeToString(error)));
           }
         });
       } else {
-        emit(SetPasswordState.error('Passwords do not match'));
+        emit(state.error('Passwords do not match'));
       }
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }
+  }
+
+  clearOverlays(_) {
+    emit(state.copyWith(clearOverlays: true));
   }
 
   void togglePasswordVisibility() {

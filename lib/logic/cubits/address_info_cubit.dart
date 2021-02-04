@@ -2,19 +2,20 @@ import 'package:avs/data/api_responses/location_response.dart';
 import 'package:avs/data/models/address.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
+import 'package:avs/utils/constant_strings.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
 
+import '../../presentation/widgets/app_snack_bar.dart';
 import 'authentication_cubit.dart';
 
 part 'address_info_state.dart';
-
-const kGoogleApiKey = "AIzaSyDWzGqryJyULurQz_nOuTz5L-tktCz60JE";
 
 class AddressInfoCubit extends Cubit<AddressInfoState> {
   AddressInfoCubit(this.userRepository, this.authenticationCubit,
@@ -22,14 +23,14 @@ class AddressInfoCubit extends Cubit<AddressInfoState> {
       : super(AddressInfoState());
 
   final PageController controller;
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   onStreetAddressTap(BuildContext context) async {
     PlacesAutocomplete.show(
             context: context,
             apiKey: kGoogleApiKey,
-            mode: Mode.overlay, // Mode.fullscreen
+            mode: Mode.overlay,
             language: "en",
             components: [new Component(Component.country, "ng")])
         .then((Prediction p) {
@@ -55,8 +56,8 @@ class AddressInfoCubit extends Cubit<AddressInfoState> {
         state.copyWith(selectedAddressLocalGovernment: addressLocalGovernment));
   }
 
-  void dialogClosed() {
-    emit(state.copyWith(clearMessage: true));
+  clearOverlays(_) {
+    emit(state.copyWith(clearOverlays: true));
   }
 
   void handleContinue(BuildContext context) {
@@ -84,13 +85,10 @@ class AddressInfoCubit extends Cubit<AddressInfoState> {
           emit(state.error('Something went wrong, please try again later'));
         }
       }).catchError((error) {
-        print(error);
-        if (error is ClientError || error is Exception) {
+        if (error is DioError) {
           emit(state.error(error.message));
-        } else if (error is Error) {
-          emit(state.error(Error.safeToString(error)));
         } else {
-          emit(state.error(error));
+          emit(state.error(Error.safeToString(error)));
         }
       });
     } else {
