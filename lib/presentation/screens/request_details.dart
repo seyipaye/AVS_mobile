@@ -5,14 +5,11 @@ import 'package:avs/presentation/screens/photo_view_screen.dart';
 import 'package:avs/presentation/widgets/app_card.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
 import 'package:avs/presentation/widgets/avatar_image.dart';
-import 'package:avs/presentation/screens/process_request_screen.dart';
 import 'package:avs/presentation/widgets/input/app_text_form_field.dart';
-import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:page_transition/page_transition.dart';
 
 const double cardsPadding = 15;
 

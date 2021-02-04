@@ -19,7 +19,7 @@ class Request {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'verificationNumber': verificationNumber,
       'firstName': contact.firstName,
       'lastName': contact.lastName,
       'gender': contact.gender,
@@ -49,7 +49,7 @@ class Request {
 
   Request.fromDb(Map<String, dynamic> json)
       : contact = Contact.fromDB(json),
-        address = Address.fromMap(json),
+        address = Address.fromDB(json),
         report = null,
         status = json['status'],
         verificationNumber = json['verificationNumber'],

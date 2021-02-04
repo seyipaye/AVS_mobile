@@ -9,7 +9,6 @@ import 'package:avs/presentation/widgets/bar_chart.dart';
 import 'package:avs/presentation/widgets/bar_chart_group_data.dart';
 import 'package:avs/presentation/widgets/completion_chart.dart';
 import 'package:avs/presentation/widgets/request_item.dart';
-import 'package:avs/presentation/widgets/page_title.dart';
 import 'package:avs/presentation/widgets/profile_image.dart';
 import 'package:avs/presentation/widgets/request_count_card.dart';
 import 'package:avs/presentation/widgets/wallet_data.dart';
@@ -49,7 +48,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(15),
+            padding: EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

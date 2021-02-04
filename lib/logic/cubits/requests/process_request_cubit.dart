@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:adhara_socket_io/adhara_socket_io.dart';
+import 'package:avs/data/database/database.dart';
 import 'package:avs/data/models/document.dart';
+import 'package:avs/data/models/failed_verification_upload.dart';
 import 'package:avs/data/models/request.dart';
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/presentation/screens/process_request_screen.dart';
@@ -97,9 +102,28 @@ class ProcessRequestCubit extends Cubit<ProcessRequestState> {
         Future.delayed(Duration(seconds: 2)).then((_) {
           Navigator.of(context).pop(value);
         });
-      }).catchError((error) {
+      }).catchError((error) async {
         print(error);
         if (error is DioError) {
+          if (error.error is SocketException) {
+            ///Save data offline
+            print('Socket exception');
+            print(error.request.data);
+            var reasons = state.reasons.join('/');
+            var failedVerification = FailedVerificationUpload(
+                id: _request.id,
+                reasons: reasons,
+                latitude: position.latitude.toString(),
+                longitude: position.longitude.toString(),
+                assessment: state.assessment,
+                documentPath: state.images[0].url);
+
+            // await DBProvider.db
+            //     .addFailedVerification(failedVerification.toJson());
+
+            var list = await DBProvider.db.getFailedVerification();
+            print(list);
+          }
           emit(state.copyWith(
               isLoading: false, snackBar: AppSnackBar.error(error.message)));
         }

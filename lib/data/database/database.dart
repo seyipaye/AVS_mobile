@@ -1,3 +1,5 @@
+import 'package:avs/data/models/document.dart';
+import 'package:avs/data/models/failed_verification_upload.dart';
 import 'package:avs/data/models/request.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -33,12 +35,21 @@ class DBProvider {
       status TEXT
         )
         ''');
+      await db.execute('''
+        CREATE TABLE failedVerificationUploads (
+       id TEXT PRIMARY KEY,
+      reasons TEXT,
+      latitude TEXT,
+      longitude TEXT,
+     assessment TEXT,
+     documentPath TEXt
+        )
+        ''');
     }, version: 1);
   }
 
-  ///Create
+  ///Add to database
   Future<int> addRequest(Map<String, dynamic> request) async {
-    print('Adding');
     final db = await database;
     var res = await db.rawInsert('''
     INSERT INTO requests(
@@ -66,7 +77,7 @@ class DBProvider {
     final db = await database;
     final res = await db.query('requests');
     if (res.isEmpty) {
-      return [];
+      return <Request>[];
     } else {
       return res.map((e) => Request.fromDb(e)).toList();
     }
@@ -76,5 +87,66 @@ class DBProvider {
   Future<void> deleteTable() async {
     final db = await database;
     // await db.rawDelete(sql)
+  }
+
+  Future<int> dropRequestTable() async {
+    final db = await database;
+    var res = await db.delete('requests');
+    return res;
+  }
+
+  ///Add to database
+  Future<int> addFailedVerification(Map<String, dynamic> verification) async {
+    final db = await database;
+    var res = await db.rawInsert('''
+    INSERT INTO failedVerificationUploads(
+    id, reasons, latitude, longitude, assessment, documentPath
+    ) VALUES (?, ?, ?, ?, ?, ?)
+    ''', [
+      verification['id'],
+      verification['reasons'],
+      verification['latitude'],
+      verification['longitude'],
+      verification['assessment'],
+      verification['documentPath']
+    ]);
+
+    return res;
+  }
+
+  Future<int> addDocument(Map<String, dynamic> document, String id) async {
+    final db = await database;
+    var res = await db.rawInsert('''
+    INSERT INTO document(
+    id, title, value, type, label, url, backendtype,
+    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    ''', [
+      id,
+      document['title'],
+      document['value'],
+      document['type'],
+      document['label'],
+      document['url'],
+      document['backendtype'],
+    ]);
+
+    return res;
+  }
+
+  Future<List<FailedVerificationUpload>> getFailedVerification() async {
+    final db = await database;
+    final res = await db.query('failedVerificationUploads');
+    if (res.isEmpty) {
+      return <FailedVerificationUpload>[];
+    } else {
+      return res.map((e) => FailedVerificationUpload.fromDb(e)).toList();
+    }
+  }
+
+  Future<int> deleteFailedVerification(String id) async {
+    final db = await database;
+    final res = await db
+        .delete("failedVerificationUploads", where: "id = ?", whereArgs: [id]);
+    return res;
   }
 }
