@@ -2,10 +2,12 @@ import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../presentation/widgets/app_snack_bar.dart';
 import 'authentication_cubit.dart';
 
 part 'login_state.dart';
@@ -33,22 +35,22 @@ class LoginCubit extends Cubit<LoginState> {
         if (user != null) {
           authenticationCubit.authenticatedUser = user;
         } else {
-          emit(
-              LoginState.error('Something went wrong, please try again later'));
+          emit(state.error('Something went wrong, please try again later'));
         }
       }).catchError((error) {
-        print(error);
-        if (error is AppError || error is Exception) {
-          emit(LoginState.error(error.message));
-        } else if (error is Error) {
-          emit(LoginState.error(Error.safeToString(error)));
+        if (error is DioError) {
+          emit(state.error(error.message));
         } else {
-          emit(LoginState.error(error));
+          emit(state.error(Error.safeToString(error)));
         }
       });
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }
+  }
+
+  clearOverlays(_) {
+    emit(state.copyWith(clearOverlays: true));
   }
 
   void togglePasswordVisibility() {

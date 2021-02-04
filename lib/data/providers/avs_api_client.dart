@@ -68,7 +68,7 @@ class AVSApiClient {
         .post(
       baseUrl + '/agents/verifyAddress/' + user.id,
       data: {"status": "VERIFY"},
-      options: Options(headers: {requiresToken: true}),
+      options: Options(headers: {kRequiresToken: true}),
     )
         .then((response) {
       if (printAllResponses) {

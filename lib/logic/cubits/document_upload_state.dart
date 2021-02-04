@@ -6,36 +6,29 @@ class DocumentUploadState extends Equatable {
     this.photoFile,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.isLoading = false,
-    this.showCompletionDialog = false,
-    this.errorMessage,
+    this.snackBar,
     this.selectedDoc,
-  }) {
-    //print(firstName);
-  }
+  });
 
-  final bool showCompletionDialog;
   final bool isLoading;
-  final String errorMessage;
+  final Widget snackBar;
   final AutovalidateMode autovalidateMode;
   final Document selectedDoc;
   final PickedFile photoFile;
   final String firstName;
 
-  bool get hasError => errorMessage != null && errorMessage != '';
-
   DocumentUploadState copyWith({
-    final bool showCompletionDialog,
     final bool isLoading,
-    final String errorMessage,
+    final Widget snackBar,
     final AutovalidateMode autovalidateMode,
     final Document selectedDoc,
     final PickedFile photoFile,
     final String firstName,
+    final bool clearOverlays = false,
   }) {
     return DocumentUploadState(
-      showCompletionDialog: showCompletionDialog ?? this.showCompletionDialog,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage ?? this.errorMessage,
+      snackBar: clearOverlays ? null : snackBar ?? this.snackBar,
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
       selectedDoc: selectedDoc ?? this.selectedDoc,
       photoFile: photoFile ?? this.photoFile,
@@ -43,16 +36,21 @@ class DocumentUploadState extends Equatable {
     );
   }
 
+  DocumentUploadState error(String message) {
+    return this.copyWith(
+      isLoading: false,
+      snackBar: AppSnackBar.error(message),
+    );
+  }
+
   @override
-  // TODO: implement props
   List<Object> get props => [
         firstName,
         photoFile,
         selectedDoc,
         autovalidateMode,
         isLoading,
-        errorMessage,
-        showCompletionDialog,
+        snackBar,
         selectedDoc,
       ];
 }

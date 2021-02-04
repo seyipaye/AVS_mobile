@@ -4,12 +4,14 @@ import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:avs/utils/validators.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../presentation/widgets/app_snack_bar.dart';
 import 'authentication_cubit.dart';
 
 part 'document_upload_state.dart';
@@ -34,7 +36,7 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
   }
 
   void handleContinue(BuildContext context) {
-    print('ffe ${authenticationCubit.user}');
+    //print('ffe ${authenticationCubit.user}');
 
     FocusScope.of(context).unfocus();
     final form = Form.of(context);
@@ -52,31 +54,21 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
             controller.nextPage(
                 duration: kAnimationDuration, curve: Curves.bounceOut);
           } else {
-            _showError('Something went wrong, please try again later');
+            emit(state.error('Something went wrong, please try again later'));
           }
         }).catchError((error) {
-          print(error.message);
-          if (error is AppError || error is Exception) {
-            _showError(error.message);
-          } else if (error is Error) {
-            _showError(Error.safeToString(error));
+          if (error is DioError) {
+            emit(state.error(error.message));
           } else {
-            _showError(error);
+            emit(state.error(Error.safeToString(error)));
           }
         });
       } else {
-        _showError(Validator.isProfilePhoto(_photoFile));
+        emit(state.error(Validator.isProfilePhoto(_photoFile)));
       }
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }
-  }
-
-  void _showError(String error) {
-    emit(state.copyWith(isLoading: false, errorMessage: error));
-    Future.delayed(Duration(seconds: 1), () {
-      emit(state.copyWith(errorMessage: ''));
-    });
   }
 
   Future<void> onUploadPhotoPressed(BuildContext context) async {
@@ -87,9 +79,9 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
       emit(state.copyWith(photoFile: value));
     }).catchError((error) {
       if (error is Exception) {
-        _showError((error as dynamic).message);
+        emit(state.error((error as dynamic).message));
       } else {
-        _showError(Error.safeToString(error));
+        emit(state.error(Error.safeToString(error)));
       }
     });
   }
@@ -102,14 +94,18 @@ class DocumentUploadCubit extends Cubit<DocumentUploadState> {
         selectedDoc =
             state.selectedDoc.copyWith(value: result.files.single.path);
       } else {
-        _showError('User canceled the operation');
+        emit(state.error('User canceled the operation'));
       }
     }).catchError((error) {
       if (error is Exception) {
-        _showError((error as dynamic).snackBar);
+        emit(state.error((error as dynamic).message));
       } else {
-        _showError(Error.safeToString(error));
+        emit(state.error(Error.safeToString(error)));
       }
     });
+  }
+
+  clearOverlays(_) {
+    emit(state.copyWith(clearOverlays: true));
   }
 }

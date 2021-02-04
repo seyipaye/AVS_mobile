@@ -59,6 +59,13 @@ class _AsyncDropDownButtonState<T> extends State<AsyncDropDownButton<T>> {
   List<T> items;
 
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   void initState() {
     _fetchData();
     super.initState();

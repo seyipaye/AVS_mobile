@@ -54,14 +54,10 @@ class DocumentUploadPage extends StatelessWidget {
   );
 
   final List<DropdownMenuItem> documentItems = documents
-      .map(
-        (e) => DropdownMenuItem(
-          value: e,
-          child: Text(
-            e.title,
-          ),
-        ),
-      )
+      .map((e) => DropdownMenuItem(
+            value: e,
+            child: Text(e.title),
+          ))
       .toList();
 
   @override
@@ -93,12 +89,12 @@ class DocumentUploadPage extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: BlocConsumer<DocumentUploadCubit, DocumentUploadState>(
         listener: (context, state) {
-          if (state.hasError) {
+          if (state.snackBar != null) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                AppSnackBar.error(state.errorMessage),
-              );
+              ..showSnackBar(state.snackBar)
+                  .closed
+                  .then(context.read<DocumentUploadCubit>().clearOverlays);
           }
         },
         builder: (context, state) {

@@ -2,7 +2,6 @@ import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/logic/cubits/otp_cubit.dart';
 import 'package:avs/presentation/screens/authentication_screen.dart';
 import 'package:avs/presentation/widgets/app_raised_button.dart';
-import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/presentation/widgets/auth_header.dart';
 import 'package:avs/presentation/widgets/input/app_text_form_field.dart';
 import 'package:avs/utils/validators.dart';
@@ -53,12 +52,12 @@ class OtpPage extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: BlocConsumer<OtpCubit, OtpState>(
         listener: (context, state) {
-          if (state.hasError) {
+          if (state.snackBar != null) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                AppSnackBar.error(state.errorMessage),
-              );
+              ..showSnackBar(state.snackBar)
+                  .closed
+                  .then(context.read<OtpCubit>().clearOverlays);
           }
         },
         builder: (context, state) {

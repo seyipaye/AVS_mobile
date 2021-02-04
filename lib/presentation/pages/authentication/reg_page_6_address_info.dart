@@ -56,14 +56,12 @@ class AddressInfoPage extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: BlocConsumer<AddressInfoCubit, AddressInfoState>(
         listener: (context, state) {
-          if (state.hasError) {
+          if (state.snackBar != null) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                AppSnackBar.error(state.errorMessage),
-              ).closed.then((value) {
-                context.read<AddressInfoCubit>().dialogClosed();
-              });
+              ..showSnackBar(state.snackBar)
+                  .closed
+                  .then(context.read<AddressInfoCubit>().clearOverlays);
           }
         },
         builder: (context, state) {

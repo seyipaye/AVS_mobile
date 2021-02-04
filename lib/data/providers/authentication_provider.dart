@@ -23,8 +23,6 @@ final printAllResponses = true;
 // primary-agent@quickavs.ng
 // System123!
 
-final baseUrl = 'https://api-sandbox.quickavs.ng/v1';
-
 class AuthenticationProvider {
   AuthenticationProvider(this._authCubit)
       : _dio = Dio()..interceptors.add(ApiInterceptor2(_authCubit));
@@ -37,32 +35,32 @@ class AuthenticationProvider {
 
     return _dio
         .post(
-      baseUrl + '/auth/local/register/address/agent/$id',
+      kBaseUrl + '/auth/local/register/address/agent/$id',
       data: address.toRegisterRequestBody,
     )
         .then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
       return AddressUploadResponse.fromMap(response.data);
     });
   }
 
   Future<String> verifyAddress({User user, ApiInterceptor2 interceptor}) async {
-    log('fdfdfdfffd ...');
+    //log('fdfdfdfffd ...');
 
     return _dio
         .post(
-      baseUrl + '/agents/verifyAddress/' + user.id,
+      kBaseUrl + '/agents/verifyAddress/' + user.id,
       data: {"status": "VERIFY"},
-      options: Options(headers: {requiresToken: true}),
+      options: Options(headers: {kRequiresToken: true}),
     )
         .then((response) {
       if (printAllResponses) {
-        log(' fdfdf ${jsonEncode(response.data)}');
+        log(jsonEncode(response.data));
       }
 
-      return StatusResponse.fromMap(response.data).message ??
+      return StatusResponse.fromMap(response.data)?.message ??
           response.statusMessage;
     });
   }
@@ -70,11 +68,11 @@ class AuthenticationProvider {
   Future<User> login(String email, String password) async {
     print('$email...$password');
     return _dio.post(
-      baseUrl + '/auth/local/login',
+      kBaseUrl + '/auth/local/login',
       data: {"credential": email, "password": password},
     ).then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
       return LoginResponse.fromMap(response.data)?.toSimpleUser;
     });
@@ -84,26 +82,28 @@ class AuthenticationProvider {
     print(jsonEncode(user.toRegisterRequestBody) + user.id);
     return _dio
         .post(
-      baseUrl + '/auth/local/register/agent/${user.id}',
+      kBaseUrl + '/auth/local/register/agent/${user.id}',
       //headers: {"Content-Type": "application/json"},
       data: user.toRegisterRequestBody,
     )
         .then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
       return RegistrationResponse.fromMap(response.data)?.toSimpleUser;
     });
   }
 
   Future<UploadFileResponse> uploadFile(String filePath) async {
-    FormData formData = FormData.fromMap({
+    final FormData formData = FormData.fromMap({
       "file": await MultipartFile.fromFile(filePath, filename: "upload.txt"),
     });
 
-    return _dio.post("/utils/uploads", data: formData).then((response) {
+    return _dio
+        .post(kBaseUrl + "/utils/uploads", data: formData)
+        .then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
       return UploadFileResponse.fromMap(response.data);
     });
@@ -113,12 +113,12 @@ class AuthenticationProvider {
   Future<String> uploadDocs(String id, {dynamic body}) async {
     return _dio
         .post(
-      baseUrl + '/auth/local/register/upload/agent/$id',
+      kBaseUrl + '/auth/local/register/upload/agent/$id',
       data: body,
     )
         .then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
       return StatusResponse.fromMap(response.data)?.message;
     });
@@ -127,45 +127,45 @@ class AuthenticationProvider {
   Future<String> setPassword({String mobile, String password}) async {
     print(mobile + password);
     return _dio.post(
-      baseUrl + '/agents/addPassword',
+      kBaseUrl + '/agents/addPassword',
       data: {
         'mobile': mobile,
         'password': password,
       },
     ).then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
-      return jsonDecode(response.data)['id']?.toString();
+      return response.data['id']?.toString();
     });
   }
 
   Future<StatusResponse> verifyOtp({String mobile, String code}) async {
     //print('sd$phoneNumber');
     return _dio.post(
-      baseUrl + '/auth/verify/otp/agent',
+      kBaseUrl + '/auth/verify/otp/agent',
       data: {
         'mobile': mobile,
         'code': code,
       },
     ).then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
-      return StatusResponse.fromMap(jsonDecode(response.data));
+      return StatusResponse.fromMap(response.data);
     });
   }
 
   Future<StatusResponse> sendOtp(String mobile) async {
     //print('sd$mobile');
     return _dio.post(
-      baseUrl + '/auth/send/otp/agent',
+      kBaseUrl + '/auth/send/otp/agent',
       data: {
         'mobile': mobile,
       },
     ).then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
       return StatusResponse.fromMap(response.data);
     });
@@ -173,10 +173,10 @@ class AuthenticationProvider {
 
   Future<Tokens> refreshTokens(Tokens tokens) async {
     ///Refresh call
-    return _dio.post('$baseUrl/auth/refresh-tokens',
+    return _dio.post('$kBaseUrl/auth/refresh-tokens',
         data: {"refreshToken": tokens.refresh.token}).then((response) {
       if (printAllResponses) {
-        log(response.data);
+        log(jsonEncode(response.data));
       }
       return Tokens.fromMap(response.data);
     });
