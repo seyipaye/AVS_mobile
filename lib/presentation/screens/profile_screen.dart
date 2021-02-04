@@ -1,4 +1,5 @@
 import 'package:avs/logic/cubits/authentication_cubit.dart';
+import 'package:avs/presentation/screens/update_password_screen.dart';
 import 'package:avs/presentation/widgets/app_card.dart';
 import 'package:avs/presentation/widgets/avatar_image.dart';
 import 'package:avs/utils/constants.dart';
@@ -87,7 +88,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       _profileOption(
                           icon: Icons.edit,
                           text: 'Change Password',
-                          onTap: () {}),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        UpdatePasswordScreen()));
+                          }),
                       _profileOption(
                           icon: Icons.payment, text: 'Wallet', onTap: () {}),
                       _profileOption(

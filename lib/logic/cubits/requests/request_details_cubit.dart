@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:adhara_socket_io/manager.dart';
+import 'package:adhara_socket_io/options.dart';
+import 'package:adhara_socket_io/socket.dart';
 import 'package:avs/data/models/request.dart';
 import 'package:avs/data/repositories/request_repository.dart';
 import 'package:avs/presentation/screens/map_screen.dart';
@@ -19,10 +22,13 @@ part 'request_details_state.dart';
 class RequestDetailsCubit extends Cubit<RequestDetailsState> {
   RequestDetailsCubit(AuthenticationCubit _authCubit, this._request)
       : repository = RequestRepository(_authCubit),
-        super(RequestDetailsState(request: _request));
+        super(RequestDetailsState(request: _request)) {
+    addSocket();
+  }
 
   final RequestRepository repository;
   final Request _request;
+  SocketIO socket;
 
   clearOverlays(_) {
     //log('clear');
@@ -91,7 +97,10 @@ class RequestDetailsCubit extends Cubit<RequestDetailsState> {
     );
   }
 
-  void onAcceptPressed(mainContext) {
+  void onAcceptPressed(mainContext) async {
+    var status = await socket.isConnected();
+    print(status);
+
     /*Navigator.push(
       context,
       MaterialPageRoute(
@@ -123,7 +132,10 @@ class RequestDetailsCubit extends Cubit<RequestDetailsState> {
                     isLoading: false,
                     snackBar: AppSnackBar.success(value),
                   ));
-                  Future.delayed(Duration(seconds: 2)).then((_) {
+                  Future.delayed(Duration(seconds: 2)).then((_) async {
+                    var response =
+                        await socket.emit('requestAgentAccepted', []);
+                    print(response);
                     Navigator.of(mainContext).pop();
                   });
                 }).catchError((error) {
@@ -140,5 +152,17 @@ class RequestDetailsCubit extends Cubit<RequestDetailsState> {
         ),
       ),
     );
+  }
+
+  Future<void> addSocket() async {
+    SocketIOManager manager = SocketIOManager();
+    var options = SocketOptions('https://api-sandbox.quickavs.ng');
+    socket = await manager.createInstance(options);
+    socket.onConnect((data) {
+      print('Connected... in details');
+    });
+    var connectivity = await socket.connect();
+    print('this is socket: $socket');
+    print('This is $connectivity');
   }
 }

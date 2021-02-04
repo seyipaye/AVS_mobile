@@ -24,23 +24,20 @@ class ApiInterceptor extends Interceptor {
 
   @override
   Future onError(DioError err) async {
-    print('this was executed');
-    if (err.response.statusCode == 401) {
-      await authCubit.refreshTokens();
-      RequestOptions options = err.response.request;
-      options.headers["Authorization"] =
-          "Bearer " + authCubit.user.tokens.access.token;
-      return await dio
-          .request(options.path, options: options)
-          .catchError((error) {
-        print(error);
-      });
+    if (err.response != null) {
+      if (err.response.statusCode == 401) {
+        await authCubit.refreshTokens();
+        RequestOptions options = err.response.request;
+        options.headers["Authorization"] =
+            "Bearer " + authCubit.user.tokens.access.token;
+        return await dio
+            .request(options.path, options: options)
+            .catchError((error) {
+          print(error);
+        });
+      }
     }
 
-    if (err is SocketException) {
-      throw ('Unable to Connect at this time');
-    }
-
-    print(err.response.data);
+    return super.onError(err);
   }
 }

@@ -27,13 +27,24 @@ class UpdatePasswordScreen extends StatelessWidget {
         ),
       ),
       child: Scaffold(
+        appBar: AppBar(
+          elevation: 1,
+          centerTitle: true,
+          title: Text(
+            'Update Password',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Color(0xff151522),
+            ),
+          ),
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: <Widget>[
-                PageHeader(title: 'Update Password'),
-                space,
+                // PageHeader(title: 'Update Password'),
+                // space,
                 BlocConsumer<UpdatePasswordCubit, UpdatePasswordState>(
                   listener: (context, state) {},
                   builder: (context, state) {

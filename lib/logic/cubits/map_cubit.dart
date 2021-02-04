@@ -68,7 +68,6 @@ class MapCubit extends Cubit<MapState> {
       //     ),
       //   ),
       // );
-      print('This ran : Listener is set');
       createRoute(
         start: position,
       );
@@ -94,8 +93,6 @@ class MapCubit extends Cubit<MapState> {
   void createRoute({@required Position start}) async {
     ///Flutter polylines
     polylinePoints = PolylinePoints();
-
-    try {} catch (e) {}
 
     /// Generating the list of coordinates to be used for drawing the polylines
     // PolylineResult result =

@@ -24,6 +24,8 @@ class Document {
       this.type,
       this.label});
 
+  static const Map<String, DocumentType> map = {'PHOTO': DocumentType.PHOTO};
+
   Document copyWith({
     final String title,
     final String value,
