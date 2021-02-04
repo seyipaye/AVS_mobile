@@ -53,17 +53,16 @@ class UserInfoPage extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: BlocConsumer<UserInfoCubit, UserInfoState>(
         listener: (context, state) {
-          if (state.hasError) {
+          if (state.snackBar != null) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                AppSnackBar.error(state.errorMessage),
-              );
+              ..showSnackBar(state.snackBar)
+                  .closed
+                  .then(context.read<UserInfoCubit>().clearOverlays);
           }
 
           if (state.showCompletionDialog) {
             final userInfoCubit = context.read<UserInfoCubit>();
-
             showDialog(
               context: context,
               builder: (_) {
@@ -110,9 +109,9 @@ class UserInfoPage extends StatelessWidget {
                 ),
                 authSpacer,
                 AppTextFormField(
-                  label: 'Other Names',
+                  label: '*Other Names',
                   onSaved: (String val) => userInfoCubit.otherNames = val,
-                  validator: Validator.isOtherName,
+                  validator: Validator.isName,
                 ),
                 authSpacer,
                 AppDropDownButton(
@@ -141,10 +140,10 @@ class UserInfoPage extends StatelessWidget {
                 ),
                 authSpacer,
                 AppTextFormField(
-                  label: 'Email Address',
+                  label: '*Email Address',
                   hintText: 'mail@quickavs.ng',
                   onSaved: (String val) => userInfoCubit.email = val.trim(),
-                  validator: Validator.isOptionalEmail,
+                  validator: Validator.isEmail,
                 ),
                 authSpacer,
                 AppRaisedButton(

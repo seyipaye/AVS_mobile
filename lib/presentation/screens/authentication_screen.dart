@@ -11,6 +11,7 @@ import 'package:avs/presentation/pages/authentication/reg_page_6_address_info.da
 import 'package:avs/presentation/pages/authentication/reg_page_7_address_confirm.dart';
 import 'package:avs/presentation/widgets/app_snack_bar.dart';
 import 'package:avs/utils/constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,7 +36,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   void initState() {
     super.initState();
     controller = PageController(initialPage: 1);
-    final userRepository = context.read<UserRepository>();
+    final userRepository = context.read<AuthenticationRepository>();
     final authenticationCubit = context.read<AuthenticationCubit>();
 
     pages = [
@@ -63,11 +64,13 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   Future<bool> onWillPop() {
     bool result = true;
     if (controller.page != 1) {
-      // TODO: swap
-      // controller.animateToPage(1,
-      //     duration: kAnimationDuration, curve: Curves.linear);
-      controller.previousPage(
-          duration: kAnimationDuration, curve: Curves.linear);
+      if (kReleaseMode) {
+        controller.animateToPage(1,
+            duration: kAnimationDuration, curve: Curves.linear);
+      } else {
+        controller.previousPage(
+            duration: kAnimationDuration, curve: Curves.linear);
+      }
       result = false;
     }
     return Future.value(result);

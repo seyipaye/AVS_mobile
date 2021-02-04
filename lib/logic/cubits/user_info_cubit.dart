@@ -5,10 +5,12 @@ import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/data/repositories/authentication_repository.dart';
 import 'package:avs/utils/constants.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../presentation/widgets/app_snack_bar.dart';
 import 'authentication_cubit.dart';
 
 part 'user_info_state.dart';
@@ -18,7 +20,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       {this.controller})
       : super(UserInfoState());
 
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
   final AuthenticationCubit authenticationCubit;
 
   final PageController controller;
@@ -54,22 +56,22 @@ class UserInfoCubit extends Cubit<UserInfoState> {
           print(authenticationCubit.user);
           emit(state.copyWith(isLoading: false, showCompletionDialog: true));
         } else {
-          emit(UserInfoState.error(
-              'Something went wrong, please try again later'));
+          emit(state.error('Something went wrong, please try again later'));
         }
       }).catchError((error) {
-        print(error);
-        if (error is ClientError || error is Exception) {
-          emit(UserInfoState.error(error.message));
-        } else if (error is Error) {
-          emit(UserInfoState.error(Error.safeToString(error)));
+        if (error is DioError) {
+          emit(state.error(error.message));
         } else {
-          emit(UserInfoState.error(error));
+          emit(state.error(Error.safeToString(error)));
         }
       });
     } else {
       emit(state.copyWith(autovalidateMode: AutovalidateMode.always));
     }
+  }
+
+  clearOverlays(_) {
+    emit(state.copyWith(clearOverlays: true));
   }
 
   void onPositivePressed(BuildContext context) {

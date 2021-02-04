@@ -1,34 +1,36 @@
 part of 'otp_cubit.dart';
 
 class OtpState extends Equatable {
-  OtpState(
-      {this.autovalidateMode = AutovalidateMode.disabled,
-      this.isLoading = false,
-      this.errorMessage});
-
-  factory OtpState.error(String message) => OtpState(
-        isLoading: false,
-        errorMessage: message,
-      );
+  OtpState({
+    this.autovalidateMode = AutovalidateMode.disabled,
+    this.isLoading = false,
+    this.snackBar,
+  });
 
   final AutovalidateMode autovalidateMode;
   final bool isLoading;
-  final String errorMessage;
-
-  bool get hasError => errorMessage != null;
+  final Widget snackBar;
 
   OtpState copyWith({
-    final String phoneNumber,
     final AutovalidateMode autovalidateMode,
     final bool isLoading,
+    final Widget snackBar,
+    bool clearOverlays = false,
   }) {
     return OtpState(
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
       isLoading: isLoading ?? this.isLoading,
+      snackBar: clearOverlays ? null : snackBar ?? this.snackBar,
     );
   }
 
   @override
-  // TODO: implement props
-  List<Object> get props => [autovalidateMode, isLoading, errorMessage];
+  List<Object> get props => [autovalidateMode, isLoading, snackBar];
+
+  OtpState error(String message) {
+    return this.copyWith(
+      isLoading: false,
+      snackBar: AppSnackBar.error(message),
+    );
+  }
 }

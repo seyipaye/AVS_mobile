@@ -56,12 +56,12 @@ class LoginPage extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
-          if (state.hasError) {
+          if (state.snackBar != null) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                AppSnackBar.error(state.errorMessage),
-              );
+              ..showSnackBar(state.snackBar)
+                  .closed
+                  .then(context.read<LoginCubit>().clearOverlays);
           }
         },
         builder: (context, state) {

@@ -8,23 +8,27 @@ import 'package:avs/data/models/document.dart';
 import 'package:avs/data/models/shared_pref.dart';
 import 'package:avs/data/models/tokens.dart';
 import 'package:avs/data/models/user.dart';
+import 'package:avs/data/providers/authentication_provider.dart';
 import 'package:avs/data/providers/avs_api_client.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 
-class UserRepository {
+class AuthenticationRepository {
   //final userDao = UserDao();
-  final apiClient = AVSApiClient();
+  final AuthenticationProvider provider;
   final prefs = SharedPref();
 
+  AuthenticationRepository(AuthenticationCubit authCubit)
+      : this.provider = AuthenticationProvider(authCubit);
+
   Future<User> login({String email, String password}) async {
-    return apiClient.login(email, password).then((user) async {
+    return provider.login(email, password).then((user) async {
       await saveUser(user: user);
       return user;
     });
   }
 
   Future<User> uploadUserInfo({User user}) async {
-    return apiClient.uploadUserInfo(user: user);
+    return provider.uploadUserInfo(user: user);
   }
 
   Future saveUser({User user}) async {
@@ -32,24 +36,24 @@ class UserRepository {
   }
 
   Future<AddressUploadResponse> addAddress({String id, Address address}) async {
-    return apiClient.addAddress(id: id, address: address);
+    return provider.addAddress(id: id, address: address);
   }
 
   Future<String> verifyAddress(AuthenticationCubit authCubit) async {
-    return apiClient.verifyAddress(
+    return provider.verifyAddress(
         user: authCubit.user, interceptor: ApiInterceptor2(authCubit));
   }
 
   Future<String> uploadDocs(User user, {String photoPath, Document doc}) async {
     //'https://api-sandbox.quickavs.ng/v1/files/XhCvmR8cM3cu0vg7HKCe.bin/get';
-    final String photoUrl = await apiClient.uploadFile(photoPath).then((value) {
+    final String photoUrl = await provider.uploadFile(photoPath).then((value) {
       return value.imageUrls.first;
     });
 
     print(user.id);
 
     if (doc.type == DocumentType.NIN) {
-      return apiClient.uploadDocs(
+      return provider.uploadDocs(
         user.id,
         body: {
           "imageUrl": photoUrl,
@@ -59,11 +63,11 @@ class UserRepository {
       );
     } else {
       //'https://api-sandbox.quickavs.ng/v1/files/BL32YUjZGxoxiu3IMQrY.bin/get';
-      final String docUrl = await apiClient.uploadFile(doc.value).then((value) {
+      final String docUrl = await provider.uploadFile(doc.value).then((value) {
         return value.imageUrls.first;
       });
 
-      return apiClient.uploadDocs(
+      return provider.uploadDocs(
         user.id,
         body: {
           "imageUrl": photoUrl,
@@ -75,15 +79,15 @@ class UserRepository {
   }
 
   Future<String> setPassword({String mobile, String password}) {
-    return apiClient.setPassword(mobile: mobile, password: password);
+    return provider.setPassword(mobile: mobile, password: password);
   }
 
   Future<StatusResponse> verifyOtp({String mobile, String code}) {
-    return apiClient.verifyOtp(mobile: mobile, code: code);
+    return provider.verifyOtp(mobile: mobile, code: code);
   }
 
   Future<StatusResponse> sendOtp(String mobile) {
-    return apiClient.sendOtp(mobile);
+    return provider.sendOtp(mobile);
   }
 
   Future<User> getUser() async {
@@ -98,7 +102,7 @@ class UserRepository {
 
   ///Function to refresh the request
   Future<Tokens> refreshTokens(Tokens tokens) async {
-    return apiClient.refreshTokens(tokens);
+    return provider.refreshTokens(tokens);
   }
 
   Future<void> logUserOut() async {

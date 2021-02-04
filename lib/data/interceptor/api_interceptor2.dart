@@ -26,9 +26,9 @@ class ApiInterceptor2 extends Interceptor {
 
   @override
   Future onRequest(RequestOptions options) async {
-    if (options.headers.containsKey(requiresToken)) {
+    if (options.headers.containsKey(kRequiresToken)) {
       // Remove the auxiliary header
-      options.headers.remove(requiresToken);
+      options.headers.remove(kRequiresToken);
 
       // Add token
       String token = authCubit.user.tokens.access.token;
@@ -45,7 +45,8 @@ class ApiInterceptor2 extends Interceptor {
   @override
   Future onError(DioError err) async {
     if (err.response != null) {
-      print('xsmnkn  ${err.response.data}');
+      print('ApiInterceptor2 ${jsonEncode(err.response.data)}');
+
       if (err.response.statusCode == 401) {
         if (await authCubit.refreshTokens()) {
           RequestOptions options = err.response.request;
@@ -56,10 +57,10 @@ class ApiInterceptor2 extends Interceptor {
       }
       return StatusResponse.fromMap(err.response.data)?.message ??
           err.response.statusMessage;
+    } else if (err.error is SocketException) {
+      return "Couldn't reach the internet, please try that later";
     } else {
-      if (err.response != null) {
-        print('pure Error  ${err.response.data}');
-      }
+      print('Pure Error  ${err.error}');
       return err;
     }
   }

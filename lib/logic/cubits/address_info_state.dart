@@ -9,43 +9,41 @@ class AddressInfoState extends Equatable {
     this.autovalidateMode = AutovalidateMode.disabled,
     this.isLoading = false,
     this.showCompletionDialog = false,
-    this.errorMessage,
+    this.snackBar,
   });
 
   AddressInfoState error(String message) {
     return this.copyWith(
-        isLoading: false,
-        errorMessage: message,
-      );
+      isLoading: false,
+      snackBar: AppSnackBar.error(message),
+    );
   }
 
   final bool showCompletionDialog;
   final bool isLoading;
-  final String errorMessage;
+  final Widget snackBar;
   final String streetAddress;
   final String postalCode;
   final AutovalidateMode autovalidateMode;
   final AddressResponseState selectedAddressState;
   final AddressResponseLocalGovernment selectedAddressLocalGovernment;
 
-  bool get hasError => errorMessage != null;
-
   AddressInfoState copyWith({
     final bool showCompletionDialog,
     final bool isLoading,
-    final String errorMessage,
+    final Widget snackBar,
     final String streetAddress,
     final String postalCode,
     final AutovalidateMode autovalidateMode,
     final AddressResponseState selectedAddressState,
     final AddressResponseLocalGovernment selectedAddressLocalGovernment,
     final bool resetLG = false,
-    final bool clearMessage = false,
+    final bool clearOverlays = false,
   }) {
     return AddressInfoState(
       showCompletionDialog: showCompletionDialog ?? this.showCompletionDialog,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: clearMessage ? null : errorMessage ?? this.errorMessage,
+      snackBar: clearOverlays ? null : snackBar ?? this.snackBar,
       streetAddress: streetAddress ?? this.streetAddress,
       postalCode: postalCode ?? this.postalCode,
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
@@ -66,6 +64,6 @@ class AddressInfoState extends Equatable {
         selectedAddressState,
         autovalidateMode,
         isLoading,
-        errorMessage
+        snackBar
       ];
 }

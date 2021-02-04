@@ -22,9 +22,9 @@ class RequestProvider {
   }) async {
     //log(id);
     return _dio.post(baseUrl + '/requests/assign/' + id,
-        options: Options(headers: {requiresToken: true}),
+        options: Options(headers: {kRequiresToken: true}),
         data: {"status": "ACCEPTED"}).then((response) {
-      return StatusResponse.fromMap(response.data).message ??
+      return StatusResponse.fromMap(response.data)?.message ??
           response.statusMessage;
     });
   }
@@ -34,9 +34,9 @@ class RequestProvider {
   }) async {
     //log(id);
     return _dio.post(baseUrl + '/requests/assign/' + id,
-        options: Options(headers: {requiresToken: true}),
+        options: Options(headers: {kRequiresToken: true}),
         data: {"status": "REJECTED"}).then((response) {
-      return StatusResponse.fromMap(response.data).message ??
+      return StatusResponse.fromMap(response.data)?.message ??
           response.statusMessage;
     });
   }
@@ -48,9 +48,9 @@ class RequestProvider {
     //log(id);
     return _dio
         .post(baseUrl + '/requests/process/' + id,
-            options: Options(headers: {requiresToken: true}), data: data)
+            options: Options(headers: {kRequiresToken: true}), data: data)
         .then((response) {
-      return StatusResponse.fromMap(response.data).message ??
+      return StatusResponse.fromMap(response.data)?.message ??
           response.statusMessage;
     });
   }
@@ -61,7 +61,7 @@ class RequestProvider {
   }) async {
     final response = await _dio.get(
         baseUrl + '/requests?page=${page.toString()}&status=NEW&limit=$limit',
-        options: Options(headers: {requiresToken: true}));
+        options: Options(headers: {kRequiresToken: true}));
     if (response.statusCode != 200) {
       return null;
     }
@@ -78,7 +78,7 @@ class RequestProvider {
     final response = await _dio.get(
         baseUrl +
             '/requests?page=${page.toString()}&status=ASSIGNED&limit=$limit',
-        options: Options(headers: {requiresToken: true}));
+        options: Options(headers: {kRequiresToken: true}));
     if (response.statusCode != 200) {
       return null;
     }
