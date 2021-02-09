@@ -139,14 +139,19 @@ class MapCubit extends Cubit<MapState> {
   }
 
   handleClick(buildContext) async {
-    await Navigator.push(
+    final message = await Navigator.push(
         buildContext,
         PageTransition(
-            type: PageTransitionType.bottomToTop,
-            curve: Curves.bounceOut,
-            duration: const Duration(milliseconds: 400),
-            settings: RouteSettings(arguments: request),
-            child: ProcessRequestScreen()));
+          type: PageTransitionType.bottomToTop,
+          curve: Curves.bounceOut,
+          duration: const Duration(milliseconds: 400),
+          settings: RouteSettings(arguments: request),
+          child: ProcessRequestScreen(),
+        ));
+
+    if (message != null) {
+      Navigator.pop(buildContext, message);
+    }
   }
 
   void closeSubscription() {

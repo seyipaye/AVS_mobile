@@ -78,6 +78,19 @@ class AuthenticationProvider {
     });
   }
 
+  Future<String> forgotPassword(String email) async {
+    //print('$email...$password');
+    return _dio.post(
+      kBaseUrl + '/auth/forgot-password',
+      data: {"email": email},
+    ).then((response) {
+      if (printAllResponses) {
+        log(jsonEncode(response.data));
+      }
+      return StatusResponse.fromMap(response.data)?.message;
+    });
+  }
+
   Future<User> uploadUserInfo({User user}) async {
     print(jsonEncode(user.toRegisterRequestBody) + user.id);
     return _dio

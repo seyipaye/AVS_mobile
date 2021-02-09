@@ -4,6 +4,7 @@ import 'package:avs/logic/bloc/request_bloc_states.dart';
 import 'package:avs/logic/cubits/authentication_cubit.dart';
 import 'package:avs/presentation/screens/request_details.dart';
 import 'package:avs/presentation/widgets/app_snack_bar.dart';
+import 'package:avs/presentation/widgets/error_screens.dart';
 import 'package:avs/presentation/widgets/loading_indicator.dart';
 import 'package:avs/presentation/widgets/request_item.dart';
 import 'package:flutter/material.dart';
@@ -56,15 +57,11 @@ class NewRequestPage extends StatelessWidget {
           }
           if (state is RequestsErrorState && list.isEmpty) {
             /// Show error loading page with option to retry
-            return Center(
-              child: Text('Unable to fetch requests at this time'),
-            );
+            return NoConnectionScreen(onRetryPressed: (context) {});
           }
           if (state is RequestsSuccessState && list.isEmpty) {
             /// Show that the list is empty
-            return Center(
-              child: Text('No new requests at this time'),
-            );
+            return EmptyRequestScreen(onRetryPressed: (context) {});
           }
 
           ///Work on the list given on success

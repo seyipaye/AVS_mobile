@@ -27,6 +27,10 @@ class AuthenticationRepository {
     });
   }
 
+  Future<String> forgotPassword({String email}) async {
+    return provider.forgotPassword(email);
+  }
+
   Future<User> uploadUserInfo({User user}) async {
     return provider.uploadUserInfo(user: user);
   }

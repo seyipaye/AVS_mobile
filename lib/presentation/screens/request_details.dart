@@ -65,7 +65,7 @@ class RequestDetailsScreen extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => PhotoViewScreen(
-                                ' https://i.pravatar.cc/400',
+                                'https://i.pravatar.cc/400',
                                 heroTag: state.request.contact.firstName,
                                 title: 'Jude' + ' ' + 'Severin',
                               ),
